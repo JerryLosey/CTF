@@ -1,0 +1,23 @@
+Spawns:
+  Red:
+    X: 120
+    Y: 120
+    Z: 120
+  Blue:
+    X: 120
+    Y: 120
+    Z: 120
+Minimum Players: 1
+Staging Area:
+    X: 120
+    Y: 120
+    Z: 120
+Diamond Blocks:
+  Red:
+    X: 120
+    Y: 120
+    Z: 120
+  Blue:
+    X: 120
+    Y: 120
+    Z: 120

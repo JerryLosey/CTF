@@ -1,0 +1,20 @@
+name: CTF
+description: Capture The Flag
+main: me.jimbo.plugin.CTF
+version: 0.2.0
+author: teh_jombi
+commands:
+   ctf:
+       description: Manage Capture The Flag
+   heavy:
+       description: Respawn as a heavy.
+       usage: /heavy
+       permission: ctf.class.heavy
+   soldier:
+       description: Respawn as a soldier.
+       usage: /heavy
+       permission: ctf.class.soldier
+   archer:
+       description: Respawn as an archer.
+       usage: /heavy
+       permission: ctf.class.archer
