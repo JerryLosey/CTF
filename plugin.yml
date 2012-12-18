@@ -12,9 +12,9 @@ commands:
        permission: ctf.class.heavy
    soldier:
        description: Respawn as a soldier.
-       usage: /heavy
+       usage: /soldier
        permission: ctf.class.soldier
    archer:
        description: Respawn as an archer.
-       usage: /heavy
+       usage: /archer
        permission: ctf.class.archer
