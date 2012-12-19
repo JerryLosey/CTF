@@ -476,7 +476,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					if(cmd.equals("team"))
 			    	{
 					    //Do something
-						if(CTF.BluePlayers.contains(((Player) sender).getPlayer())){
+						if(CTF.AllPlayers.contains(((Player) sender).getPlayer())){
 							sender.sendMessage("You're on the Blue Team!");
 						} else if(CTF.RedPlayers.contains(((Player) sender).getPlayer())) {
 							sender.sendMessage("You're on the Red Team!");

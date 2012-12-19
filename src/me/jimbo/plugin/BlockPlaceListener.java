@@ -42,7 +42,7 @@ public class BlockPlaceListener implements Listener {
 					}
 				}
 			}
-		}else if (CTF.BluePlayers.contains(player)){
+		}else if (CTF.AllPlayers.contains(player)){
 			
 		} else {
 			if(!player.isOp()){

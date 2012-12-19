@@ -19,11 +19,22 @@ public class PlayerKickListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerKick(PlayerKickEvent e) {
 		e.setReason(ChatColor.AQUA + "Server Restarting. Reconnect.");
-		CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
+		if(CTF.AllPlayers.contains(e.getPlayer())){
+			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
+		}
+		if(CTF.RedPlayers.contains(e.getPlayer())){
+			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
+		}
+		
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
+		if(CTF.AllPlayers.contains(e.getPlayer())){
+			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
+		}
+		if(CTF.RedPlayers.contains(e.getPlayer())){
+			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
+		}
 	}
 }

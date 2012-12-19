@@ -21,7 +21,7 @@ public class PlayerRespawnListener implements Listener {
 	{
 		Player player = e.getPlayer();
 	
-		if(CTF.BluePlayers.contains(player)){
+		if(CTF.AllPlayers.contains(player)){
 			Location location = new Location(Bukkit.getWorlds().get(0), (double) plugin.getConfig().getDouble("Spawns.Blue.X"), (double) plugin.getConfig().getDouble("Spawns.Blue.Y"), (double) plugin.getConfig().getDouble("Spawns.Blue.Z"));
 			e.setRespawnLocation(location);
 		} else if (CTF.RedPlayers.contains(player)) {
