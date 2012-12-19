@@ -1,6 +1,8 @@
 package me.jimbo.plugin;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -33,6 +35,7 @@ public class BlockBreakListener implements Listener {
 		if (brokenBlock.getTypeId() != 35 && brokenBlock.getData() != 14 && brokenBlock.getData() != 11 && !player.isOp()) {
 			
 			e.setCancelled(true);
+			brokenBlock.setType(Material.AIR);
 		}
 	}
 	
