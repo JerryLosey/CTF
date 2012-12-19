@@ -24,9 +24,9 @@ public class BlockPlaceListener implements Listener {
 		Block block = e.getBlock();
 		Block placedAgainst = e.getBlockAgainst();
 		placedAgainst.getRelative(BlockFace.UP);
-		int redX = (int) plugin.getConfig().getDouble("Diamond Blocks.Red.X");
-		int redY = (int) plugin.getConfig().getDouble("Diamond Blocks.Red.Y");
-		//int redZ = (int) plugin.getConfig().getDouble("Diamond Blocks.Red.Z");
+		int redX = (int) plugin.getConfig().getDouble("Goals.Red.X");
+		int redY = (int) plugin.getConfig().getDouble("Goals.Red.Y");
+		//int redZ = (int) plugin.getConfig().getDouble("Goals.Red.Z");
 		
 		//Location redLocation = new Location(Bukkit.getWorlds().get(0), redX, redY, redZ);
 		

@@ -394,13 +394,13 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 									sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 									sender.sendMessage(ChatColor.GREEN + "Setting Red Team Goal!");
 									sender.sendMessage(ChatColor.GREEN + "Make sure you are standing on top of the diamond block!");
-									sender.sendMessage(ChatColor.GREEN + "" + plugin.getConfig().getDouble("Diamond Blocks.Red.X") + "," + plugin.getConfig().getDouble("Diamond Blocks.Red.Y") + "," + plugin.getConfig().getDouble("Diamond Blocks.Red.Z"));
+									sender.sendMessage(ChatColor.GREEN + "" + plugin.getConfig().getDouble("Goals.Red.X") + "," + plugin.getConfig().getDouble("Goals.Red.Y") + "," + plugin.getConfig().getDouble("Goals.Red.Z"));
 								    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 								    //Do something
 								    
-								    plugin.getConfig().set("Diamond Blocks.Red.X", location.getX());
-								    plugin.getConfig().set("Diamond Blocks.Red.Y", location.getY());
-								    plugin.getConfig().set("Diamond Blocks.Red.Z", location.getZ());
+								    plugin.getConfig().set("Goals.Red.X", location.getX());
+								    plugin.getConfig().set("Goals.Red.Y", location.getY());
+								    plugin.getConfig().set("Goals.Red.Z", location.getZ());
 								    plugin.saveConfig();
 						    	}
 					    	}
@@ -429,13 +429,13 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 									sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 									sender.sendMessage(ChatColor.GREEN + "Setting Blue Team Goal!");
 									sender.sendMessage(ChatColor.GREEN + "Make sure you are standing on top of the diamond block!");
-									sender.sendMessage(ChatColor.GREEN + "" + plugin.getConfig().getDouble("Diamond Blocks.Blue.X") + "," + plugin.getConfig().getDouble("Diamond Blocks.Blue.Y") + "," + plugin.getConfig().getDouble("Diamond Blocks.Blue.Z"));
+									sender.sendMessage(ChatColor.GREEN + "" + plugin.getConfig().getDouble("Goals.Blue.X") + "," + plugin.getConfig().getDouble("Goals.Blue.Y") + "," + plugin.getConfig().getDouble("Goals.Blue.Z"));
 								    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 								    //Do something
 								    
-								    plugin.getConfig().set("Diamond Blocks.Blue.X", location.getX());
-								    plugin.getConfig().set("Diamond Blocks.Blue.Y", location.getY());
-								    plugin.getConfig().set("Diamond Blocks.Blue.Z", location.getZ());
+								    plugin.getConfig().set("Goals.Blue.X", location.getX());
+								    plugin.getConfig().set("Goals.Blue.Y", location.getY());
+								    plugin.getConfig().set("Goals.Blue.Z", location.getZ());
 								    plugin.saveConfig();
 						    	}
 					    	}
