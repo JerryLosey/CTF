@@ -2,6 +2,7 @@ package me.jimbo.plugin;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Logger;
 
 
@@ -14,7 +15,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class CTF extends JavaPlugin {
 	
 	public final static ArrayList<Player> RedPlayers = new ArrayList<Player>();
-	public final static ArrayList<Player> BluePlayers = new ArrayList<Player>();
 	public final static ArrayList<Player> AllPlayers = new ArrayList<Player>();
 
 	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
@@ -141,6 +141,7 @@ public class CTF extends JavaPlugin {
 						getServer().broadcastMessage("");
 						inProgress = true;
 						canAttack = true;
+						splitTeams();
 					}
 			}
 		}, 0L, 20L);
@@ -164,6 +165,17 @@ public class CTF extends JavaPlugin {
 			return blueScore;
 		}
 		return 0;
+	}
+	
+	public void splitTeams(){
+		Random r = new Random();
+		int moving = AllPlayers.size()/2;
+		for(int i=0;i<moving;i++){
+			int x = r.nextInt(AllPlayers.size());
+			Player player = AllPlayers.get(x);
+			RedPlayers.add(player);
+			AllPlayers.remove(player);
+		}
 	}
 	
 }
