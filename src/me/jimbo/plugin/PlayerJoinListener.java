@@ -33,8 +33,4 @@ public class PlayerJoinListener implements Listener {
 		player.teleport(location);
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onPlayerQuit(PlayerQuitEvent e) {
-		CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
-	}
 }
