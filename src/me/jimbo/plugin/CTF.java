@@ -2,6 +2,7 @@ package me.jimbo.plugin;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -16,6 +17,8 @@ public class CTF extends JavaPlugin {
 	
 	public final static ArrayList<Player> RedPlayers = new ArrayList<Player>();
 	public final static ArrayList<Player> AllPlayers = new ArrayList<Player>();
+	
+	public final static HashMap<Player, String> PlayerClasses = new HashMap<Player,String>();
 
 	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
 	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
