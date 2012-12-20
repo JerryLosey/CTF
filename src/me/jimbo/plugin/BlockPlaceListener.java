@@ -25,24 +25,17 @@ public class BlockPlaceListener implements Listener {
 		Player player = e.getPlayer();
 		Block block = e.getBlock();
 		Block placedAgainst = e.getBlockAgainst();
-		placedAgainst.getRelative(BlockFace.UP);
 		int redX = (int) plugin.getConfig().getDouble("Goals.Red.X");
 		int redY = (int) plugin.getConfig().getDouble("Goals.Red.Y");
 		int redZ = (int) plugin.getConfig().getDouble("Goals.Red.Z");
 		
 		Location redLocation = new Location(Bukkit.getWorlds().get(0), redX, redY, redZ);
 		
-		if(CTF.AllPlayers.contains(player)){
-			if((int)(placedAgainst.getLocation().getY()+1) == redY){
-				if((int)(placedAgainst.getLocation().getX()) == redX){
-					if(block.getType() == Material.WOOL ){
-						if(placedAgainst.getType() == Material.DIAMOND_BLOCK && block.getData() == 11){
-							plugin.getServer().broadcastMessage(ChatColor.RED + "Red" + ChatColor.GOLD + " team has scored a point!");
-							plugin.setScore(1);
-							plugin.getServer().broadcastMessage("Current Score: " + ChatColor.RED + plugin.getScore(1) + " : " + ChatColor.BLUE + plugin.getScore(2));
-						}
-					}
-				}
+		if(CTF.RedPlayers.contains(player)){
+			if(placedAgainst.getLocation() == redLocation){
+				plugin.getServer().broadcastMessage(ChatColor.RED + "Red" + ChatColor.GOLD + " team has scored a point!");
+				plugin.setScore(1);
+				plugin.getServer().broadcastMessage("Current Score: " + ChatColor.RED + plugin.getScore(1) + " : " + ChatColor.BLUE + plugin.getScore(2));
 			}
 		}else if (CTF.AllPlayers.contains(player)){
 			
