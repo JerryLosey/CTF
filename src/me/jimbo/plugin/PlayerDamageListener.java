@@ -4,13 +4,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerDamageListener implements Listener{
 	
-	//private PlayerCommands pCommands;
 	@SuppressWarnings("unused")
 	private CTF plugin;
 	
@@ -23,7 +23,8 @@ public class PlayerDamageListener implements Listener{
 		if((e.getEntity() instanceof Player)){
 			Player p = (Player)e.getEntity();
 			if(e.getCause().equals(DamageCause.FALL)){
-				p.sendMessage("Fall Damage");
+				p.sendMessage(""+ e.getCause());
+				e.setCancelled(true);
 			}
 			if(p.getHealth() - e.getDamage() < 1){
 				PlayerInventory inv = p.getInventory();
@@ -31,6 +32,24 @@ public class PlayerDamageListener implements Listener{
 				inv.setArmorContents(null);
 				p.setHealth(0);
 			}
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onPlayerDamageEnt(EntityDamageByEntityEvent e) {
+		if((e.getEntity() instanceof Player)){
+			Player p = (Player)e.getEntity();
+			if(e.getCause().equals(DamageCause.FALL)){
+				p.sendMessage(""+ e.getCause());
+				e.setCancelled(true);
+			}
+			if(p.getHealth() - e.getDamage() < 1){
+				PlayerInventory inv = p.getInventory();
+				inv.clear();
+				inv.setArmorContents(null);
+				p.setHealth(0);
+			}
+
 		}
 	}
 	

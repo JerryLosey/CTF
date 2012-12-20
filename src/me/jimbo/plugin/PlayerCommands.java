@@ -850,5 +850,24 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 		}
 	}
 	
+	public boolean getClass(String playerClass){
+		if(playerClass.equals("Engineer")){
+			return this.isEngineer;
+		}else if(playerClass.equals("Ninja")){
+			return this.isNinja;
+		}else if(playerClass.equals("Heavy")){
+			return this.isHeavy;
+		}else if(playerClass.equals("Medic")){
+			return this.isMedic;
+		}else if(playerClass.equals("Archer")){
+			return this.isArcher;
+		}else if(playerClass.equals("Soldier")){
+			return this.isSoldier;
+		}else if(playerClass.equals("Pyro")){
+			return this.isPyro;
+		}
+		
+		return false;
+	}
 	
 }

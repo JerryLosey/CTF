@@ -26,6 +26,7 @@ public class CTF extends JavaPlugin {
 	public final EntitySpawnListener EntitySpawnListener = new EntitySpawnListener(this);
 	public final BlockPlaceListener BlockPlaceListener = new BlockPlaceListener(this);
 	public final PlayerDropItemListener PlayerDropItemListener = new PlayerDropItemListener(this);
+	public final PlayerDamageListener PlayerDamageListener = new PlayerDamageListener(this);
 
 	FileConfiguration config;
 	public int redX;
@@ -55,7 +56,8 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(PlayerKickListener, this);		
 		getServer().getPluginManager().registerEvents(EntitySpawnListener, this);			
 		getServer().getPluginManager().registerEvents(BlockPlaceListener, this);			
-		getServer().getPluginManager().registerEvents(PlayerDropItemListener, this);
+		getServer().getPluginManager().registerEvents(PlayerDropItemListener, this);	
+		getServer().getPluginManager().registerEvents(PlayerDamageListener, this);
 
 		inProgress = false;
 		canAttack = false;
