@@ -28,6 +28,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	public boolean isPyro = false;
 	public boolean isNinja = false;
 	public boolean isChemist = false;
+	public boolean isEngineer = false;
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
 	ItemStack dleggings = new ItemStack(Material.DIAMOND_LEGGINGS);
@@ -61,7 +62,14 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	ItemStack cleggings = new ItemStack(Material.CHAINMAIL_LEGGINGS);
 	ItemStack cboots = new ItemStack(Material.CHAINMAIL_BOOTS);
 	ItemStack ebow = new ItemStack(Material.BOW);
+	ItemStack redstone = new ItemStack(Material.REDSTONE);
 	ItemStack egg = new ItemStack(Material.EGG);
+	ItemStack egsword = new ItemStack(Material.GOLD_SWORD);
+	//ItemStack spawnzombie = new ItemStack(383, 1, 54);
+	ItemStack spawner = new ItemStack(52);
+	ItemStack sugar = new ItemStack(Material.SUGAR);
+	ItemStack coal = new ItemStack(Material.COAL);
+	ItemStack wsword = new ItemStack(Material.WOOD_SWORD);
 
 	
 	public PlayerCommands (CTF plugin) {
@@ -108,7 +116,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			        this.isPyro = false;
 			        this.isNinja = false;
 			        this.isChemist = false;
-			        
+
+			        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Heavy");
 			        return true;
 				}
 			}
@@ -135,40 +144,41 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				}
 				if(inventory.getBoots() == null){
 					inventory.setBoots(this.iboots);
-					
-					inventory.addItem(new ItemStack[] { this.isword });
-					inventory.addItem(new ItemStack[] { this.steak });
-					inventory.addItem(new ItemStack[] { this.steak });
-					inventory.addItem(new ItemStack[] { this.steak });
-					inventory.addItem(new ItemStack[] { this.steak });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					inventory.addItem(new ItemStack[] { this.pearl });
-					
-					this.isSoldier = true;
-					
-					this.isHeavy = false;
-			        this.isArcher = false;
-			        this.isMedic = false;
-			        this.isPyro = false;
-			        this.isNinja = false;
-			        this.isChemist = false;
-			        
-			        return true;
 				}
+				inventory.addItem(new ItemStack[] { this.isword });
+				inventory.addItem(new ItemStack[] { this.steak });
+				inventory.addItem(new ItemStack[] { this.steak });
+				inventory.addItem(new ItemStack[] { this.steak });
+				inventory.addItem(new ItemStack[] { this.steak });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				inventory.addItem(new ItemStack[] { this.pearl });
+				
+				this.isSoldier = true;
+				
+				this.isHeavy = false;
+		        this.isArcher = false;
+		        this.isMedic = false;
+		        this.isPyro = false;
+		        this.isNinja = false;
+		        this.isChemist = false;
+			    this.isEngineer = false;
+
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Soldier");
+		        return true;
 			}
 			// Archer class
 			if((command.getName().equalsIgnoreCase("archer")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.archer")))){
@@ -193,162 +203,484 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				}
 				if(inv.getBoots() == null){
 					inv.setBoots(this.cboots);
-					this.ebow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
-					inv.addItem(new ItemStack[] { this.ebow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-			        inv.addItem(new ItemStack[] { this.arrow });
-
-			        inv.addItem(new ItemStack[] { this.ssword });
-
-			        inv.addItem(new ItemStack[] { this.steak });
-			        inv.addItem(new ItemStack[] { this.steak });
-			        inv.addItem(new ItemStack[] { this.steak });
-			        inv.addItem(new ItemStack[] { this.steak });
-			        this.isArcher = true;
-					
-					this.isSoldier = false;
-					this.isHeavy = false;
-			        this.isMedic = false;
-			        this.isPyro = false;
-			        this.isNinja = false;
-			        this.isChemist = false;
-			        
-			        return true;
 				}
+				inv.addItem(new ItemStack[] { this.ebow });
+				this.ebow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+		        inv.addItem(new ItemStack[] { this.arrow });
+
+		        inv.addItem(new ItemStack[] { this.ssword });
+
+		        inv.addItem(new ItemStack[] { this.steak });
+		        inv.addItem(new ItemStack[] { this.steak });
+		        inv.addItem(new ItemStack[] { this.steak });
+		        inv.addItem(new ItemStack[] { this.steak });
+		        this.isArcher = true;
+				
+				this.isSoldier = false;
+				this.isHeavy = false;
+		        this.isMedic = false;
+		        this.isPyro = false;
+		        this.isNinja = false;
+		        this.isChemist = false;
+			    this.isEngineer = false;
+
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now an Archer!");
+		        return true;
+			}
+			// Medic class
+			if((command.getName().equalsIgnoreCase("medic")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.medic")))){
+				if(!(sender instanceof Player)){
+					sender.sendMessage(ChatColor.RED + "In-Game Only!");
+					return true;
+				}
+				Player target = (Player)sender;
+				PlayerInventory inv = target.getInventory();
+				inv.clear();
+				inv.setArmorContents(null);
+				target.setHealth(0);
+				
+				if(inv.getHelmet() == null){
+					inv.setHelmet(this.ihelmet);
+				}
+				if(inv.getChestplate() == null){
+					inv.setChestplate(this.ichestplate);
+				}
+				if(inv.getLeggings() == null){
+					inv.setLeggings(this.ileggings);
+				}
+				if(inv.getBoots() == null){
+					inv.setBoots(this.iboots);
+				}
+				inv.addItem(new ItemStack[] { this.gsword });
+
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+			    inv.addItem(new ItemStack[] { this.web });
+
+			    inv.addItem(new ItemStack[] { this.regeneration });
+
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+					
+			    this.isMedic = true;
+					
+				this.isHeavy = false;
+			    this.isArcher = false;
+				this.isSoldier = false;
+			    this.isPyro = false;
+			    this.isNinja = false;
+			    this.isChemist = false;
+			    this.isEngineer = false;
+
+			    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Soldier");
+			    return true;
+			}
+			// Pyro class
+			if((command.getName().equalsIgnoreCase("pyro")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.pyro")))){
+				if(!(sender instanceof Player)){
+					sender.sendMessage(ChatColor.RED + "In-Game Only!");
+					return true;
+				}
+				Player target = (Player)sender;
+				PlayerInventory inv = target.getInventory();
+				inv.clear();
+				inv.setArmorContents(null);
+				target.setHealth(0);
+				
+				if(inv.getHelmet() == null){
+					inv.setHelmet(this.ihelmet);
+				}
+				if(inv.getChestplate() == null){
+					inv.setChestplate(this.ichestplate);
+				}
+				if(inv.getLeggings() == null){
+					inv.setLeggings(this.ileggings);
+				}
+				if(inv.getBoots() == null){
+					inv.setBoots(this.iboots);
+				}
+				if (inv.getHelmet() == null) {
+			        inv.setHelmet(this.lhelmet);
+			      }
+			      if (inv.getChestplate() == null) {
+			        inv.setChestplate(this.lchestplate);
+			      }
+			      if (inv.getLeggings() == null) {
+			        inv.setLeggings(this.lleggings);
+			      }
+			      if (inv.getBoots() == null) {
+			        inv.setBoots(this.lboots);
+			      }
+			      inv.addItem(new ItemStack[] { this.daxe });
+
+			      inv.addItem(new ItemStack[] { this.flintandsteel });
+
+			      inv.addItem(new ItemStack[] { this.bow });
+
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+			      inv.addItem(new ItemStack[] { this.arrow });
+
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+
+			      this.isPyro = true;
+
+			      this.isHeavy = false;
+			      this.isSoldier = false;
+			      this.isArcher = false;
+			      this.isMedic = false;
+			      this.isNinja = false;
+			      this.isChemist = false;
+			      this.isEngineer = false;
+
+			      sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Pyro");
+			      return true;
+			}
+			// Ninja class
+			if((command.getName().equalsIgnoreCase("ninja")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.ninja")))){
+				if(!(sender instanceof Player)){
+					sender.sendMessage(ChatColor.RED + "In-Game Only!");
+					return true;
+				}
+				Player target = (Player)sender;
+				PlayerInventory inv = target.getInventory();
+				inv.clear();
+				inv.setArmorContents(null);
+				target.setHealth(0);
+				
+				inv.addItem(new ItemStack[] { this.egsword });
+			      this.egsword.addEnchantment(Enchantment.KNOCKBACK, 2);
+
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+			      inv.addItem(new ItemStack[] { this.egg });
+
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+			      inv.addItem(new ItemStack[] { this.pearl });
+
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+			      inv.addItem(new ItemStack[] { this.redstone });
+
+			      inv.addItem(new ItemStack[] { this.steak });
+
+			      this.isNinja = true;
+
+			      this.isHeavy = false;
+			      this.isSoldier = false;
+			      this.isArcher = false;
+			      this.isMedic = false;
+			      this.isPyro = false;
+			      this.isChemist = false;
+			      this.isEngineer = false;
+
+			      sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Ninja");
+			      return true;
+			}
+			// Engineer class
+			if((command.getName().equalsIgnoreCase("engineer")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.engineer")))){
+				if(!(sender instanceof Player)){
+					sender.sendMessage(ChatColor.RED + "In-Game Only!");
+					return true;
+				}
+				Player target = (Player)sender;
+				PlayerInventory inv = target.getInventory();
+				inv.clear();
+				inv.setArmorContents(null);
+				target.setHealth(0);
+				
+				if (inv.getHelmet() == null) {
+			        inv.setHelmet(this.lhelmet);
+			      }
+			      if (inv.getChestplate() == null) {
+			        inv.setChestplate(this.gchestplate);
+			      }
+			      if (inv.getLeggings() == null) {
+			        inv.setLeggings(this.gleggings);
+			      }
+			      if (inv.getBoots() == null) {
+			        inv.setBoots(this.lboots);
+			      }
+			      inv.addItem(new ItemStack[] { this.wsword });
+
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+			      inv.addItem(new ItemStack[] { this.steak });
+
+			      inv.addItem(new ItemStack[] { this.coal });
+			      inv.addItem(new ItemStack[] { this.coal });
+			      inv.addItem(new ItemStack[] { this.coal });
+			      inv.addItem(new ItemStack[] { this.coal });
+			      inv.addItem(new ItemStack[] { this.coal });
+			      inv.addItem(new ItemStack[] { this.coal });
+			      inv.addItem(new ItemStack[] { this.coal });
+
+			      this.isEngineer = true;
+
+			      this.isNinja = false;
+			      this.isHeavy = false;
+			      this.isSoldier = false;
+			      this.isArcher = false;
+			      this.isMedic = false;
+			      this.isPyro = false;
+			      this.isChemist = false;
+
+			      sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now an Engineer");
+			      return true;
 			}
 			
 			if (command.getName().equalsIgnoreCase("ctf")) {
@@ -480,9 +812,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			    	{
 					    //Do something
 						if(CTF.AllPlayers.contains(((Player) sender).getPlayer())){
-							sender.sendMessage("You're on the Blue Team!");
+							sender.sendMessage("You're on the " + ChatColor.BLUE + "Blue " + "Team!");
 						} else if(CTF.RedPlayers.contains(((Player) sender).getPlayer())) {
-							sender.sendMessage("You're on the Red Team!");
+							sender.sendMessage("You're on the " + ChatColor.RED + "Red " + "Team!");
 						} else {
 							sender.sendMessage("Your team has not been set yet!");
 						}

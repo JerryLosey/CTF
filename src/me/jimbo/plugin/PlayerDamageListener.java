@@ -5,10 +5,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerDamageListener implements Listener{
 	
+	private PlayerCommands pCommands;
 	@SuppressWarnings("unused")
 	private CTF plugin;
 	
@@ -20,6 +22,9 @@ public class PlayerDamageListener implements Listener{
 	public void onPlayerDamage(EntityDamageEvent e) {
 		if((e.getEntity() instanceof Player)){
 			Player p = (Player)e.getEntity();
+			if(e.getCause() == DamageCause.FALL){
+				p.sendMessage("Fall Damage");
+			}
 			if(p.getHealth() - e.getDamage() < 1){
 				PlayerInventory inv = p.getInventory();
 				inv.clear();
