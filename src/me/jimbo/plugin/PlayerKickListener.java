@@ -22,6 +22,9 @@ public class PlayerKickListener implements Listener {
 		if(CTF.AllPlayers.contains(e.getPlayer())){
 			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
 		}
+		if(CTF.PlayerClasses.containsKey(e.getPlayer())){
+			CTF.PlayerClasses.remove(e.getPlayer());
+		}
 		if(CTF.RedPlayers.contains(e.getPlayer())){
 			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
 		}
@@ -33,8 +36,12 @@ public class PlayerKickListener implements Listener {
 		if(CTF.AllPlayers.contains(e.getPlayer())){
 			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
 		}
+		if(CTF.PlayerClasses.containsKey(e.getPlayer())){
+			CTF.PlayerClasses.remove(e.getPlayer());
+		}
 		if(CTF.RedPlayers.contains(e.getPlayer())){
 			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
+			CTF.PlayerClasses.remove(e.getPlayer());
 		}
 	}
 }
