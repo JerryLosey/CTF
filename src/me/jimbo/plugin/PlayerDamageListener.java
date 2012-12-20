@@ -23,7 +23,7 @@ public class PlayerDamageListener implements Listener{
 		if((e.getEntity() instanceof Player)){
 			Player p = (Player)e.getEntity();
 			if(CTF.PlayerClasses.containsKey(p)){
-				if(CTF.PlayerClasses.get(p) == "soldier"){
+				if(CTF.PlayerClasses.get(p).equals("soldier")){
 					if(e.getCause().equals(DamageCause.FALL)){
 						e.setCancelled(true);
 					}
@@ -43,7 +43,7 @@ public class PlayerDamageListener implements Listener{
 		if((e.getEntity() instanceof Player)){
 			Player p = (Player)e.getEntity();
 			if(CTF.PlayerClasses.containsKey(p)){
-				if(CTF.PlayerClasses.get(p) == "soldier"){
+				if(CTF.PlayerClasses.get(p).equals("soldier")){
 					if(e.getCause().equals(DamageCause.FALL)){
 						e.setCancelled(true);
 					}
