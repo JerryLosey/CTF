@@ -22,9 +22,12 @@ public class PlayerDamageListener implements Listener{
 	public void onPlayerDamage(EntityDamageEvent e) {
 		if((e.getEntity() instanceof Player)){
 			Player p = (Player)e.getEntity();
-			if(e.getCause().equals(DamageCause.FALL)){
-				p.sendMessage(""+ e.getCause());
-				e.setCancelled(true);
+			if(CTF.PlayerClasses.containsKey(p)){
+				if(CTF.PlayerClasses.get(p) == "soldier"){
+					if(e.getCause().equals(DamageCause.FALL)){
+						e.setCancelled(true);
+					}
+				}
 			}
 			if(p.getHealth() - e.getDamage() < 1){
 				PlayerInventory inv = p.getInventory();
@@ -39,9 +42,12 @@ public class PlayerDamageListener implements Listener{
 	public void onPlayerDamageEnt(EntityDamageByEntityEvent e) {
 		if((e.getEntity() instanceof Player)){
 			Player p = (Player)e.getEntity();
-			if(e.getCause().equals(DamageCause.FALL)){
-				p.sendMessage(""+ e.getCause());
-				e.setCancelled(true);
+			if(CTF.PlayerClasses.containsKey(p)){
+				if(CTF.PlayerClasses.get(p) == "soldier"){
+					if(e.getCause().equals(DamageCause.FALL)){
+						e.setCancelled(true);
+					}
+				}
 			}
 			if(p.getHealth() - e.getDamage() < 1){
 				PlayerInventory inv = p.getInventory();
