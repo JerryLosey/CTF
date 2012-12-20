@@ -1,6 +1,8 @@
 package me.jimbo.plugin;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -26,9 +28,9 @@ public class BlockPlaceListener implements Listener {
 		placedAgainst.getRelative(BlockFace.UP);
 		int redX = (int) plugin.getConfig().getDouble("Goals.Red.X");
 		int redY = (int) plugin.getConfig().getDouble("Goals.Red.Y");
-		//int redZ = (int) plugin.getConfig().getDouble("Goals.Red.Z");
+		int redZ = (int) plugin.getConfig().getDouble("Goals.Red.Z");
 		
-		//Location redLocation = new Location(Bukkit.getWorlds().get(0), redX, redY, redZ);
+		Location redLocation = new Location(Bukkit.getWorlds().get(0), redX, redY, redZ);
 		
 		if(CTF.AllPlayers.contains(player)){
 			if((int)(placedAgainst.getLocation().getY()+1) == redY){
