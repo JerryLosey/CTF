@@ -37,7 +37,7 @@ public class BlockBreakListener implements Listener {
 		//brokenBlock.getData() == 14 is red
 		if((CTF.RedPlayers.contains(player) && block.getData() == 11) || (CTF.AllPlayers.contains(player) && block.getData() == 14))
 		{
-			ItemStack flag = (ItemStack) block.getDrops();
+			ItemStack flag = block.getDrops().toArray(new ItemStack[]{new ItemStack(Material.AIR, 1)})[0];
 			Item hover = player.getWorld().dropItem(player.getLocation(), flag);
 			hoverItem = hover.getUniqueId();
 			player.setPassenger(hover);
