@@ -3,6 +3,8 @@ package me.jimbo.plugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -387,14 +389,15 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 								    plugin.getConfig().set("Spawns.Red.Z", location.getZ());
 								    plugin.saveConfig();
 						    	}
-								if(cmd3.equals("goal"))
+								if(cmd3.equals("flag"))
 						    	{
 									Player player = (Player) sender;
-								    Location location = player.getLocation();
+									Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
+								    Location location = block.getLocation();
 									sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 									sender.sendMessage(ChatColor.GREEN + "Setting Red Team Goal!");
 									sender.sendMessage(ChatColor.GREEN + "Make sure you are standing on top of the diamond block!");
-									sender.sendMessage(ChatColor.GREEN + "" + plugin.getConfig().getDouble("Goals.Red.X") + "," + plugin.getConfig().getDouble("Goals.Red.Y") + "," + plugin.getConfig().getDouble("Goals.Red.Z"));
+									sender.sendMessage(ChatColor.GREEN + "" + block.getLocation());
 								    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 								    //Do something
 								    
@@ -422,17 +425,17 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 								    plugin.getConfig().set("Spawns.Blue.Z", location.getZ());
 								    plugin.saveConfig();
 						    	}
-								if(cmd3.equals("goal"))
+								if(cmd3.equals("flag"))
 						    	{
 									Player player = (Player) sender;
-								    Location location = player.getLocation();
+									Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
+								    Location location = block.getLocation();
 									sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 									sender.sendMessage(ChatColor.GREEN + "Setting Blue Team Goal!");
 									sender.sendMessage(ChatColor.GREEN + "Make sure you are standing on top of the diamond block!");
-									sender.sendMessage(ChatColor.GREEN + "" + plugin.getConfig().getDouble("Goals.Blue.X") + "," + plugin.getConfig().getDouble("Goals.Blue.Y") + "," + plugin.getConfig().getDouble("Goals.Blue.Z"));
+									sender.sendMessage(ChatColor.GREEN + "" + block.getLocation());
 								    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 								    //Do something
-								    
 								    plugin.getConfig().set("Goals.Blue.X", location.getX());
 								    plugin.getConfig().set("Goals.Blue.Y", location.getY());
 								    plugin.getConfig().set("Goals.Blue.Z", location.getZ());
