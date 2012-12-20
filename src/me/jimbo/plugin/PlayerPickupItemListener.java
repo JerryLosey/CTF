@@ -36,10 +36,10 @@ public class PlayerPickupItemListener implements Listener {
 		
 		//14 is red, 11 is blue
 		if(item.getDurability() == 14){
-
+			e.setCancelled(true);
 		}
 		if(item.getDurability() == 11){
-			
+			e.setCancelled(true);
 		}
 	}
 	
