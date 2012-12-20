@@ -1,8 +1,9 @@
 name: CTF
 description: Capture The Flag
 main: me.jimbo.plugin.CTF
-version: 0.2.0
+version: 0.7.0
 author: teh_jombi
+authors: [fireblast709]
 commands:
    ctf:
        description: Manage Capture The Flag
