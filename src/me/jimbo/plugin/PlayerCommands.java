@@ -109,6 +109,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					inventory.addItem(new ItemStack[] { this.steak });
 					
 					this.isHeavy = true;
+					if(CTF.PlayerClasses.containsKey(target)){
+						CTF.PlayerClasses.put(target, "heavy");
+					}
 					
 					this.isSoldier = false;
 			        this.isArcher = false;
@@ -168,6 +171,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				inventory.addItem(new ItemStack[] { this.pearl });
 				
 				this.isSoldier = true;
+				if(CTF.PlayerClasses.containsKey(target)){
+					CTF.PlayerClasses.put(target, "soldier");
+				}
 				
 				this.isHeavy = false;
 		        this.isArcher = false;
@@ -350,6 +356,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 		        inv.addItem(new ItemStack[] { this.steak });
 		        inv.addItem(new ItemStack[] { this.steak });
 		        this.isArcher = true;
+				if(CTF.PlayerClasses.containsKey(target)){
+					CTF.PlayerClasses.put(target, "archer");
+				}
 				
 				this.isSoldier = false;
 				this.isHeavy = false;
@@ -409,6 +418,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			    inv.addItem(new ItemStack[] { this.steak });
 					
 			    this.isMedic = true;
+				if(CTF.PlayerClasses.containsKey(target)){
+					CTF.PlayerClasses.put(target, "medic");
+				}
 					
 				this.isHeavy = false;
 			    this.isArcher = false;
@@ -492,6 +504,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			      inv.addItem(new ItemStack[] { this.steak });
 
 			      this.isPyro = true;
+					if(CTF.PlayerClasses.containsKey(target)){
+						CTF.PlayerClasses.put(target, "pyro");
+					}
 
 			      this.isHeavy = false;
 			      this.isSoldier = false;
@@ -618,6 +633,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			      inv.addItem(new ItemStack[] { this.steak });
 
 			      this.isNinja = true;
+					if(CTF.PlayerClasses.containsKey(target)){
+						CTF.PlayerClasses.put(target, "ninja");
+					}
 
 			      this.isHeavy = false;
 			      this.isSoldier = false;
@@ -670,6 +688,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			      inv.addItem(new ItemStack[] { this.coal });
 
 			      this.isEngineer = true;
+					if(CTF.PlayerClasses.containsKey(target)){
+						CTF.PlayerClasses.put(target, "engineer");
+					}
 
 			      this.isNinja = false;
 			      this.isHeavy = false;
