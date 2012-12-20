@@ -10,7 +10,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerDamageListener implements Listener{
 	
-	private PlayerCommands pCommands;
+	//private PlayerCommands pCommands;
 	@SuppressWarnings("unused")
 	private CTF plugin;
 	
@@ -22,7 +22,7 @@ public class PlayerDamageListener implements Listener{
 	public void onPlayerDamage(EntityDamageEvent e) {
 		if((e.getEntity() instanceof Player)){
 			Player p = (Player)e.getEntity();
-			if(e.getCause() == DamageCause.FALL){
+			if(e.getCause().equals(DamageCause.FALL)){
 				p.sendMessage("Fall Damage");
 			}
 			if(p.getHealth() - e.getDamage() < 1){
