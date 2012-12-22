@@ -1,5 +1,6 @@
 package me.jimbo.plugin;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -64,18 +65,31 @@ public class PlayerDamageListener implements Listener{
 	
 			}
 			if(e.getDamager().getType() == EntityType.ARROW){
-				//plugin.getServer().broadcastMessage("Entity = Arrow");
 				Arrow a = (Arrow)e.getDamager();
 				if(a.getShooter() instanceof Player){
-					//plugin.getServer().broadcastMessage("Shooter = Player");
 					if(e.getEntity() instanceof Player){
-						//plugin.getServer().broadcastMessage("Player = Player");
 						Player killer = (Player)a.getShooter();
 						Player player = (Player)e.getEntity();
 						if(killer.getLocation().distance(player.getLocation()) > 20){
-							player.sendMessage("Headshot!");
-							killer.sendMessage("Headshot!");
-							e.setDamage(20);
+							if(CTF.AllPlayers.contains(killer)){ //killer is on blue team
+								if(CTF.AllPlayers.contains(player)){ //player is on blue team as well!
+									e.setCancelled(true);
+								}else if(CTF.RedPlayers.contains(player)){
+									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.BLUE + killer.getDisplayName() + ChatColor.GOLD + "!");
+									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.RED + player.getDisplayName() + ChatColor.GOLD + "!");
+									e.setDamage(20);
+								}
+							}else if(CTF.RedPlayers.contains(killer)){
+								if(CTF.RedPlayers.contains(player)){
+									e.setCancelled(true); // Can't kill teammates
+								} else if(CTF.AllPlayers.contains(player)){
+									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.RED + killer.getDisplayName() + ChatColor.GOLD + "!");
+									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.BLUE + player.getDisplayName() + ChatColor.GOLD + "!");
+									e.setDamage(20);
+								}
+								
+							}
+							
 						}
 					}
 				}
