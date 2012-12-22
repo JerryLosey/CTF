@@ -19,7 +19,7 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		if (!CTF.AllPlayers.contains(e.getPlayer())){
 			CTF.AllPlayers.add(e.getPlayer());
-			CTF.PlayerClasses.put(e.getPlayer(), null);
+			CTF.PlayerClasses.put(e.getPlayer(), "soldier");
 		}
 		Player player = e.getPlayer();
 		Location location = player.getLocation();
