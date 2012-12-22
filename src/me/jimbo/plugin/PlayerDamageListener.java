@@ -70,7 +70,7 @@ public class PlayerDamageListener implements Listener{
 					if(e.getEntity() instanceof Player){
 						Player killer = (Player)a.getShooter();
 						Player player = (Player)e.getEntity();
-						if(killer.getLocation().distance(player.getLocation()) > 20){
+						if(killer.getLocation().distanceSquared(player.getLocation()) >= 400){
 							if(CTF.AllPlayers.contains(killer)){ //killer is on blue team
 								if(CTF.AllPlayers.contains(player)){ //player is on blue team as well!
 									e.setCancelled(true);
