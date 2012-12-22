@@ -210,8 +210,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				if(inv.getBoots() == null){
 					inv.setBoots(this.cboots);
 				}
-				inv.addItem(new ItemStack[] { this.ebow });
 				this.ebow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+				inv.addItem(new ItemStack[] { this.ebow });
 
 		        inv.addItem(new ItemStack[] { this.arrow });
 		        inv.addItem(new ItemStack[] { this.arrow });
@@ -457,67 +457,55 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				if(inv.getBoots() == null){
 					inv.setBoots(this.iboots);
 				}
-				if (inv.getHelmet() == null) {
-			        inv.setHelmet(this.lhelmet);
-			      }
-			      if (inv.getChestplate() == null) {
-			        inv.setChestplate(this.lchestplate);
-			      }
-			      if (inv.getLeggings() == null) {
-			        inv.setLeggings(this.lleggings);
-			      }
-			      if (inv.getBoots() == null) {
-			        inv.setBoots(this.lboots);
-			      }
-			      inv.addItem(new ItemStack[] { this.daxe });
+			    inv.addItem(new ItemStack[] { this.daxe });
 
-			      inv.addItem(new ItemStack[] { this.flintandsteel });
+			    inv.addItem(new ItemStack[] { this.flintandsteel });
 
-			      inv.addItem(new ItemStack[] { this.bow });
+			    inv.addItem(new ItemStack[] { this.bow });
 
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
-			      inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
+			    inv.addItem(new ItemStack[] { this.arrow });
 
-			      inv.addItem(new ItemStack[] { this.steak });
-			      inv.addItem(new ItemStack[] { this.steak });
-			      inv.addItem(new ItemStack[] { this.steak });
-			      inv.addItem(new ItemStack[] { this.steak });
-			      inv.addItem(new ItemStack[] { this.steak });
-			      inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
+			    inv.addItem(new ItemStack[] { this.steak });
 
-			      this.isPyro = true;
-					if(CTF.PlayerClasses.containsKey(target)){
-						CTF.PlayerClasses.put(target, "pyro");
-					}
+			    this.isPyro = true;
+			    if(CTF.PlayerClasses.containsKey(target)){
+					CTF.PlayerClasses.put(target, "pyro");
+				}
 
-			      this.isHeavy = false;
-			      this.isSoldier = false;
-			      this.isArcher = false;
-			      this.isMedic = false;
-			      this.isNinja = false;
-			      this.isChemist = false;
-			      this.isEngineer = false;
+			    this.isHeavy = false;
+			    this.isSoldier = false;
+			    this.isArcher = false;
+			    this.isMedic = false;
+			    this.isNinja = false;
+			    this.isChemist = false;
+			    this.isEngineer = false;
 
-			      sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Pyro");
-			      return true;
+			    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Pyro");
+			    return true;
 			}
 			// Ninja class
 			if((command.getName().equalsIgnoreCase("ninja")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.ninja")))){
