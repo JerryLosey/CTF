@@ -21,18 +21,18 @@ commands:
        permission: ctf.class.archer
    medic:
        description: Respawn as a medic.
-       usage: /archer
+       usage: /medic
        permission: ctf.class.medic
    pyro:
        description: Respawn as a pyromaniac.
-       usage: /archer
+       usage: /pyro
        permission: ctf.class.pyro
    ninja:
        description: Respawn as a stealthy ninja.
-       usage: /archer
+       usage: /ninja
        permission: ctf.class.ninja
    engineer:
        description: Respawn as an engineer.
-       usage: /archer
+       usage: /engineer
        permission: ctf.class.engineer
 
