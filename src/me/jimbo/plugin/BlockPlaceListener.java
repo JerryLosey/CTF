@@ -42,17 +42,19 @@ public class BlockPlaceListener implements Listener {
 						plugin.getServer().broadcastMessage(ChatColor.RED + "Red" + ChatColor.GOLD + " team has scored a point!");
 						plugin.setScore(1);
 						plugin.getServer().broadcastMessage("Current Score: " + ChatColor.RED + plugin.getScore(1) + " : " + ChatColor.BLUE + plugin.getScore(2));
+						e.getBlock().setType(Material.AIR);
 					}
 				}
 				
 			}
-		}else if (CTF.AllPlayers.contains(player)){
+		}else if (CTF.AllPlayers.contains(player)){ //Blue team
 			if(placedAgainst.getLocation().getBlockX() == blueX){
 				if(placedAgainst.getLocation().getBlockY() == blueY){
 					if(placedAgainst.getLocation().getBlockZ() == blueZ){
 						plugin.getServer().broadcastMessage(ChatColor.BLUE + "Blue" + ChatColor.GOLD + " team has scored a point!");
 						plugin.setScore(2);
 						plugin.getServer().broadcastMessage("Current Score: " + ChatColor.RED + plugin.getScore(1) + " : " + ChatColor.BLUE + plugin.getScore(2));
+						e.getBlock().setType(Material.AIR);
 					}
 				}
 				
