@@ -15,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class BlockBreakListener implements Listener {
 
-	@SuppressWarnings("unused")
 	private CTF plugin;
 	public UUID hoverItem;
 	
@@ -35,14 +34,18 @@ public class BlockBreakListener implements Listener {
 		Player player = e.getPlayer();
 		//brokenBlock.getData() == 11 is blue
 		//brokenBlock.getData() == 14 is red
-		if((CTF.RedPlayers.contains(player) && block.getData() == 11) || (CTF.AllPlayers.contains(player) && block.getData() == 14))
-		{
-			ItemStack flag = block.getDrops().toArray(new ItemStack[]{new ItemStack(Material.AIR, 1)})[0];
-			Item hover = player.getWorld().dropItem(player.getLocation(), flag);
-			hoverItem = hover.getUniqueId();
-			player.setPassenger(hover);
-			player.getInventory().addItem(flag);
-			block.setType(Material.AIR);
+		if(plugin.canAttack){
+			if((CTF.RedPlayers.contains(player) && block.getData() == 11) || (CTF.AllPlayers.contains(player) && block.getData() == 14))
+			{
+				ItemStack flag = block.getDrops().toArray(new ItemStack[]{new ItemStack(Material.AIR, 1)})[0];
+				Item hover = player.getWorld().dropItem(player.getLocation(), flag);
+				hoverItem = hover.getUniqueId();
+				player.setPassenger(hover);
+				player.getInventory().addItem(flag);
+				block.setType(Material.AIR);
+			}
+		}else{
+			e.setCancelled(true);
 		}
 	}
 	
