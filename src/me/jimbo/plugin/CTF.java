@@ -46,7 +46,7 @@ public class CTF extends JavaPlugin {
 	public int timer;
 	
 	public boolean inProgress;
-	public boolean canAttack;
+	public boolean canAttack = false;
 
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -68,6 +68,10 @@ public class CTF extends JavaPlugin {
 		getCommand("heavy").setExecutor(new PlayerCommands(this));
 		getCommand("soldier").setExecutor(new PlayerCommands(this));
 		getCommand("archer").setExecutor(new PlayerCommands(this));
+		getCommand("medic").setExecutor(new PlayerCommands(this));
+		getCommand("pyro").setExecutor(new PlayerCommands(this));
+		getCommand("ninja").setExecutor(new PlayerCommands(this));
+		getCommand("engineer").setExecutor(new PlayerCommands(this));
 		
 		String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
