@@ -76,14 +76,14 @@ public class PlayerDamageListener implements Listener{
 									e.setCancelled(true);
 								}else if(CTF.RedPlayers.contains(player)){
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.BLUE + killer.getDisplayName() + ChatColor.GOLD + "!");
-									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.RED + player.getDisplayName() + ChatColor.GOLD + "!");
+									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.DARK_RED + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(20);
 								}
 							}else if(CTF.RedPlayers.contains(killer)){
 								if(CTF.RedPlayers.contains(player)){
 									e.setCancelled(true); // Can't kill teammates
 								} else if(CTF.AllPlayers.contains(player)){
-									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.RED + killer.getDisplayName() + ChatColor.GOLD + "!");
+									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.DARK_RED + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.BLUE + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(20);
 								}
