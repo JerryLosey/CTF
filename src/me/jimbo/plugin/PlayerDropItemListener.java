@@ -19,7 +19,7 @@ public class PlayerDropItemListener implements Listener {
 	public void onPlayerDropItem(PlayerDropItemEvent e)
 	{
 		Player player = e.getPlayer();
-		//e.setCancelled(true);
+		e.setCancelled(true);
 	}
 		
 }

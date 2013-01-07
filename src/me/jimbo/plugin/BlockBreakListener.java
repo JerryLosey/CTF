@@ -1,22 +1,21 @@
 package me.jimbo.plugin;
 
-import java.util.UUID;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class BlockBreakListener implements Listener {
 
 	private CTF plugin;
-	public UUID hoverItem;
 	
 	public BlockBreakListener (CTF plugin) {
 		this.plugin = plugin;
@@ -35,14 +34,31 @@ public class BlockBreakListener implements Listener {
 		//brokenBlock.getData() == 11 is blue
 		//brokenBlock.getData() == 14 is red
 		if(plugin.canAttack){
-			if((CTF.RedPlayers.contains(player) && block.getData() == 11) || (CTF.AllPlayers.contains(player) && block.getData() == 14))
-			{
-				ItemStack flag = block.getDrops().toArray(new ItemStack[]{new ItemStack(Material.AIR, 1)})[0];
-				Item hover = player.getWorld().dropItem(player.getLocation(), flag);
-				hoverItem = hover.getUniqueId();
-				player.setPassenger(hover);
-				player.getInventory().addItem(flag);
-				block.setType(Material.AIR);
+			if(CTF.AllPlayers.contains(player)){
+				if(block.getData() == 14){
+					ItemStack flag = block.getDrops().toArray(new ItemStack[]{new ItemStack(35, 14)})[0];
+					Inventory inv = player.getInventory();
+					inv.clear();
+					player.getInventory().addItem(flag);
+					block.setType(Material.AIR);
+					plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag!");
+				}
+				else if(block.getData() != 14) {
+					e.setCancelled(true);
+				}
+			}
+			if(CTF.RedPlayers.contains(player)){
+				if(block.getData() == 11){
+					ItemStack flag = block.getDrops().toArray(new ItemStack[]{new ItemStack(35, 11)})[0];
+					Inventory inv = player.getInventory();
+					inv.clear();
+					player.getInventory().addItem(flag);
+					block.setType(Material.AIR);
+					plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag!");
+				}
+				else if(block.getData() == 14) {
+					e.setCancelled(true);
+				}
 			}
 		}else{
 			e.setCancelled(true);

@@ -9,8 +9,12 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CTF extends JavaPlugin {
@@ -30,6 +34,49 @@ public class CTF extends JavaPlugin {
 	public final BlockPlaceListener BlockPlaceListener = new BlockPlaceListener(this);
 	public final PlayerDropItemListener PlayerDropItemListener = new PlayerDropItemListener(this);
 	public final PlayerDamageListener PlayerDamageListener = new PlayerDamageListener(this);
+	public final InventoryOpenListener InventoryOpenListener = new InventoryOpenListener(this);
+	
+	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
+	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
+	ItemStack dleggings = new ItemStack(Material.DIAMOND_LEGGINGS);
+	ItemStack dboots = new ItemStack(Material.DIAMOND_BOOTS);
+	ItemStack dsword = new ItemStack(Material.DIAMOND_SWORD);
+	ItemStack steak = new ItemStack(Material.COOKED_BEEF);
+	ItemStack ihelmet = new ItemStack(Material.IRON_HELMET);
+	ItemStack ichestplate = new ItemStack(Material.IRON_CHESTPLATE);
+	ItemStack ileggings = new ItemStack(Material.IRON_LEGGINGS);
+	ItemStack iboots = new ItemStack(Material.IRON_BOOTS);
+	ItemStack isword = new ItemStack(Material.IRON_SWORD);
+	ItemStack pearl = new ItemStack(Material.ENDER_PEARL);
+	ItemStack ghelmet = new ItemStack(Material.GOLD_HELMET);
+	ItemStack gchestplate = new ItemStack(Material.GOLD_CHESTPLATE);
+	ItemStack gleggings = new ItemStack(Material.GOLD_LEGGINGS);
+	ItemStack gboots = new ItemStack(Material.GOLD_BOOTS);
+	ItemStack gsword = new ItemStack(Material.GOLD_SWORD);
+	ItemStack web = new ItemStack(Material.WEB);
+	ItemStack regeneration = new ItemStack(Material.POTION);
+	ItemStack lhelmet = new ItemStack(Material.LEATHER_HELMET);
+	ItemStack lchestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
+	ItemStack lleggings = new ItemStack(Material.LEATHER_LEGGINGS);
+	ItemStack lboots = new ItemStack(Material.LEATHER_BOOTS);
+	ItemStack ssword = new ItemStack(Material.STONE_SWORD);
+	ItemStack daxe = new ItemStack(Material.DIAMOND_AXE);
+	ItemStack bow = new ItemStack(Material.BOW);
+	ItemStack flintandsteel = new ItemStack(Material.FLINT_AND_STEEL);
+	ItemStack arrow = new ItemStack(Material.ARROW);
+	ItemStack chelmet = new ItemStack(Material.CHAINMAIL_HELMET);
+	ItemStack cchestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
+	ItemStack cleggings = new ItemStack(Material.CHAINMAIL_LEGGINGS);
+	ItemStack cboots = new ItemStack(Material.CHAINMAIL_BOOTS);
+	ItemStack ebow = new ItemStack(Material.BOW);
+	ItemStack redstone = new ItemStack(Material.REDSTONE);
+	ItemStack egg = new ItemStack(Material.EGG);
+	ItemStack egsword = new ItemStack(Material.GOLD_SWORD);
+	ItemStack spawnzombie = new ItemStack(Material.MOB_SPAWNER);
+	ItemStack spawner = new ItemStack(52);
+	ItemStack sugar = new ItemStack(Material.SUGAR);
+	ItemStack coal = new ItemStack(Material.COAL);
+	ItemStack wsword = new ItemStack(Material.WOOD_SWORD);
 
 	FileConfiguration config;
 	public int redX;
@@ -60,7 +107,9 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(EntitySpawnListener, this);			
 		getServer().getPluginManager().registerEvents(BlockPlaceListener, this);			
 		getServer().getPluginManager().registerEvents(PlayerDropItemListener, this);	
-		getServer().getPluginManager().registerEvents(PlayerDamageListener, this);
+		getServer().getPluginManager().registerEvents(PlayerDamageListener, this);	
+		getServer().getPluginManager().registerEvents(InventoryOpenListener, this);
+		
 
 		inProgress = false;
 		canAttack = false;
@@ -184,6 +233,439 @@ public class CTF extends JavaPlugin {
 			Player player = AllPlayers.get(x);
 			RedPlayers.add(player);
 			AllPlayers.remove(player);
+		}
+	}
+	
+	public void resetInv(Player player){
+		
+		String classed = PlayerClasses.get(player);
+		PlayerInventory inv = player.getInventory();
+		inv.clear();
+		inv.setArmorContents(null);
+		if(classed.equals("engineer")){
+			if (inv.getHelmet() == null) {
+		        inv.setHelmet(this.lhelmet);
+		      }
+		      if (inv.getChestplate() == null) {
+		        inv.setChestplate(this.gchestplate);
+		      }
+		      if (inv.getLeggings() == null) {
+		        inv.setLeggings(this.gleggings);
+		      }
+		      if (inv.getBoots() == null) {
+		        inv.setBoots(this.lboots);
+		      }
+		      inv.addItem(new ItemStack[] { this.wsword });
+
+		      inv.addItem(new ItemStack[] { this.steak });
+		      inv.addItem(new ItemStack[] { this.steak });
+		      inv.addItem(new ItemStack[] { this.steak });
+		      inv.addItem(new ItemStack[] { this.steak });
+
+		      inv.addItem(new ItemStack[] { this.coal });
+		      inv.addItem(new ItemStack[] { this.coal });
+		      inv.addItem(new ItemStack[] { this.coal });
+		      inv.addItem(new ItemStack[] { this.coal });
+		      inv.addItem(new ItemStack[] { this.coal });
+		      inv.addItem(new ItemStack[] { this.coal });
+		      inv.addItem(new ItemStack[] { this.coal });
+		}
+		if(classed.equals("ninja")){
+		    this.egsword.addEnchantment(Enchantment.KNOCKBACK, 2);
+			inv.addItem(new ItemStack[] { this.egsword });
+
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
+
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+		    inv.addItem(new ItemStack[] { this.pearl });
+
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+
+		    inv.addItem(new ItemStack[] { this.steak });
+		}
+		if(classed.equals("pyro")){
+			if(inv.getHelmet() == null){
+				inv.setHelmet(this.ihelmet);
+			}
+			if(inv.getChestplate() == null){
+				inv.setChestplate(this.ichestplate);
+			}
+			if(inv.getLeggings() == null){
+				inv.setLeggings(this.ileggings);
+			}
+			if(inv.getBoots() == null){
+				inv.setBoots(this.iboots);
+			}
+		    inv.addItem(new ItemStack[] { this.daxe });
+
+		    inv.addItem(new ItemStack[] { this.flintandsteel });
+
+		    inv.addItem(new ItemStack[] { this.bow });
+
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+		    inv.addItem(new ItemStack[] { this.arrow });
+
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		}
+		if(classed.equals("medic")){
+			if(inv.getHelmet() == null){
+				inv.setHelmet(this.ihelmet);
+			}
+			if(inv.getChestplate() == null){
+				inv.setChestplate(this.ichestplate);
+			}
+			if(inv.getLeggings() == null){
+				inv.setLeggings(this.ileggings);
+			}
+			if(inv.getBoots() == null){
+				inv.setBoots(this.iboots);
+			}
+			inv.addItem(new ItemStack[] { this.gsword });
+
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+
+		    inv.addItem(new ItemStack(Material.POTION, 8257));
+
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		}
+		if(classed.equals("heavy")){
+			if(inv.getHelmet() == null){
+				inv.setHelmet(this.dhelmet);
+			}
+			if(inv.getChestplate() == null){
+				inv.setChestplate(this.dchestplate);
+			}
+			if(inv.getLeggings() == null){
+				inv.setLeggings(this.dleggings);
+			}
+			if(inv.getBoots() == null){
+				inv.setBoots(this.dboots);
+				
+				inv.addItem(new ItemStack[] { this.dsword });
+				inv.addItem(new ItemStack[] { this.steak });
+				inv.addItem(new ItemStack[] { this.steak });
+				inv.addItem(new ItemStack[] { this.steak });
+			}
+		}
+		if(classed.equals("archer")){
+			if(inv.getHelmet() == null){
+				inv.setHelmet(this.chelmet);
+			}
+			if(inv.getChestplate() == null){
+				inv.setChestplate(this.cchestplate);
+			}
+			if(inv.getLeggings() == null){
+				inv.setLeggings(this.cleggings);
+			}
+			if(inv.getBoots() == null){
+				inv.setBoots(this.cboots);
+			}
+			this.ebow.addEnchantment(Enchantment.ARROW_KNOCKBACK, 2);
+			inv.addItem(new ItemStack[] { this.ebow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+	        inv.addItem(new ItemStack[] { this.arrow });
+
+	        inv.addItem(new ItemStack[] { this.ssword });
+
+	        inv.addItem(new ItemStack[] { this.steak });
+	        inv.addItem(new ItemStack[] { this.steak });
+	        inv.addItem(new ItemStack[] { this.steak });
+	        inv.addItem(new ItemStack[] { this.steak });
+		}
+		if(classed.equals("soldier")){			
+			if(inv.getHelmet() == null){
+				inv.setHelmet(this.ihelmet);
+			}
+			if(inv.getChestplate() == null){
+				inv.setChestplate(this.ichestplate);
+			}
+			if(inv.getLeggings() == null){
+				inv.setLeggings(this.ileggings);
+			}
+			if(inv.getBoots() == null){
+				inv.setBoots(this.iboots);
+			}
+			inv.addItem(new ItemStack[] { this.isword });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
+			inv.addItem(new ItemStack[] { this.pearl });
 		}
 	}
 	
