@@ -40,6 +40,7 @@ public class BlockBreakListener implements Listener {
 					Inventory inv = player.getInventory();
 					inv.clear();
 					player.getInventory().addItem(flag);
+					player.getInventory().setHelmet(flag);
 					block.setType(Material.AIR);
 					plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag!");
 				}
@@ -53,6 +54,7 @@ public class BlockBreakListener implements Listener {
 					Inventory inv = player.getInventory();
 					inv.clear();
 					player.getInventory().addItem(flag);
+					player.getInventory().setHelmet(flag);
 					block.setType(Material.AIR);
 					plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag!");
 				}
