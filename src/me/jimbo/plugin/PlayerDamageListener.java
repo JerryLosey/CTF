@@ -1,12 +1,20 @@
 package me.jimbo.plugin;
 
+import java.util.List;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Egg;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
@@ -18,6 +26,26 @@ public class PlayerDamageListener implements Listener{
 	
 	public PlayerDamageListener (CTF plugin) {
 		this.plugin = plugin;
+	}
+	
+	@EventHandler
+	public void onHit(ProjectileHitEvent event){
+		if (event.getEntity() instanceof Egg){
+			Entity e = event.getEntity();
+			Location loc = event.getEntity().getLocation();
+			World world = event.getEntity().getWorld();
+		    world.createExplosion(loc, 0.0F, false);
+		    List<Entity> entities = e.getNearbyEntities(4.0D, 4.0D, 4.0D);
+
+		      for (Entity entity : entities)
+		      {
+		        if (!(entity instanceof Player)) {
+		          continue;
+		        }
+		        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 300, 1), true);
+		        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 1), true);
+		      }
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
