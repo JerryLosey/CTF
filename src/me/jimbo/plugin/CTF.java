@@ -35,6 +35,7 @@ public class CTF extends JavaPlugin {
 	public final PlayerDropItemListener PlayerDropItemListener = new PlayerDropItemListener(this);
 	public final PlayerDamageListener PlayerDamageListener = new PlayerDamageListener(this);
 	public final InventoryOpenListener InventoryOpenListener = new InventoryOpenListener(this);
+	public final ArmorRemovalListener ArmorRemovalListener = new ArmorRemovalListener(this);
 	
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
@@ -109,6 +110,7 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(PlayerDropItemListener, this);	
 		getServer().getPluginManager().registerEvents(PlayerDamageListener, this);	
 		getServer().getPluginManager().registerEvents(InventoryOpenListener, this);
+		getServer().getPluginManager().registerEvents(ArmorRemovalListener, this);
 		
 
 		inProgress = false;

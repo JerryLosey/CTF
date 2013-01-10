@@ -1,6 +1,7 @@
 package me.jimbo.plugin;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -9,7 +10,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerKickListener implements Listener {
 
-	@SuppressWarnings("unused")
 	private CTF plugin;
 	
 	public PlayerKickListener (CTF plugin) {
@@ -45,6 +45,12 @@ public class PlayerKickListener implements Listener {
 		}
 		if(CTF.PlayerClasses.size() < 1 || CTF.AllPlayers.size() < 1 || CTF.RedPlayers.size() < 1){
 			plugin.getServer().broadcastMessage(ChatColor.GREEN + "There are not enough players to continue the match!  ");
+			plugin.blueScore = 0;
+			plugin.redScore = 0;
+			for(Player all:plugin.getServer().getOnlinePlayers()){
+				all.kickPlayer("Match is over!");
+			}
+			plugin.getServer().getOnlinePlayers();
 		}
 	}
 }

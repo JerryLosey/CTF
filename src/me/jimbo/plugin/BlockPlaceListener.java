@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.inventory.Inventory;
 
 public class BlockPlaceListener implements Listener {
 
@@ -22,7 +21,6 @@ public class BlockPlaceListener implements Listener {
 	public void onBlockPlace(BlockPlaceEvent e)
 	{
 		Player player = e.getPlayer();
-		Inventory inv = player.getInventory();
 		e.getBlock();
 		Block placedAgainst = e.getBlockAgainst();
 		int redX = (int) plugin.getConfig().getDouble("Goals.Red.X");
@@ -60,7 +58,6 @@ public class BlockPlaceListener implements Listener {
 						plugin.setScore(2);
 						plugin.getServer().broadcastMessage("Current Score: " + ChatColor.RED + plugin.getScore(1) + " : " + ChatColor.BLUE + plugin.getScore(2));
 						e.getBlock().setType(Material.AIR);
-						inv.clear();
 						plugin.resetInv(player);
 						Location loc = new Location(player.getWorld(), (double)redX,(double)redY,(double)redZ);
 						Block b = loc.getBlock();
