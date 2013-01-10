@@ -43,5 +43,8 @@ public class PlayerKickListener implements Listener {
 			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
 			CTF.PlayerClasses.remove(e.getPlayer());
 		}
+		if(CTF.PlayerClasses.size() < 1 || CTF.AllPlayers.size() < 1 || CTF.RedPlayers.size() < 1){
+			plugin.getServer().broadcastMessage(ChatColor.GREEN + "There are not enough players to continue the match!  ");
+		}
 	}
 }
