@@ -36,6 +36,7 @@ public class CTF extends JavaPlugin {
 	public final PlayerDamageListener PlayerDamageListener = new PlayerDamageListener(this);
 	public final InventoryOpenListener InventoryOpenListener = new InventoryOpenListener(this);
 	public final ArmorRemovalListener ArmorRemovalListener = new ArmorRemovalListener(this);
+	public final EatingListener EatingListener = new EatingListener(this);
 	
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
@@ -111,6 +112,7 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(PlayerDamageListener, this);	
 		getServer().getPluginManager().registerEvents(InventoryOpenListener, this);
 		getServer().getPluginManager().registerEvents(ArmorRemovalListener, this);
+		getServer().getPluginManager().registerEvents(EatingListener, this);
 		
 
 		inProgress = false;
@@ -273,7 +275,8 @@ public class CTF extends JavaPlugin {
 		      inv.addItem(new ItemStack[] { this.coal });
 		}
 		if(classed.equals("ninja")){
-		    this.egsword.addEnchantment(Enchantment.KNOCKBACK, 2);
+		    this.egsword.addEnchantment(Enchantment.DURABILITY, 5);
+		    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 6);
 			inv.addItem(new ItemStack[] { this.egsword });
 
 		    inv.addItem(new ItemStack[] { this.egg });
@@ -372,6 +375,9 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.redstone });
 		    inv.addItem(new ItemStack[] { this.redstone });
 
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
+		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
 		if(classed.equals("pyro")){
