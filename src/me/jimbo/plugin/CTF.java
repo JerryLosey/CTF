@@ -183,7 +183,7 @@ public class CTF extends JavaPlugin {
 					getServer().broadcastMessage("");
 					getServer().broadcastMessage(ChatColor.GREEN +"##################################################");
 					getServer().broadcastMessage("Basic classes available for all players:");
-					getServer().broadcastMessage(ChatColor.GRAY + "/knight, /archer, /wizard");
+					getServer().broadcastMessage(ChatColor.GRAY + "/soldier, /archer, /heavy");
 					getServer().broadcastMessage(ChatColor.BLUE + "Contributor classes available at:" + ChatColor.BOLD + " www.silentnoobs.com");
 					getServer().broadcastMessage("Round Starts in " + timer + " seconds.");
 					getServer().broadcastMessage(ChatColor.GREEN +"##################################################");
