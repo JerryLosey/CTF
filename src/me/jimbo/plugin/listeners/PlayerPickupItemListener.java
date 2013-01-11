@@ -1,6 +1,9 @@
-package me.jimbo.plugin;
+package me.jimbo.plugin.listeners;
 
 import java.util.List;
+
+import me.jimbo.plugin.CTF;
+
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;

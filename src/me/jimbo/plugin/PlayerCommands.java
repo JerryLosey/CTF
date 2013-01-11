@@ -737,7 +737,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 								    Location location = block.getLocation();
 									sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 									sender.sendMessage(ChatColor.GREEN + "Setting Red Team Goal!");
-									sender.sendMessage(ChatColor.GREEN + "Make sure you are standing on top of the diamond block!");
 									sender.sendMessage(ChatColor.GREEN + "" + block.getLocation());
 								    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 								    //Do something
@@ -773,7 +772,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 								    Location location = block.getLocation();
 									sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 									sender.sendMessage(ChatColor.GREEN + "Setting Blue Team Goal!");
-									sender.sendMessage(ChatColor.GREEN + "Make sure you are standing on top of the diamond block!");
 									sender.sendMessage(ChatColor.GREEN + "" + block.getLocation());
 								    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 								    //Do something
@@ -838,16 +836,12 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    sender.sendMessage("" + plugin.inProgress);
 					    //sender.sendMessage("" +CTF.AllPlayers.get(0));
 			    	}
-					if(cmd.equals("join"))
+					if(cmd.equals("class"))
 			    	{
 						sender.sendMessage(ChatColor.GRAY + "------------------------------------");
-						sender.sendMessage(ChatColor.RED + "Joined The Game!");
+						sender.sendMessage(ChatColor.RED + "Checking Class!");
+						sender.sendMessage(ChatColor.GREEN + "You are a " + CTF.PlayerClasses.get(sender));
 					    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
-					    //Do something
-					    if (!CTF.AllPlayers.contains(((Player) sender).getPlayer())) {
-					    	CTF.AllPlayers.add(((Player) sender).getPlayer());
-					    	sender.sendMessage("" + CTF.AllPlayers.size());
-					    }
 			    	}
 				}
 			}

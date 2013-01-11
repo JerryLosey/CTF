@@ -1,6 +1,9 @@
-package me.jimbo.plugin;
+package me.jimbo.plugin.listeners;
 
 import java.util.List;
+
+import me.jimbo.plugin.CTF;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -28,6 +31,7 @@ public class PlayerDamageListener implements Listener{
 		this.plugin = plugin;
 	}
 	
+	// Ninja class flash bombs
 	@EventHandler
 	public void onHit(ProjectileHitEvent event){
 		if (event.getEntity() instanceof Egg){
@@ -47,7 +51,7 @@ public class PlayerDamageListener implements Listener{
 		      }
 		}
 	}
-	
+	// Soldier class no-fall damage
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDamage(EntityDamageEvent e) {
 		if(plugin.canAttack){
@@ -71,10 +75,28 @@ public class PlayerDamageListener implements Listener{
 			e.setCancelled(true);
 		}
 	}
-	
+	// Medic class heal teammates
+	// Soldier class no-fall damage
+	// Archer class insta-kill arrows
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDamageEnt(EntityDamageByEntityEvent e) {
 		if(plugin.canAttack){
+			if((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)){
+				if(CTF.PlayerClasses.get(e.getDamager()).equals("medic")){
+					Player medic = (Player)e.getDamager();
+					Player hp = (Player)e.getEntity();
+					if(CTF.RedPlayers.contains(medic) && CTF.RedPlayers.contains(hp)){
+						//Both on Red Team
+						hp.setHealth(20);
+						plugin.resetInv(hp);
+					}
+					if(CTF.AllPlayers.contains(medic) && CTF.AllPlayers.contains(hp)){
+						//Both on Blue Team
+						hp.setHealth(20);
+						plugin.resetInv(hp);
+					}
+				}
+			}
 			if((e.getEntity() instanceof Player)){
 				Player p = (Player)e.getEntity();
 				if(CTF.PlayerClasses.containsKey(p)){

@@ -1,4 +1,6 @@
-package me.jimbo.plugin;
+package me.jimbo.plugin.listeners;
+
+import me.jimbo.plugin.CTF;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -50,7 +52,6 @@ public class PlayerKickListener implements Listener {
 			for(Player all:plugin.getServer().getOnlinePlayers()){
 				all.kickPlayer("Match is over!");
 			}
-			plugin.getServer().getOnlinePlayers();
 		}
 	}
 }

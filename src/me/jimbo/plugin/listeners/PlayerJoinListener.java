@@ -1,4 +1,6 @@
-package me.jimbo.plugin;
+package me.jimbo.plugin.listeners;
+
+import me.jimbo.plugin.CTF;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -31,6 +33,8 @@ public class PlayerJoinListener implements Listener {
 		location.setY(y);
 		location.setZ(z);
 		player.teleport(location);
+		player.getInventory().clear();
+		plugin.resetInv(player);
 	}
 
 }

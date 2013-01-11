@@ -6,6 +6,20 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
 
+import me.jimbo.plugin.listeners.ArmorRemovalListener;
+import me.jimbo.plugin.listeners.BlockBreakListener;
+import me.jimbo.plugin.listeners.BlockPlaceListener;
+import me.jimbo.plugin.listeners.EatingListener;
+import me.jimbo.plugin.listeners.EntitySpawnListener;
+import me.jimbo.plugin.listeners.InventoryOpenListener;
+import me.jimbo.plugin.listeners.PlayerClickListener;
+import me.jimbo.plugin.listeners.PlayerDamageListener;
+import me.jimbo.plugin.listeners.PlayerDeathListener;
+import me.jimbo.plugin.listeners.PlayerDropItemListener;
+import me.jimbo.plugin.listeners.PlayerJoinListener;
+import me.jimbo.plugin.listeners.PlayerKickListener;
+import me.jimbo.plugin.listeners.PlayerPickupItemListener;
+import me.jimbo.plugin.listeners.PlayerRespawnListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -119,6 +133,8 @@ public class CTF extends JavaPlugin {
 
 		inProgress = false;
 		canAttack = false;
+		redScore = 0;
+		blueScore = 0;
 		getCommand("CTF").setExecutor(new PlayerCommands(this));
 		getCommand("heavy").setExecutor(new PlayerCommands(this));
 		getCommand("soldier").setExecutor(new PlayerCommands(this));
@@ -454,8 +470,6 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.web });
 		    inv.addItem(new ItemStack[] { this.web });
 		    inv.addItem(new ItemStack[] { this.web });
-
-		    inv.addItem(new ItemStack(Material.POTION, 8257));
 
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
