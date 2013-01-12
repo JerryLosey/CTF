@@ -19,8 +19,16 @@ public class PlayerJoinListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		if (!CTF.AllPlayers.contains(e.getPlayer())){
-			CTF.AllPlayers.add(e.getPlayer());
+		int redsize = CTF.RedPlayers.size();
+		int bluesize = CTF.AllPlayers.size();
+		if (!CTF.AllPlayers.contains(e.getPlayer()) && !CTF.RedPlayers.contains(e.getPlayer())){
+			if(redsize > bluesize){
+				CTF.AllPlayers.add(e.getPlayer());
+			}else if(bluesize > redsize){
+				CTF.RedPlayers.add(e.getPlayer());
+			} else {
+				CTF.AllPlayers.add(e.getPlayer());
+			}
 			CTF.PlayerClasses.put(e.getPlayer(), "soldier");
 		}
 		Player player = e.getPlayer();
