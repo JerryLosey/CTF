@@ -29,5 +29,3 @@ private CTF plugin;
 	  }
 
 }
-// '&5ob&bs'
-// ChatColor.Red + "T" + ChatColor.
