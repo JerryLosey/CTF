@@ -35,6 +35,8 @@ public class EatingListener implements Listener {
 						//
 					}
 			}
+		}else{
+			e.setCancelled(true);
 		}
 
 	}
