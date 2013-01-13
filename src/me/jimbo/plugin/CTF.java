@@ -20,6 +20,7 @@ import me.jimbo.plugin.listeners.PlayerJoinListener;
 import me.jimbo.plugin.listeners.PlayerKickListener;
 import me.jimbo.plugin.listeners.PlayerPickupItemListener;
 import me.jimbo.plugin.listeners.PlayerRespawnListener;
+import me.jimbo.plugin.listeners.PingListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -52,6 +53,7 @@ public class CTF extends JavaPlugin {
 	public final ArmorRemovalListener ArmorRemovalListener = new ArmorRemovalListener(this);
 	public final EatingListener EatingListener = new EatingListener(this);
 	public final PlayerClickListener PlayerClickListener = new PlayerClickListener(this);
+	public final PingListener PingListener = new PingListener(this);
 	
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
@@ -103,14 +105,14 @@ public class CTF extends JavaPlugin {
 	public int blueY;
 	public int blueZ;
 	public int kills;
+	public int timer = 35;
 	
 	public int redScore;
 	public int blueScore;
 	
-	public int timer;
-	
 	public boolean inProgress;
 	public boolean canAttack = false;
+	public boolean roundOver = false;
 
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -129,6 +131,7 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(ArmorRemovalListener, this);
 		getServer().getPluginManager().registerEvents(EatingListener, this);
 		getServer().getPluginManager().registerEvents(PlayerClickListener, this);
+		getServer().getPluginManager().registerEvents(PingListener, this);
 		
 
 		inProgress = false;
@@ -156,17 +159,20 @@ public class CTF extends JavaPlugin {
         	saveDefaultConfig();
         }
         
-		startTimer();
+		startTimer(37);
 	}
 	
 	public void onDisable() {
-		
+		blueScore = 0;
+		redScore = 0;
+		roundOver = true;
 	}
 	
 	@SuppressWarnings("deprecation")
-	public void startTimer() {
-		timer = 35;
+	public void startTimer(int timer) {
+		final int t = timer;
 		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
+			int z = t;
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
@@ -185,20 +191,23 @@ public class CTF extends JavaPlugin {
 					getServer().broadcastMessage("Basic classes available for all players:");
 					getServer().broadcastMessage(ChatColor.GRAY + "/soldier, /archer, /heavy");
 					getServer().broadcastMessage(ChatColor.BLUE + "Contributor classes available at:" + ChatColor.BOLD + " www.silentnoobs.com");
-					getServer().broadcastMessage("Round Starts in " + timer + " seconds.");
+					getServer().broadcastMessage("Round Starts in " + z + " seconds.");
 					getServer().broadcastMessage(ChatColor.GREEN +"##################################################");
 					getServer().broadcastMessage("");
 					getServer().broadcastMessage("");
-					timer = timer - 1;
-					if(timer == 0 && (AllPlayers.size() < getConfig().getInt("Minimum Players"))){
+					z = z - 1;
+					if(z == 0 && (AllPlayers.size() < getConfig().getInt("Minimum Players"))){
 						getServer().getScheduler().cancelAllTasks();
 						for(Player p : Bukkit.getServer().getOnlinePlayers()){
 							if(!p.isOp()){
 								p.kickPlayer(ChatColor.RED + "Not Enough Players! Restarting Server.");
+								roundOver = true;
 							}
 						}
-						startTimer();
-					}else if(timer == -1){
+						startTimer(35);
+					}else if(z == t-5){
+						roundOver = false;
+					}else if(z == -1){
 						getServer().getScheduler().cancelAllTasks();
 						getServer().broadcastMessage("");
 						getServer().broadcastMessage("");
