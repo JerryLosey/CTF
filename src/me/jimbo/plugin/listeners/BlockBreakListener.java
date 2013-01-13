@@ -36,7 +36,7 @@ public class BlockBreakListener implements Listener {
 			Player player = e.getPlayer();
 			//brokenBlock.getData() == 11 is blue
 			//brokenBlock.getData() == 14 is red
-			if(plugin.canAttack){
+			if(plugin.inProgress){
 				if(CTF.AllPlayers.contains(player)){
 					if(block.getData() == 14){
 						ItemStack flag = block.getDrops().toArray(new ItemStack[]{new ItemStack(35, 14)})[0];
