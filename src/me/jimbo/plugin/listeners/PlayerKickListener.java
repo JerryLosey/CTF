@@ -52,6 +52,7 @@ public class PlayerKickListener implements Listener {
 			for(Player all:plugin.getServer().getOnlinePlayers()){
 				if(all != e.getPlayer()){
 					all.kickPlayer("Match is over!");
+					plugin.onEnable();
 				}
 			}
 		}

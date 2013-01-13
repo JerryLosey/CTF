@@ -34,27 +34,29 @@ public class PlayerDamageListener implements Listener{
 	// Ninja class flash bombs
 	@EventHandler
 	public void onHit(ProjectileHitEvent event){
-		if (event.getEntity() instanceof Egg){
-			Entity e = event.getEntity();
-			Location loc = event.getEntity().getLocation();
-			World world = event.getEntity().getWorld();
-		    world.createExplosion(loc, 0.0F, false);
-		    List<Entity> entities = e.getNearbyEntities(4.0D, 4.0D, 4.0D);
-
-		      for (Entity entity : entities)
-		      {
-		        if (!(entity instanceof Player)) {
-		          continue;
-		        }
-		        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 300, 1), true);
-		        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 1), true);
-		      }
+		if(plugin.inProgress){
+			if (event.getEntity() instanceof Egg){
+				Entity e = event.getEntity();
+				Location loc = event.getEntity().getLocation();
+				World world = event.getEntity().getWorld();
+			    world.createExplosion(loc, 0.0F, false);
+			    List<Entity> entities = e.getNearbyEntities(4.0D, 4.0D, 4.0D);
+	
+			      for (Entity entity : entities)
+			      {
+			        if (!(entity instanceof Player)) {
+			          continue;
+			        }
+			        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 300, 1), true);
+			        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 1), true);
+			      }
+			}
 		}
 	}
 	// Soldier class no-fall damage
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDamage(EntityDamageEvent e) {
-		if(plugin.canAttack){
+		if(plugin.inProgress){
 			if((e.getEntity() instanceof Player)){
 				Player p = (Player)e.getEntity();
 				if(CTF.PlayerClasses.containsKey(p)){
@@ -80,7 +82,7 @@ public class PlayerDamageListener implements Listener{
 	// Archer class insta-kill arrows
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDamageEnt(EntityDamageByEntityEvent e) {
-		if(plugin.canAttack){
+		if(plugin.inProgress){
 			if((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)){
 				if(CTF.PlayerClasses.get(e.getDamager()).equals("medic")){
 					Player medic = (Player)e.getDamager();

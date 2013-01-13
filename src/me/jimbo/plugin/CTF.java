@@ -111,7 +111,6 @@ public class CTF extends JavaPlugin {
 	public int blueScore;
 	
 	public boolean inProgress;
-	public boolean canAttack = false;
 	public boolean roundOver = false;
 
 	Logger log = Logger.getLogger("Minecraft");
@@ -135,7 +134,6 @@ public class CTF extends JavaPlugin {
 		
 
 		inProgress = false;
-		canAttack = false;
 		redScore = 0;
 		blueScore = 0;
 		getCommand("CTF").setExecutor(new PlayerCommands(this));
@@ -229,7 +227,6 @@ public class CTF extends JavaPlugin {
 						getServer().broadcastMessage("");
 						getServer().broadcastMessage("");
 						inProgress = true;
-						canAttack = true;
 						splitTeams();
 					}
 			}

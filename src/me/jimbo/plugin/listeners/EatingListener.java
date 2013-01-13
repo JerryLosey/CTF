@@ -21,18 +21,20 @@ public class EatingListener implements Listener {
 	
 	@EventHandler
 	public void onEat(PlayerInteractEvent e){
-		if (e.getAction() == Action.RIGHT_CLICK_AIR) {
-			try{
-				if (e.getPlayer().getHealth() == e.getPlayer().getMaxHealth()) {
-			        return;
-			      }
-				if (e.getItem().getTypeId() == 364) {
-					this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(e.getPlayer(), new ItemStack(Material.COOKED_BEEF, 1)), 1L);
-					e.getPlayer().setHealth(e.getPlayer().getHealth() + 8 <= 20 ? e.getPlayer().getHealth() + 8 : 20);
+		if(plugin.inProgress){
+			if (e.getAction() == Action.RIGHT_CLICK_AIR) {
+				try{
+					if (e.getPlayer().getHealth() == e.getPlayer().getMaxHealth()) {
+				        return;
+				      }
+					if (e.getItem().getTypeId() == 364) {
+						this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(e.getPlayer(), new ItemStack(Material.COOKED_BEEF, 1)), 1L);
+						e.getPlayer().setHealth(e.getPlayer().getHealth() + 8 <= 20 ? e.getPlayer().getHealth() + 8 : 20);
+						}
+					} catch (Exception ex) {
+						//
 					}
-				} catch (Exception ex) {
-					//
-				}
+			}
 		}
 
 	}
