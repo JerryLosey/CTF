@@ -21,3 +21,13 @@ Goals:
     X: 120
     Y: 120
     Z: 120
+Config:
+  server: localhost
+  table: bukkit
+  database: bukkit
+  user: root
+  password: password
+  interval: 5
+  column_name: commands
+  port: 3306
+  singleuse: false

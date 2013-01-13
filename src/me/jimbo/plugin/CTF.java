@@ -94,6 +94,16 @@ public class CTF extends JavaPlugin {
 	ItemStack sugar = new ItemStack(Material.SUGAR);
 	ItemStack coal = new ItemStack(Material.COAL);
 	ItemStack wsword = new ItemStack(Material.WOOD_SWORD);
+	
+	private final String SERVER = "Config.server";
+	private final String TABLE = "Config.table";
+	private final String DATABASE = "Config.database";
+	private final String USER = "Config.user";
+	private final String PASSWORD = "Config.password";
+	private final String INTERVAL = "Config.interval";
+	private final String COLUMN = "Config.column_name";
+	private final String PORT = "Config.port";
+	private final String SINGLEUSE = "Config.singleuse";
 
 	FileConfiguration config;
 	public int redX;
@@ -256,6 +266,32 @@ public class CTF extends JavaPlugin {
 			RedPlayers.add(player);
 			AllPlayers.remove(player);
 		}
+	}
+	
+	private void loadConfig(){
+		boolean configFileExistent = false;
+		if (new File("plugins/CTF/").exists())
+	    {
+			configFileExistent = true;
+	    }
+		
+		getConfig().options().copyDefaults(true);
+
+	    if (!configFileExistent)
+	    {
+	      getConfig().addDefault("Config.server", "localhost");
+	      getConfig().addDefault("Config.table", "bukkit");
+	      getConfig().addDefault("Config.database", "bukkit");
+	      getConfig().addDefault("Config.user", "root");
+	      getConfig().addDefault("Config.password", "password");
+	      getConfig().addDefault("Config.interval", Integer.valueOf(5));
+	      getConfig().addDefault("Config.column_name", "commands");
+	      getConfig().addDefault("Config.port", Integer.valueOf(3306));
+	      getConfig().addDefault("Config.singleuse", Boolean.valueOf(false));
+	    }
+
+	    saveConfig();
+	    reloadConfig();
 	}
 	
 	public void resetInv(Player player){
