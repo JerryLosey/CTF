@@ -71,6 +71,15 @@ public class PlayerDamageListener implements Listener{
 					inv.clear();
 					inv.setArmorContents(null);
 					p.setHealth(0);
+					if((p == plugin.redFlagCarrier) && (CTF.RedPlayers.contains(p))){
+						plugin.resetFlag(2);
+						plugin.getServer().broadcastMessage(ChatColor.DARK_RED + p.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.BLUE + "blue " + ChatColor.WHITE + "flag!");
+						plugin.getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
+					}else if ((p == plugin.blueFlagCarrier) && (CTF.AllPlayers.contains(p))) {
+						plugin.resetFlag(1);
+						plugin.getServer().broadcastMessage(ChatColor.BLUE + p.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_RED + "red " + ChatColor.WHITE + "flag!");
+						plugin.getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
+					}
 				}
 			}
 		}else{

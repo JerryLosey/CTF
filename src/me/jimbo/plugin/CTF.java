@@ -24,7 +24,9 @@ import me.jimbo.plugin.listeners.PingListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -112,6 +114,9 @@ public class CTF extends JavaPlugin {
 	
 	public boolean inProgress;
 	public boolean roundOver = false;
+	
+	public Player redFlagCarrier;
+	public Player blueFlagCarrier;
 
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -220,7 +225,7 @@ public class CTF extends JavaPlugin {
 						getServer().broadcastMessage("");
 						getServer().broadcastMessage(ChatColor.RED +"##################################################");
 						getServer().broadcastMessage("Basic classes available for all players:");
-						getServer().broadcastMessage(ChatColor.GRAY + "/knight, /archer, /wizard");
+						getServer().broadcastMessage(ChatColor.GRAY + "/soldier, /archer, /heavy");
 						getServer().broadcastMessage(ChatColor.BLUE + "Contributor classes available at:" + ChatColor.BOLD + " www.silentnoobs.com");
 						getServer().broadcastMessage("Round Has Started!");
 						getServer().broadcastMessage(ChatColor.RED +"##################################################");
@@ -261,6 +266,32 @@ public class CTF extends JavaPlugin {
 			Player player = AllPlayers.get(x);
 			RedPlayers.add(player);
 			AllPlayers.remove(player);
+		}
+	}
+	
+	public void resetFlag(int flag){
+		// 1 is red
+		// 2 is blue
+		
+		if(flag == 1){
+			int redX = (int) getConfig().getDouble("Goals.Red.X");
+			int redY = (int) getConfig().getDouble("Goals.Red.Y");
+			int redZ = (int) getConfig().getDouble("Goals.Red.Z");
+			Location loc = new Location(Bukkit.getWorlds().get(0), (double)redX,(double)redY,(double)redZ);
+			Block b = loc.getBlock();
+			b.setTypeId(35);
+			b.setData((byte) 14);
+		} else if(flag == 2){
+			int blueX = (int) getConfig().getDouble("Goals.Blue.X");
+			int blueY = (int) getConfig().getDouble("Goals.Blue.Y");
+			int blueZ = (int) getConfig().getDouble("Goals.Blue.Z");
+			Location loc = new Location(Bukkit.getWorlds().get(0), (double)blueX,(double)blueY,(double)blueZ);
+			Block b = loc.getBlock();
+			b.setTypeId(35);
+			b.setData((byte) 11);
+			
+		}else{
+			log.warning("Invalid flag on resetFlag()");
 		}
 	}
 	

@@ -52,9 +52,12 @@ public class PlayerKickListener implements Listener {
 			for(Player all:plugin.getServer().getOnlinePlayers()){
 				if(all != e.getPlayer()){
 					all.kickPlayer("Match is over!");
-					plugin.onEnable();
 				}
 			}
+			plugin.blueScore = 0;
+			plugin.redScore = 0;
+			plugin.roundOver = true;
+			plugin.startTimer(35);
 		}
 	}
 }

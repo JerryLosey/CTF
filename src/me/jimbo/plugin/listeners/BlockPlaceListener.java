@@ -49,6 +49,7 @@ public class BlockPlaceListener implements Listener {
 							Block b = loc.getBlock();
 							b.setTypeId(35);
 							b.setData((byte) 11);
+							plugin.redFlagCarrier = null;
 						}
 					}
 					
@@ -66,6 +67,7 @@ public class BlockPlaceListener implements Listener {
 							Block b = loc.getBlock();
 							b.setTypeId(35);
 							b.setData((byte) 14);
+							plugin.blueFlagCarrier = null;
 						}
 					}
 					
