@@ -33,11 +33,15 @@ public class BlockPlaceListener implements Listener {
 			int blueZ = (int) plugin.getConfig().getDouble("Goals.Blue.Z");
 			
 			if(CTF.RedPlayers.contains(player)){
-				if(placedAgainst.getLocation().getBlockX() == redX){
-					if(placedAgainst.getLocation().getBlockY() == redY-1){
+				if(placedAgainst.getLocation().getBlockX() != redX){
+					e.setCancelled(true);
+				}else if(placedAgainst.getLocation().getBlockX() == redX){
+					if(placedAgainst.getLocation().getBlockY() != redY){
 						e.setCancelled(true);
 					} else if(placedAgainst.getLocation().getBlockY() == redY){
-						if(placedAgainst.getLocation().getBlockZ() == redZ){
+						if(placedAgainst.getLocation().getBlockZ() != redZ){
+							e.setCancelled(true);
+						}else if(placedAgainst.getLocation().getBlockZ() == redZ){
 							plugin.getServer().broadcastMessage(ChatColor.RED + "Red" + ChatColor.GOLD + " team has scored a point!");
 							plugin.setScore(1);
 							plugin.getServer().broadcastMessage("Current Score: " + ChatColor.RED + plugin.getScore(1) + " : " + ChatColor.BLUE + plugin.getScore(2));
@@ -54,11 +58,15 @@ public class BlockPlaceListener implements Listener {
 					
 				}
 			}else if (CTF.AllPlayers.contains(player)){ //Blue team
-				if(placedAgainst.getLocation().getBlockX() == blueX){
-					if(placedAgainst.getLocation().getBlockY() == blueY-1){
+				if(placedAgainst.getLocation().getBlockX() != blueX){
+					e.setCancelled(true);
+				}else if(placedAgainst.getLocation().getBlockX() == blueX){
+					if(placedAgainst.getLocation().getBlockY() != blueY){
 						e.setCancelled(true);
 					} else if(placedAgainst.getLocation().getBlockY() == blueY){
-						if(placedAgainst.getLocation().getBlockZ() == blueZ){
+						if(placedAgainst.getLocation().getBlockZ() != blueZ){
+							e.setCancelled(true);
+						} else if(placedAgainst.getLocation().getBlockZ() == blueZ){
 							plugin.getServer().broadcastMessage(ChatColor.BLUE + "Blue" + ChatColor.GOLD + " team has scored a point!");
 							plugin.setScore(2);
 							plugin.getServer().broadcastMessage("Current Score: " + ChatColor.RED + plugin.getScore(1) + " : " + ChatColor.BLUE + plugin.getScore(2));

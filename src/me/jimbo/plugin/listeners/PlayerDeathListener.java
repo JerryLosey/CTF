@@ -10,7 +10,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class PlayerDeathListener implements Listener {
 
-	@SuppressWarnings("unused")
 	private CTF plugin;
 	
 	public PlayerDeathListener (CTF plugin) {
@@ -25,6 +24,7 @@ public class PlayerDeathListener implements Listener {
 			Player player = e.getEntity();
 			player.getPlayer().getInventory().clear();
 			e.setDeathMessage(null);
+			plugin.redFlagCarrier = null;
 		}
 		// Do nothing
 	}

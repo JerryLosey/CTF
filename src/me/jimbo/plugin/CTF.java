@@ -205,12 +205,7 @@ public class CTF extends JavaPlugin {
 					z = z - 1;
 					if(z == 0 && (AllPlayers.size() < getConfig().getInt("Minimum Players"))){
 						getServer().getScheduler().cancelAllTasks();
-						for(Player p : Bukkit.getServer().getOnlinePlayers()){
-							if(!p.isOp()){
-								p.kickPlayer(ChatColor.RED + "Not Enough Players! Restarting Server.");
-								roundOver = true;
-							}
-						}
+						roundOver = true;
 						startTimer(35);
 					}else if(z == t-5){
 						roundOver = false;
@@ -283,10 +278,6 @@ public class CTF extends JavaPlugin {
 			} else {
 				Bukkit.broadcastMessage("An Error Occured! Notify an admin to check the logs!");
 				getLogger().warning("Error On PlayerRespawn! Player hasn't been assigned a team!");
-			}
-			if(!p.isOp()){
-				p.kickPlayer(ChatColor.RED + "Not Enough Players! Restarting Server.");
-				roundOver = true;
 			}
 		}
 	}

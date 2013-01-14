@@ -44,11 +44,12 @@ public class PlayerDamageListener implements Listener{
 	
 			      for (Entity entity : entities)
 			      {
-			        if (!(entity instanceof Player)) {
-			          continue;
+			        if (entity instanceof Player) {
+			        	if(entity != event.getEntity()){
+					          ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1), true);
+					          ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1), true);
+			        	}
 			        }
-			        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 300, 1), true);
-			        ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 300, 1), true);
 			      }
 			}
 		}
@@ -71,6 +72,7 @@ public class PlayerDamageListener implements Listener{
 					inv.clear();
 					inv.setArmorContents(null);
 					p.setHealth(0);
+					plugin.redFlagCarrier = null;
 					if((p == plugin.redFlagCarrier) && (CTF.RedPlayers.contains(p))){
 						plugin.resetFlag(2);
 						plugin.getServer().broadcastMessage(ChatColor.DARK_RED + p.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.BLUE + "blue " + ChatColor.WHITE + "flag!");
@@ -107,6 +109,16 @@ public class PlayerDamageListener implements Listener{
 						plugin.resetInv(hp);
 					}
 				}
+			}
+			if((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)){
+				Player damager = (Player) e.getDamager();
+				Player player = (Player) e.getEntity();
+				if(CTF.AllPlayers.contains(damager) && CTF.AllPlayers.contains(player)){
+					e.setCancelled(true);
+				}else if(CTF.RedPlayers.contains(damager) && CTF.RedPlayers.contains(player)){
+					e.setCancelled(true);
+				}
+				
 			}
 			if((e.getEntity() instanceof Player)){
 				Player p = (Player)e.getEntity();
