@@ -3,7 +3,6 @@ package me.jimbo.plugin.listeners;
 import me.jimbo.plugin.CTF;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -45,19 +44,15 @@ public class PlayerKickListener implements Listener {
 			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
 			CTF.PlayerClasses.remove(e.getPlayer());
 		}
-		if(CTF.PlayerClasses.size() < 1 || CTF.AllPlayers.size() < 1 || CTF.RedPlayers.size() < 1){
-			plugin.getServer().broadcastMessage(ChatColor.GREEN + "There are not enough players to continue the match!  ");
-			plugin.blueScore = 0;
-			plugin.redScore = 0;
-			for(Player all:plugin.getServer().getOnlinePlayers()){
-				if(all != e.getPlayer()){
-					all.kickPlayer("Match is over!");
+		if(plugin.inProgress){
+			if(CTF.PlayerClasses.size() < 1 || CTF.AllPlayers.size() < 1 || CTF.RedPlayers.size() < 1){
+					plugin.getServer().broadcastMessage(ChatColor.GREEN + "There are not enough players to continue the match!  ");
+					plugin.blueScore = 0;
+					plugin.redScore = 0;
+					plugin.roundOver = true;
+					plugin.getServer().getScheduler().cancelAllTasks();
+					plugin.startTimer(35);
 				}
 			}
-			plugin.blueScore = 0;
-			plugin.redScore = 0;
-			plugin.roundOver = true;
-			plugin.startTimer(35);
-		}
 	}
 }

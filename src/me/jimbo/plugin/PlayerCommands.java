@@ -431,7 +431,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    this.isChemist = false;
 				    this.isEngineer = false;
 	
-				    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Soldier");
+				    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Medic!");
 				    return true;
 				}
 				// Pyro class
@@ -520,9 +520,10 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					inv.setArmorContents(null);
 					target.setHealth(0);
 	
-				    this.egsword.addEnchantment(Enchantment.KNOCKBACK, 2);
+					this.egsword.addEnchantment(Enchantment.DURABILITY, 3);
+				    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
 					inv.addItem(new ItemStack[] { this.egsword });
-	
+
 				    inv.addItem(new ItemStack[] { this.egg });
 				    inv.addItem(new ItemStack[] { this.egg });
 				    inv.addItem(new ItemStack[] { this.egg });
@@ -533,7 +534,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.egg });
 				    inv.addItem(new ItemStack[] { this.egg });
 				    inv.addItem(new ItemStack[] { this.egg });
-	
+
 				    inv.addItem(new ItemStack[] { this.pearl });
 				    inv.addItem(new ItemStack[] { this.pearl });
 				    inv.addItem(new ItemStack[] { this.pearl });
@@ -550,7 +551,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.pearl });
 				    inv.addItem(new ItemStack[] { this.pearl });
 				    inv.addItem(new ItemStack[] { this.pearl });
-	
+
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
@@ -567,7 +568,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
-	
+
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
@@ -584,7 +585,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
-	
+
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
@@ -601,7 +602,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
-	
+
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
@@ -618,7 +619,10 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
-	
+
+				    inv.addItem(new ItemStack[] { this.steak });
+				    inv.addItem(new ItemStack[] { this.steak });
+				    inv.addItem(new ItemStack[] { this.steak });
 				    inv.addItem(new ItemStack[] { this.steak });
 	
 				      this.isNinja = true;

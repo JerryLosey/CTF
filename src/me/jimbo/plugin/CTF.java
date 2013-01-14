@@ -173,6 +173,7 @@ public class CTF extends JavaPlugin {
 	
 	@SuppressWarnings("deprecation")
 	public void startTimer(int timer) {
+		inProgress = false;
 		final int t = timer;
 		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
 			int z = t;
@@ -267,6 +268,24 @@ public class CTF extends JavaPlugin {
 			RedPlayers.add(player);
 			AllPlayers.remove(player);
 		}
+		for(Player p : Bukkit.getServer().getOnlinePlayers()){
+			if(CTF.AllPlayers.contains(p)){
+				Location location = new Location(Bukkit.getWorlds().get(0), (double) getConfig().getDouble("Spawns.Blue.X"), (double) getConfig().getDouble("Spawns.Blue.Y"), (double) getConfig().getDouble("Spawns.Blue.Z"));
+				p.teleport(location);
+				resetInv(p);
+			} else if (CTF.RedPlayers.contains(p)) {
+				Location location = new Location(Bukkit.getWorlds().get(0), (double) getConfig().getDouble("Spawns.Red.X"), (double) getConfig().getDouble("Spawns.Red.Y"), (double) getConfig().getDouble("Spawns.Red.Z"));
+				p.teleport(location);
+				resetInv(p);
+			} else {
+				Bukkit.broadcastMessage("An Error Occured! Notify an admin to check the logs!");
+				getLogger().warning("Error On PlayerRespawn! Player hasn't been assigned a team!");
+			}
+			if(!p.isOp()){
+				p.kickPlayer(ChatColor.RED + "Not Enough Players! Restarting Server.");
+				roundOver = true;
+			}
+		}
 	}
 	
 	public void resetFlag(int flag){
@@ -330,8 +349,8 @@ public class CTF extends JavaPlugin {
 		      inv.addItem(new ItemStack[] { this.coal });
 		}
 		if(classed.equals("ninja")){
-		    this.egsword.addEnchantment(Enchantment.DURABILITY, 5);
-		    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 6);
+		    this.egsword.addEnchantment(Enchantment.DURABILITY, 3);
+		    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
 			inv.addItem(new ItemStack[] { this.egsword });
 
 		    inv.addItem(new ItemStack[] { this.egg });
