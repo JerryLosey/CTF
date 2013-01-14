@@ -2,6 +2,7 @@ package me.jimbo.plugin.listeners;
 
 import me.jimbo.plugin.CTF;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,7 +25,18 @@ public class PlayerDeathListener implements Listener {
 			Player player = e.getEntity();
 			player.getPlayer().getInventory().clear();
 			e.setDeathMessage(null);
-			plugin.redFlagCarrier = null;
+
+			if((player == plugin.redFlagCarrier) && (CTF.RedPlayers.contains(player))){
+				plugin.resetFlag(2);
+				plugin.redFlagCarrier = null;
+				plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.BLUE + "blue " + ChatColor.WHITE + "flag!");
+				plugin.getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
+			}else if ((player == plugin.blueFlagCarrier) && (CTF.AllPlayers.contains(player))) {
+				plugin.resetFlag(1);
+				plugin.blueFlagCarrier = null;
+				plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_RED + "red " + ChatColor.WHITE + "flag!");
+				plugin.getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
+			}
 		}
 		// Do nothing
 	}
