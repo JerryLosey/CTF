@@ -21,6 +21,7 @@ import me.jimbo.plugin.listeners.PlayerKickListener;
 import me.jimbo.plugin.listeners.PlayerPickupItemListener;
 import me.jimbo.plugin.listeners.PlayerRespawnListener;
 import me.jimbo.plugin.listeners.PingListener;
+import me.jimbo.plugin.listeners.TagAPIListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -56,6 +57,7 @@ public class CTF extends JavaPlugin {
 	public final EatingListener EatingListener = new EatingListener(this);
 	public final PlayerClickListener PlayerClickListener = new PlayerClickListener(this);
 	public final PingListener PingListener = new PingListener(this);
+	public final TagAPIListener TagAPIListener = new TagAPIListener(this);
 	
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
@@ -136,6 +138,7 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(EatingListener, this);
 		getServer().getPluginManager().registerEvents(PlayerClickListener, this);
 		getServer().getPluginManager().registerEvents(PingListener, this);
+		getServer().getPluginManager().registerEvents(TagAPIListener, this);
 		
 
 		inProgress = false;

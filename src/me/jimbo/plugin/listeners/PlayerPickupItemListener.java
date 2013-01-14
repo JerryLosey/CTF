@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.kitteh.tag.TagAPI;
 
 public class PlayerPickupItemListener implements Listener {
 
@@ -57,6 +58,7 @@ public class PlayerPickupItemListener implements Listener {
 		List<Entity> entity = event.getPlayer().getNearbyEntities(15, 15, 15);
 		for(Entity i : entity){
 			if(i instanceof Player){
+				TagAPI.refreshPlayer(player);
 				Location location = player.getLocation();
 				((Player) i).playEffect(location, Effect.SMOKE, Material.WOOL.getId());
 			}
