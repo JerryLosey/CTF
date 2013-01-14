@@ -20,10 +20,10 @@ public class TagAPIListener implements Listener {
     public void onNameTag(PlayerReceiveNameTagEvent event) {
     	if(CTF.AllPlayers.contains(event.getPlayer())){
     		//Blue Team
-    		event.setTag(ChatColor.DARK_BLUE + event.getPlayer().getDisplayName());
+    		event.setTag(ChatColor.DARK_RED + event.getNamedPlayer().getDisplayName());
     	}else if(CTF.RedPlayers.contains(event.getPlayer())){
     		//Red Team
-    		event.setTag(ChatColor.DARK_RED + event.getPlayer().getDisplayName());
+    		event.setTag(ChatColor.DARK_BLUE + event.getNamedPlayer().getDisplayName());
     	}
     }
 }
