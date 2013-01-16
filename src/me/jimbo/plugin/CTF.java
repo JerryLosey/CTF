@@ -1,6 +1,7 @@
 package me.jimbo.plugin;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -22,7 +23,6 @@ import me.jimbo.plugin.listeners.PlayerPickupItemListener;
 import me.jimbo.plugin.listeners.PlayerRespawnListener;
 import me.jimbo.plugin.listeners.PingListener;
 import me.jimbo.plugin.listeners.TagAPIListener;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -34,6 +34,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kitteh.tag.TagAPI;
+
+import couk.Adamki11s.SQL.SyncSQL;
 
 public class CTF extends JavaPlugin {
 	
@@ -156,7 +159,7 @@ public class CTF extends JavaPlugin {
 		String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
         
-       
+        //createTable();
         
         if(!pluginFolder.contains("config.yml"))
         {
@@ -203,7 +206,7 @@ public class CTF extends JavaPlugin {
 					getServer().broadcastMessage("");
 					getServer().broadcastMessage("");
 					z = z - 1;
-					if(z == 0 && (AllPlayers.size() < getConfig().getInt("Minimum Players"))){
+					if(z == 0 && (AllPlayers.size() <= getConfig().getInt("Minimum Players"))){
 						getServer().getScheduler().cancelAllTasks();
 						roundOver = true;
 						startTimer(35);
@@ -271,14 +274,49 @@ public class CTF extends JavaPlugin {
 				Location location = new Location(Bukkit.getWorlds().get(0), (double) getConfig().getDouble("Spawns.Blue.X"), (double) getConfig().getDouble("Spawns.Blue.Y"), (double) getConfig().getDouble("Spawns.Blue.Z"));
 				p.teleport(location);
 				resetInv(p);
+				TagAPI.refreshPlayer(p);
 			} else if (CTF.RedPlayers.contains(p)) {
 				Location location = new Location(Bukkit.getWorlds().get(0), (double) getConfig().getDouble("Spawns.Red.X"), (double) getConfig().getDouble("Spawns.Red.Y"), (double) getConfig().getDouble("Spawns.Red.Z"));
 				p.teleport(location);
 				resetInv(p);
+				TagAPI.refreshPlayer(p);
 			} else {
 				Bukkit.broadcastMessage("An Error Occured! Notify an admin to check the logs!");
 				getLogger().warning("Error On PlayerRespawn! Player hasn't been assigned a team!");
 			}
+		}
+	}
+	
+	public void createTable(){
+		SyncSQL sql = new SyncSQL("li.silentnoobs.com", "ctf", "mcuser", "l33th@ck34");
+		sql.initialise();
+		try {
+			if(!sql.doesTableExist("stats")){
+				System.out.println("Table 'stats' does not exist!  Creating table...");
+				sql.standardQuery("CREATE TABLE stats ('playername' VARCHAR(50) PRIMARY KEY, 'kills' INTEGER, 'deaths' INTEGER, 'captures' INTEGER);");
+				System.out.println("Table 'stats' created!");
+			}else {
+				System.out.println("Table 'stats' already exists!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void insertKill(String playername){
+		SyncSQL sql = new SyncSQL("li.silentnoobs.com", "ctf", "mcuser", "l33th@ck34");
+		// playername, kills, deaths, captures
+		//ResultSet set;
+		try {
+			//set = sql.sqlQuery("SELECT * FROM stats WHERE playername LIKE "+ playername +");");
+			//while(set.next()){
+				sql.standardQuery("UPDATE stats SET kills = kills+1 WHERE playername=playername");
+			//}
+			//set.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	

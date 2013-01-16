@@ -4,9 +4,6 @@ import java.util.List;
 
 import me.jimbo.plugin.CTF;
 
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -59,8 +56,6 @@ public class PlayerPickupItemListener implements Listener {
 		for(Entity i : entity){
 			if(i instanceof Player){
 				TagAPI.refreshPlayer(player);
-				Location location = player.getLocation();
-				((Player) i).playEffect(location, Effect.SMOKE, Material.WOOL.getId());
 			}
 		}
 	}
