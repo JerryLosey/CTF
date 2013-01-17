@@ -36,7 +36,6 @@ public class PlayerDeathListener implements Listener {
 				plugin.blueFlagCarrier = null;
 				plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_RED + "red " + ChatColor.WHITE + "flag!");
 				plugin.getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
-				plugin.insertKill(player.getDisplayName().toString());
 			}
 		}
 		// Do nothing

@@ -72,7 +72,6 @@ public class PlayerDamageListener implements Listener{
 					inv.clear();
 					inv.setArmorContents(null);
 					p.setHealth(0);
-					plugin.insertKill(p.getDisplayName().toString());
 					if((p == plugin.redFlagCarrier) && (CTF.RedPlayers.contains(p))){
 						plugin.resetFlag(2);
 						plugin.redFlagCarrier = null;
@@ -84,10 +83,6 @@ public class PlayerDamageListener implements Listener{
 						plugin.getServer().broadcastMessage(ChatColor.BLUE + p.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_RED + "red " + ChatColor.WHITE + "flag!");
 						plugin.getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
 					}
-				}
-				
-				if(p.getHealth() <= 12){
-					
 				}
 			}
 		}else{
@@ -136,7 +131,6 @@ public class PlayerDamageListener implements Listener{
 					}
 				}
 				if(p.getHealth() - e.getDamage() < 1){
-					plugin.insertKill(p.getDisplayName().toString());
 					PlayerInventory inv = p.getInventory();
 					inv.clear();
 					inv.setArmorContents(null);
@@ -158,7 +152,6 @@ public class PlayerDamageListener implements Listener{
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.BLUE + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.DARK_RED + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(20);
-									plugin.insertKill(player.getDisplayName().toString());
 								}
 							}else if(CTF.RedPlayers.contains(killer)){
 								if(CTF.RedPlayers.contains(player)){
@@ -167,7 +160,6 @@ public class PlayerDamageListener implements Listener{
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.DARK_RED + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.BLUE + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(20);
-									plugin.insertKill(player.getDisplayName().toString());
 								}
 								
 							}

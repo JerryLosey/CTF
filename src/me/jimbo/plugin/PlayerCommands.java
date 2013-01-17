@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kitteh.tag.TagAPI;
 
 public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	
@@ -81,6 +82,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 		if(plugin.inProgress){
 			if (sender instanceof Player){
 				// Heavy class
+
+				TagAPI.refreshPlayer((Player) sender);
 				if((command.getName().equalsIgnoreCase("heavy")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.heavy")))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
@@ -809,6 +812,22 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 						    // Do something
 						    plugin.inProgress = true;
+						    
+				    	}
+						if(cmd.equals("reset") && sender.hasPermission("ctf.admin.reset"))
+				    	{
+							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
+							sender.sendMessage(ChatColor.YELLOW + "Reset Flags!");
+						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
+						    // Do something
+						    plugin.resetFlag(1);
+						    plugin.resetFlag(2);
+						    if(plugin.redFlagCarrier.getPlayer() != null){
+							    plugin.resetInv(plugin.redFlagCarrier.getPlayer());
+						    }
+						    if(plugin.blueFlagCarrier.getPlayer() != null){
+							    plugin.resetInv(plugin.blueFlagCarrier.getPlayer());
+						    }
 						    
 				    	}
 						if(cmd.equals("stop"))
