@@ -16,6 +16,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.kitteh.tag.TagAPI;
 
 public class PlayerCommands extends JavaPlugin implements CommandExecutor {
@@ -90,6 +92,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
+					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inventory = target.getInventory();
 					inventory.clear();
 					inventory.setArmorContents(null);
@@ -135,6 +138,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
+					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inventory = target.getInventory();
 					inventory.clear();
 					inventory.setArmorContents(null);
@@ -197,6 +201,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
+					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					inv.clear();
 					inv.setArmorContents(null);
@@ -382,6 +387,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
+					target.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 12000, 1), true);
 					PlayerInventory inv = target.getInventory();
 					inv.clear();
 					inv.setArmorContents(null);
@@ -444,6 +450,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
+					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					inv.clear();
 					inv.setArmorContents(null);
@@ -518,6 +525,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
+					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					inv.clear();
 					inv.setArmorContents(null);
@@ -651,6 +659,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
+					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					inv.clear();
 					inv.setArmorContents(null);

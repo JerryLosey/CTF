@@ -34,18 +34,22 @@ public class PlayerJoinListener implements Listener {
 			}
 			CTF.PlayerClasses.put(e.getPlayer(), "soldier");
 		}
-		Player player = e.getPlayer();
-		Location location = player.getLocation();
-		double x = plugin.getConfig().getDouble("Staging Area.X");
-		double y = plugin.getConfig().getDouble("Staging Area.Y");
-		double z = plugin.getConfig().getDouble("Staging Area.Z");
 		
-		location.setX(x);
-		location.setY(y);
-		location.setZ(z);
-		player.teleport(location);
-		player.getInventory().clear();
-		plugin.resetInv(player);
+		if(plugin.inProgress){
+			Player player = e.getPlayer();
+			Location location = player.getLocation();
+			double x = plugin.getConfig().getDouble("Staging Area.X");
+			double y = plugin.getConfig().getDouble("Staging Area.Y");
+			double z = plugin.getConfig().getDouble("Staging Area.Z");
+			
+			location.setX(x);
+			location.setY(y);
+			location.setZ(z);
+			player.teleport(location);
+			player.getInventory().clear();
+			plugin.resetInv(player);
+		}
+		
 	}
 
 }

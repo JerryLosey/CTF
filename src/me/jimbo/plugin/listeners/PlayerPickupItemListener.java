@@ -1,10 +1,6 @@
 package me.jimbo.plugin.listeners;
 
-import java.util.List;
-
 import me.jimbo.plugin.CTF;
-
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,7 +9,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.kitteh.tag.TagAPI;
 
 public class PlayerPickupItemListener implements Listener {
 
@@ -49,14 +44,8 @@ public class PlayerPickupItemListener implements Listener {
 			}
 		}
 	}
-	
+	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent event){
-		Player player = event.getPlayer();
-		List<Entity> entity = event.getPlayer().getNearbyEntities(15, 15, 15);
-		for(Entity i : entity){
-			if(i instanceof Player){
-				TagAPI.refreshPlayer(player);
-			}
-		}
+		
 	}
 }

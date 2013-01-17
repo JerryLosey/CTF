@@ -3,9 +3,10 @@ package me.jimbo.plugin.listeners;
 import java.util.List;
 
 import me.jimbo.plugin.CTF;
-
+import me.jimbo.plugin.threads.ItemRemoveThread;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
@@ -21,6 +22,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 public class PlayerDamageListener implements Listener{
@@ -64,6 +67,17 @@ public class PlayerDamageListener implements Listener{
 					if(CTF.PlayerClasses.get(p).equals("soldier")){
 						if(e.getCause().equals(DamageCause.FALL)){
 							e.setCancelled(true);
+						}
+					}
+				}
+				if(p.hasPermission("ctf.perk.autoeat")){
+					if(p.getHealth() < 12){
+						Inventory i = p.getInventory();
+						for(ItemStack item : i.getContents()){
+							if((item != null) && item.getType().equals(Material.COOKED_BEEF)){
+								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(p, new ItemStack(Material.COOKED_BEEF, 1)), 1L);
+								p.setHealth(p.getHealth() + 8 <= 20 ? p.getHealth() + 8 : 20);
+							}
 						}
 					}
 				}
@@ -127,6 +141,17 @@ public class PlayerDamageListener implements Listener{
 					if(CTF.PlayerClasses.get(p).equals("soldier")){
 						if(e.getCause().equals(DamageCause.FALL)){
 							e.setCancelled(true);
+						}
+					}
+				}
+				if(p.hasPermission("ctf.perk.autoeat")){
+					if(p.getHealth() < 12){
+						Inventory i = p.getInventory();
+						for(ItemStack item : i.getContents()){
+							if((item != null) && item.getType().equals(Material.COOKED_BEEF)){
+								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(p, new ItemStack(Material.COOKED_BEEF, 1)), 1L);
+								p.setHealth(p.getHealth() + 8 <= 20 ? p.getHealth() + 8 : 20);
+							}
 						}
 					}
 				}

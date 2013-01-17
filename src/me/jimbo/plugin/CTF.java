@@ -33,6 +33,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class CTF extends JavaPlugin {
 	
@@ -202,7 +204,7 @@ public class CTF extends JavaPlugin {
 					getServer().broadcastMessage("");
 					getServer().broadcastMessage("");
 					z = z - 1;
-					if((AllPlayers.size() + RedPlayers.size()) <= getConfig().getInt("Minimum Players")){
+					if(z==0 &&((AllPlayers.size() + RedPlayers.size()) <= getConfig().getInt("Minimum Players"))){
 						getServer().getScheduler().cancelAllTasks();
 						roundOver = true;
 						startTimer(35);
@@ -316,6 +318,7 @@ public class CTF extends JavaPlugin {
 		inv.clear();
 		inv.setArmorContents(null);
 		if(classed.equals("engineer")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
 			if (inv.getHelmet() == null) {
 		        inv.setHelmet(this.lhelmet);
 		      }
@@ -344,6 +347,7 @@ public class CTF extends JavaPlugin {
 		      inv.addItem(new ItemStack[] { this.coal });
 		}
 		if(classed.equals("ninja")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
 		    this.egsword.addEnchantment(Enchantment.DURABILITY, 3);
 		    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
 			inv.addItem(new ItemStack[] { this.egsword });
@@ -450,6 +454,7 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
 		if(classed.equals("pyro")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.ihelmet);
 			}
@@ -497,6 +502,7 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
 		if(classed.equals("medic")){
+			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 12000, 1), true);
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.ihelmet);
 			}
@@ -510,17 +516,19 @@ public class CTF extends JavaPlugin {
 				inv.setBoots(this.iboots);
 			}
 			inv.addItem(new ItemStack[] { this.gsword });
+			
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.web });
 
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
-		    inv.addItem(new ItemStack[] { this.web });
+		    inv.addItem(new ItemStack[] { this.regeneration });
 
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
@@ -530,6 +538,7 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
 		if(classed.equals("heavy")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.dhelmet);
 			}
@@ -549,6 +558,7 @@ public class CTF extends JavaPlugin {
 			}
 		}
 		if(classed.equals("archer")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.chelmet);
 			}
@@ -707,7 +717,8 @@ public class CTF extends JavaPlugin {
 	        inv.addItem(new ItemStack[] { this.steak });
 	        inv.addItem(new ItemStack[] { this.steak });
 		}
-		if(classed.equals("soldier")){			
+		if(classed.equals("soldier")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.ihelmet);
 			}
