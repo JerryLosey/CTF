@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
 public class EatingListener implements Listener {
@@ -37,6 +39,9 @@ public class EatingListener implements Listener {
 					}
 			}else if((e.getAction() == Action.RIGHT_CLICK_BLOCK) && (e.getPlayer().hasPermission("ctf.class.soldier")) && (e.getPlayer().getItemInHand().getTypeId() == 267)){
 				e.getPlayer().setVelocity(new Vector(0.0D, 0.9D, 0.0D));
+			}else if((e.getAction() == Action.RIGHT_CLICK_BLOCK) && (e.getPlayer().hasPermission("ctf.class.ninja")) && (e.getPlayer().getItemInHand().getTypeId() == 353)){
+				this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(e.getPlayer(), new ItemStack(Material.SUGAR, 1)), 1L);
+				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 1), true);
 			}
 		}else{
 			e.setCancelled(true);
