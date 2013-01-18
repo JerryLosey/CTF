@@ -35,7 +35,7 @@ public class PlayerJoinListener implements Listener {
 			CTF.PlayerClasses.put(e.getPlayer(), "soldier");
 		}
 		
-		if(plugin.inProgress){
+		if(!plugin.inProgress){
 			Player player = e.getPlayer();
 			Location location = player.getLocation();
 			double x = plugin.getConfig().getDouble("Staging Area.X");
