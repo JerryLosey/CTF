@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
+import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -113,6 +114,10 @@ public class PlayerDamageListener implements Listener{
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerDamageEnt(EntityDamageByEntityEvent e) {
 		if(plugin.inProgress){
+			if((e.getDamager() instanceof EnderPearl) && (e.getEntity() instanceof Player) && (CTF.PlayerClasses.get(e.getEntity()).equals("ninja"))){
+				e.setDamage(3); // If damager is an enderpearl AND damagee is a player AND player is in the ninja class, change the damage to 1.5 hearts instead of 2.5
+			}
+			
 			if((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)){
 				if(CTF.PlayerClasses.get(e.getDamager()).equals("medic")){
 					Player medic = (Player)e.getDamager();
