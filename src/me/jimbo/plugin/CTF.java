@@ -22,6 +22,7 @@ import me.jimbo.plugin.listeners.PlayerPickupItemListener;
 import me.jimbo.plugin.listeners.PlayerRespawnListener;
 import me.jimbo.plugin.listeners.PingListener;
 import me.jimbo.plugin.listeners.TagAPIListener;
+import me.jimbo.plugin.listeners.WeatherChange;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -59,6 +60,7 @@ public class CTF extends JavaPlugin {
 	public final PlayerClickListener PlayerClickListener = new PlayerClickListener(this);
 	public final PingListener PingListener = new PingListener(this);
 	public final TagAPIListener TagAPIListener = new TagAPIListener(this);
+	public final WeatherChange WeatherChange = new WeatherChange(this);
 	
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
@@ -140,6 +142,7 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(PlayerClickListener, this);
 		getServer().getPluginManager().registerEvents(PingListener, this);
 		getServer().getPluginManager().registerEvents(TagAPIListener, this);
+		getServer().getPluginManager().registerEvents(WeatherChange, this);
 		
 
 		inProgress = false;
