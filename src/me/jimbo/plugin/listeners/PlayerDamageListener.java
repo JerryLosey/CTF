@@ -74,7 +74,10 @@ public class PlayerDamageListener implements Listener{
 					if(p.getHealth() < 12){
 						Inventory i = p.getInventory();
 						for(ItemStack item : i.getContents()){
-							if((item != null) && item.getType().equals(Material.COOKED_BEEF)){
+							if(item == null){
+								continue;
+							}
+							if(item.getType().equals(Material.COOKED_BEEF)){
 								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(p, new ItemStack(Material.COOKED_BEEF, 1)), 1L);
 								p.setHealth(p.getHealth() + 8 <= 20 ? p.getHealth() + 8 : 20);
 							}
