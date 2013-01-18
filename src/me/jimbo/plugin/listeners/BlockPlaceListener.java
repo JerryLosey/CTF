@@ -1,7 +1,7 @@
 package me.jimbo.plugin.listeners;
 
 import me.jimbo.plugin.CTF;
-
+import me.jimbo.plugin.threads.BlockResetThread;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -24,6 +24,13 @@ public class BlockPlaceListener implements Listener {
 		if(plugin.inProgress){
 			Player player = e.getPlayer();
 			Block placedAgainst = e.getBlockAgainst();
+			Block block = e.getBlockPlaced();
+			
+			if((player.hasPermission("ctf.class.medic")) && (e.getBlockPlaced().getTypeId() == 30)){
+				this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new BlockResetThread(e.getBlock()), 300L);
+				
+			}
+			
 			int redX = (int) plugin.getConfig().getDouble("Goals.Red.X");
 			int redY = (int) plugin.getConfig().getDouble("Goals.Red.Y");
 			int redZ = (int) plugin.getConfig().getDouble("Goals.Red.Z");
@@ -32,7 +39,7 @@ public class BlockPlaceListener implements Listener {
 			int blueY = (int) plugin.getConfig().getDouble("Goals.Blue.Y");
 			int blueZ = (int) plugin.getConfig().getDouble("Goals.Blue.Z");
 			
-			if(CTF.RedPlayers.contains(player)){
+			if(CTF.RedPlayers.contains(player) && (block.getTypeId() == 35)){
 				if(placedAgainst.getLocation().getBlockX() != redX){
 					e.setCancelled(true);
 				}else if(placedAgainst.getLocation().getBlockX() == redX){
@@ -57,7 +64,7 @@ public class BlockPlaceListener implements Listener {
 					}
 					
 				}
-			}else if (CTF.AllPlayers.contains(player)){ //Blue team
+			}else if (CTF.AllPlayers.contains(player) && (block.getTypeId() == 35)){ //Blue team
 				if(placedAgainst.getLocation().getBlockX() != blueX){
 					e.setCancelled(true);
 				}else if(placedAgainst.getLocation().getBlockX() == blueX){
@@ -84,7 +91,7 @@ public class BlockPlaceListener implements Listener {
 				}
 				
 			} else {
-				if(!player.isOp()){
+				if(!player.isOp() && (block.getTypeId() == 30)){
 					e.setCancelled(true);
 				}
 			}
