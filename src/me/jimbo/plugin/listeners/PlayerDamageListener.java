@@ -74,6 +74,7 @@ public class PlayerDamageListener implements Listener{
 				if(CTF.PlayerClasses.containsKey(p)){
 					if(CTF.PlayerClasses.get(p).equals("soldier")){
 						if(e.getCause().equals(DamageCause.FALL)){
+							e.setDamage(0);
 							e.setCancelled(true);
 						}
 					}

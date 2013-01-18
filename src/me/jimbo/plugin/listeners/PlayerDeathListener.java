@@ -25,7 +25,6 @@ public class PlayerDeathListener implements Listener {
 			Player player = e.getEntity();
 			player.getPlayer().getInventory().clear();
 			e.setDeathMessage(null);
-
 			if((player == plugin.redFlagCarrier) && (CTF.RedPlayers.contains(player))){
 				plugin.resetFlag(2);
 				plugin.redFlagCarrier = null;
