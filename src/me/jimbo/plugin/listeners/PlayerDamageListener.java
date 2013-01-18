@@ -52,8 +52,14 @@ public class PlayerDamageListener implements Listener{
 			        	if(entity == event.getEntity().getShooter()){
 			        		continue;
 			        	}
-					    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1), true);
-					    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1), true);
+			        	if((CTF.RedPlayers.contains(event.getEntity().getShooter()) && (CTF.AllPlayers.contains((Player) entity)))){
+						    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1), true);
+						    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1), true);
+			        	}else if((CTF.AllPlayers.contains(event.getEntity().getShooter()) && (CTF.RedPlayers.contains((Player) entity)))){
+						    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1), true);
+						    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1), true);
+			        		
+			        	}
 			        }
 			      }
 			}
@@ -157,7 +163,10 @@ public class PlayerDamageListener implements Listener{
 					if(p.getHealth() < 12){
 						Inventory i = p.getInventory();
 						for(ItemStack item : i.getContents()){
-							if((item != null) && item.getType().equals(Material.COOKED_BEEF)){
+							if(item == null){
+								continue;
+							}
+							if(item.getType().equals(Material.COOKED_BEEF)){
 								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(p, new ItemStack(Material.COOKED_BEEF, 1)), 1L);
 								p.setHealth(p.getHealth() + 8 <= 20 ? p.getHealth() + 8 : 20);
 							}
@@ -185,7 +194,7 @@ public class PlayerDamageListener implements Listener{
 								}else if(CTF.RedPlayers.contains(player)){
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.BLUE + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.DARK_RED + player.getDisplayName() + ChatColor.GOLD + "!");
-									e.setDamage(20);
+									e.setDamage(1000);
 								}
 							}else if(CTF.RedPlayers.contains(killer)){
 								if(CTF.RedPlayers.contains(player)){
@@ -193,7 +202,7 @@ public class PlayerDamageListener implements Listener{
 								} else if(CTF.AllPlayers.contains(player)){
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.DARK_RED + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.BLUE + player.getDisplayName() + ChatColor.GOLD + "!");
-									e.setDamage(20);
+									e.setDamage(1000);
 								}
 								
 							}
