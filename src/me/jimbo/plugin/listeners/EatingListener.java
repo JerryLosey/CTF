@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public class EatingListener implements Listener {
 
@@ -34,6 +35,8 @@ public class EatingListener implements Listener {
 					} catch (Exception ex) {
 						//
 					}
+			}else if((e.getAction() == Action.RIGHT_CLICK_BLOCK) && (e.getPlayer().hasPermission("ctf.class.soldier")) && (e.getPlayer().getItemInHand().getTypeId() == 267)){
+				e.getPlayer().setVelocity(new Vector(0.0D, 0.9D, 0.0D));
 			}
 		}else{
 			e.setCancelled(true);
