@@ -48,10 +48,11 @@ public class PlayerDamageListener implements Listener{
 			      for (Entity entity : entities)
 			      {
 			        if (entity instanceof Player) {
-			        	if(entity != event.getEntity()){
-					          ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1), true);
-					          ((Player)entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1), true);
+			        	if(entity == event.getEntity().getShooter()){
+			        		continue;
 			        	}
+					    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 1), true);
+					    ((Player) entity).addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 100, 1), true);
 			        }
 			      }
 			}
