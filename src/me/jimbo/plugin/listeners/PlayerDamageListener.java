@@ -38,7 +38,7 @@ public class PlayerDamageListener implements Listener{
 	// Ninja class flash bombs
 	@EventHandler
 	public void onHit(ProjectileHitEvent event){
-		if(plugin.inProgress){
+		if(plugin.inProgress){			
 			if (event.getEntity() instanceof Egg){
 				Entity e = event.getEntity();
 				Location loc = event.getEntity().getLocation();
