@@ -28,7 +28,6 @@ public class BlockPlaceListener implements Listener {
 			
 			if((player.hasPermission("ctf.class.medic")) && (e.getBlockPlaced().getTypeId() == 30)){
 				this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new BlockResetThread(e.getBlock()), 300L);
-				
 			}
 			
 			int redX = (int) plugin.getConfig().getDouble("Goals.Red.X");
@@ -81,7 +80,6 @@ public class BlockPlaceListener implements Listener {
 							plugin.resetInv(player);
 							plugin.resetFlag(1);
 							if(player == plugin.blueFlagCarrier){
-								//plugin.getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
 								plugin.blueFlagCarrier = null;
 							}
 							
