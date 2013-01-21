@@ -10,7 +10,6 @@ import me.jimbo.plugin.listeners.ArmorRemovalListener;
 import me.jimbo.plugin.listeners.BlockBreakListener;
 import me.jimbo.plugin.listeners.BlockPlaceListener;
 import me.jimbo.plugin.listeners.EatingListener;
-import me.jimbo.plugin.listeners.EntitySpawnListener;
 import me.jimbo.plugin.listeners.InventoryOpenListener;
 import me.jimbo.plugin.listeners.PlayerClickListener;
 import me.jimbo.plugin.listeners.PlayerDamageListener;
@@ -23,6 +22,8 @@ import me.jimbo.plugin.listeners.PlayerRespawnListener;
 import me.jimbo.plugin.listeners.PingListener;
 import me.jimbo.plugin.listeners.TagAPIListener;
 import me.jimbo.plugin.listeners.WeatherChange;
+import me.jimbo.plugin.threads.MainTimer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -50,7 +51,6 @@ public class CTF extends JavaPlugin {
 	public final PlayerPickupItemListener PlayerPickupItemListener = new PlayerPickupItemListener(this);
 	public final PlayerJoinListener PlayerJoinListener = new PlayerJoinListener(this);
 	public final PlayerKickListener PlayerKickListener = new PlayerKickListener(this);
-	public final EntitySpawnListener EntitySpawnListener = new EntitySpawnListener(this);
 	public final BlockPlaceListener BlockPlaceListener = new BlockPlaceListener(this);
 	public final PlayerDropItemListener PlayerDropItemListener = new PlayerDropItemListener(this);
 	public final PlayerDamageListener PlayerDamageListener = new PlayerDamageListener(this);
@@ -122,6 +122,8 @@ public class CTF extends JavaPlugin {
 	
 	public Player redFlagCarrier;
 	public Player blueFlagCarrier;
+	
+	private int MTID;
 
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -131,8 +133,7 @@ public class CTF extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(PlayerRespawnListener, this);
 		getServer().getPluginManager().registerEvents(PlayerPickupItemListener, this);
 		getServer().getPluginManager().registerEvents(PlayerJoinListener, this);
-		getServer().getPluginManager().registerEvents(PlayerKickListener, this);		
-		getServer().getPluginManager().registerEvents(EntitySpawnListener, this);			
+		getServer().getPluginManager().registerEvents(PlayerKickListener, this);			
 		getServer().getPluginManager().registerEvents(BlockPlaceListener, this);			
 		getServer().getPluginManager().registerEvents(PlayerDropItemListener, this);	
 		getServer().getPluginManager().registerEvents(PlayerDamageListener, this);	
@@ -162,6 +163,7 @@ public class CTF extends JavaPlugin {
         
         //createTable();
         
+        
         if(!pluginFolder.contains("config.yml"))
         {
         	getConfig().options().copyDefaults(true);
@@ -173,9 +175,13 @@ public class CTF extends JavaPlugin {
 	}
 	
 	public void onDisable() {
+		getServer().getScheduler().cancelTask(this.MTID);
+		this.MTID = 0;
 		blueScore = 0;
 		redScore = 0;
 		roundOver = true;
+		resetFlag(1);
+		resetFlag(2);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -236,6 +242,7 @@ public class CTF extends JavaPlugin {
 						getServer().broadcastMessage("");
 						inProgress = true;
 						splitTeams();
+						registerTimers();
 					}
 			}
 		}, 0L, 20L);
@@ -286,11 +293,16 @@ public class CTF extends JavaPlugin {
 		}
 	}
 	
+	public void registerTimers(){
+		this.MTID = getServer().getScheduler().scheduleSyncRepeatingTask(this, new MainTimer(this), 60L, 20L);
+	}
+	
 	public void resetFlag(int flag){
 		// 1 is red
 		// 2 is blue
 		
 		if(flag == 1){
+			redFlagCarrier = null;
 			int redX = (int) getConfig().getDouble("Goals.Red.X");
 			int redY = (int) getConfig().getDouble("Goals.Red.Y");
 			int redZ = (int) getConfig().getDouble("Goals.Red.Z");
@@ -299,6 +311,7 @@ public class CTF extends JavaPlugin {
 			b.setTypeId(35);
 			b.setData((byte) 14);
 		} else if(flag == 2){
+			blueFlagCarrier = null;
 			int blueX = (int) getConfig().getDouble("Goals.Blue.X");
 			int blueY = (int) getConfig().getDouble("Goals.Blue.Y");
 			int blueZ = (int) getConfig().getDouble("Goals.Blue.Z");
