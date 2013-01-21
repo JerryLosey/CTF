@@ -1,7 +1,7 @@
 name: CTF
 description: Capture The Flag
 main: me.jimbo.plugin.CTF
-version: 0.7.0
+version: 0.8.1
 author: teh_jombi
 authors: [fireblast709]
 commands:
@@ -11,28 +11,35 @@ commands:
        description: Respawn as a heavy.
        usage: /heavy
        permission: ctf.class.heavy
+       permission-message: You need <permission> to use
    soldier:
        description: Respawn as a soldier.
        usage: /soldier
        permission: ctf.class.soldier
+       permission-message: You need <permission> to use
    archer:
        description: Respawn as an archer.
        usage: /archer
        permission: ctf.class.archer
+       permission-message: You need <permission> to use
    medic:
        description: Respawn as a medic.
        usage: /medic
        permission: ctf.class.medic
+       permission-message: You need <permission> to use
    pyro:
        description: Respawn as a pyromaniac.
        usage: /pyro
        permission: ctf.class.pyro
+       permission-message: You need <permission> to use
    ninja:
        description: Respawn as a stealthy ninja.
        usage: /ninja
        permission: ctf.class.ninja
+       permission-message: You need <permission> to use
    engineer:
        description: Respawn as an engineer.
        usage: /engineer
        permission: ctf.class.engineer
+       permission-message: You need <permission> to use
 

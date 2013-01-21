@@ -4,6 +4,7 @@ import me.jimbo.plugin.CTF;
 
 public class MainTimer implements Runnable {
 
+	@SuppressWarnings("unused")
 	private CTF plugin;
 	public int x = 0;
 	

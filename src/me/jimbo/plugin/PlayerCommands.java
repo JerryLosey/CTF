@@ -85,7 +85,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				// Heavy class
 
 				TagAPI.refreshPlayer((Player) sender);
-				if((command.getName().equalsIgnoreCase("heavy")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.heavy")))){
+				if((command.getName().equalsIgnoreCase("heavy")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.heavy"))))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
 						return true;
@@ -131,7 +131,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}
 				}
 				// Soldier class
-				if((command.getName().equalsIgnoreCase("soldier")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.soldier")))){
+				if((command.getName().equalsIgnoreCase("soldier")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.soldier"))))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
 						return true;
@@ -194,7 +194,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			        return true;
 				}
 				// Archer class
-				if((command.getName().equalsIgnoreCase("archer")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.archer")))){
+				if((command.getName().equalsIgnoreCase("archer")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.archer"))))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
 						return true;
@@ -380,7 +380,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 			        return true;
 				}
 				// Medic class
-				if((command.getName().equalsIgnoreCase("medic")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.medic")))){
+				if((command.getName().equalsIgnoreCase("medic")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.medic"))))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
 						return true;
@@ -442,7 +442,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    return true;
 				}
 				// Pyro class
-				if((command.getName().equalsIgnoreCase("pyro")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.pyro")))){
+				if((command.getName().equalsIgnoreCase("pyro")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.pyro"))))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
 						return true;
@@ -517,7 +517,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    return true;
 				}
 				// Ninja class
-				if((command.getName().equalsIgnoreCase("ninja")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.ninja")))){
+				if((command.getName().equalsIgnoreCase("ninja")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.ninja"))))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
 						return true;
@@ -596,7 +596,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				      return true;
 				}
 				// Engineer class
-				if((command.getName().equalsIgnoreCase("engineer")) && ((sender.isOp()) || (sender.hasPermission("ctf.class.engineer")))){
+				if((command.getName().equalsIgnoreCase("engineer")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.engineer"))))){
 					if(!(sender instanceof Player)){
 						sender.sendMessage(ChatColor.RED + "In-Game Only!");
 						return true;
@@ -768,14 +768,14 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    sender.sendMessage(ChatColor.BLUE + "http://dev.bukkit.org/server-mods/CTF");
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 				    	}
-						if(cmd.equals("start"))
-				    	{
-							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
-							sender.sendMessage(ChatColor.YELLOW + "Starting Round!");
-						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
-						    // Do something
-						    plugin.inProgress = true;					    
-				    	}
+//						if(cmd.equals("start"))
+//				    	{
+//							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
+//							sender.sendMessage(ChatColor.YELLOW + "Starting Round!");
+//						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
+//						    // Do something
+//						    plugin.inProgress = true;					    
+//				    	}
 						if(cmd.equals("reset") && sender.hasPermission("ctf.admin.reset"))
 				    	{
 							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
