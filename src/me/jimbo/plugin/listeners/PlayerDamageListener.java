@@ -36,7 +36,7 @@ public class PlayerDamageListener implements Listener{
 	}
 	
 	// Ninja class flash bombs
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onHit(ProjectileHitEvent event){
 		if(plugin.inProgress){			
 			if (event.getEntity() instanceof Egg){
@@ -91,23 +91,6 @@ public class PlayerDamageListener implements Listener{
 								p.setHealth(p.getHealth() + 8 <= 20 ? p.getHealth() + 8 : 20);
 							}
 						}
-					}
-				}
-				if(p.getHealth() - e.getDamage() < 1){
-					PlayerInventory inv = p.getInventory();
-					inv.clear();
-					inv.setArmorContents(null);
-					p.setHealth(0);
-					if((p == plugin.redFlagCarrier) && (CTF.RedPlayers.contains(p))){
-						plugin.resetFlag(2);
-						plugin.redFlagCarrier = null;
-						plugin.getServer().broadcastMessage(ChatColor.DARK_RED + p.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.BLUE + "blue " + ChatColor.WHITE + "flag!");
-						plugin.getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
-					}else if ((p == plugin.blueFlagCarrier) && (CTF.AllPlayers.contains(p))) {
-						plugin.resetFlag(1);
-						plugin.blueFlagCarrier = null;
-						plugin.getServer().broadcastMessage(ChatColor.BLUE + p.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_RED + "red " + ChatColor.WHITE + "flag!");
-						plugin.getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
 					}
 				}
 			}

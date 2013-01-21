@@ -16,7 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.kitteh.tag.TagAPI;
 
@@ -387,7 +386,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 12000, 1), true);
 					PlayerInventory inv = target.getInventory();
 					inv.clear();
 					inv.setArmorContents(null);
@@ -655,8 +653,19 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				}
 				
 				if (command.getName().equalsIgnoreCase("ctf")) {
+					sender.sendMessage("Capture The Flag Commands");
+					sender.sendMessage(ChatColor.AQUA + " /CTF class       -  show your class");
+			        sender.sendMessage(ChatColor.AQUA + " /CTF team        -  show your team");
+			        sender.sendMessage(ChatColor.AQUA + " /CTF classes     -  show available classes");
 					if (args.length > 0) {
 						String cmd = args[0].toLowerCase();
+						if(cmd.equalsIgnoreCase("classes")){
+							sender.sendMessage(ChatColor.AQUA + " /soldier    -  Be a Soldier");
+						    sender.sendMessage(ChatColor.AQUA + " /heavy      -  Be a Heavy");
+						    sender.sendMessage(ChatColor.AQUA + " /archer     -  Be an Archer");
+						    sender.sendMessage(ChatColor.AQUA + " /ninja      -  Be a Ninja");
+						    sender.sendMessage(ChatColor.AQUA + " /medic      -  Be a Medic");	
+						}
 						if (args.length > 1) {
 							String cmd2 = args[1].toLowerCase();
 							if(cmd.equals("set")) {
@@ -765,8 +774,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 							sender.sendMessage(ChatColor.YELLOW + "Starting Round!");
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 						    // Do something
-						    plugin.inProgress = true;
-						    
+						    plugin.inProgress = true;					    
 				    	}
 						if(cmd.equals("reset") && sender.hasPermission("ctf.admin.reset"))
 				    	{
@@ -776,7 +784,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    // Do something
 						    plugin.resetFlag(1);
 						    plugin.resetFlag(2);
-						    if(plugin.redFlagCarrier.getPlayer() != null){
+						    if(plugin.redFlagCarrier.getPlayer() == null){
 							    plugin.resetInv(plugin.redFlagCarrier.getPlayer());
 						    }
 						    if(plugin.blueFlagCarrier.getPlayer() != null){
