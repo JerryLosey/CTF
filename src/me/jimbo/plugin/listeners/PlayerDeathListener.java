@@ -26,14 +26,17 @@ public class PlayerDeathListener implements Listener {
 			player.getPlayer().getInventory().clear();
 			player.getPlayer().getInventory().setArmorContents(null);
 			e.setDeathMessage(null);
-			if((player == plugin.redFlagCarrier) && (CTF.RedPlayers.contains(player))){
-				plugin.resetFlag(2);
-				plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.BLUE + "blue " + ChatColor.WHITE + "flag!");
-				plugin.getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
-			}else if ((player == plugin.blueFlagCarrier) && (CTF.AllPlayers.contains(player))) {
-				plugin.resetFlag(1);
-				plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_RED + "red " + ChatColor.WHITE + "flag!");
-				plugin.getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
+			if(CTF.RedPlayers.contains(player)){
+				if(plugin.blueFlagCarrier == player){
+					plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.BLUE + "blue " + ChatColor.WHITE + "flag!");
+					plugin.resetFlag(2);
+				}
+			}else if (CTF.AllPlayers.contains(player)) {
+				if(plugin.redFlagCarrier == player){
+					plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_RED + "red " + ChatColor.WHITE + "flag!");
+					plugin.getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
+					plugin.resetFlag(1);
+				}
 			}
 		}
 		// Do nothing

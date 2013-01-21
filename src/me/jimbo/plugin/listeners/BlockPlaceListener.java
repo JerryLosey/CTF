@@ -89,7 +89,7 @@ public class BlockPlaceListener implements Listener {
 				}
 				
 			} else {
-				if(!player.isOp() && (block.getTypeId() == 30)){
+				if(block.getTypeId() != 30){
 					e.setCancelled(true);
 				}
 			}

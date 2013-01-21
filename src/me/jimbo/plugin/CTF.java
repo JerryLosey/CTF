@@ -171,7 +171,7 @@ public class CTF extends JavaPlugin {
         	saveDefaultConfig();
         }
         
-		startTimer(37);
+		startTimer(17);
 	}
 	
 	public void onDisable() {
@@ -310,6 +310,7 @@ public class CTF extends JavaPlugin {
 			Block b = loc.getBlock();
 			b.setTypeId(35);
 			b.setData((byte) 14);
+			getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
 		} else if(flag == 2){
 			blueFlagCarrier = null;
 			int blueX = (int) getConfig().getDouble("Goals.Blue.X");
@@ -319,7 +320,7 @@ public class CTF extends JavaPlugin {
 			Block b = loc.getBlock();
 			b.setTypeId(35);
 			b.setData((byte) 11);
-			
+			getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
 		}else{
 			log.warning("Invalid flag on resetFlag()");
 		}
@@ -327,8 +328,6 @@ public class CTF extends JavaPlugin {
 	
 	public void resetInv(Player player){
 
-		redFlagCarrier = null;
-		blueFlagCarrier = null;
 		String classed = PlayerClasses.get(player);
 		PlayerInventory inv = player.getInventory();
 		inv.clear();

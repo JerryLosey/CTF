@@ -653,10 +653,12 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				}
 				
 				if (command.getName().equalsIgnoreCase("ctf")) {
-					sender.sendMessage("Capture The Flag Commands");
-					sender.sendMessage(ChatColor.AQUA + " /CTF class       -  show your class");
-			        sender.sendMessage(ChatColor.AQUA + " /CTF team        -  show your team");
-			        sender.sendMessage(ChatColor.AQUA + " /CTF classes     -  show available classes");
+					if(args.length == 0){
+						sender.sendMessage("Capture The Flag Commands");
+						sender.sendMessage(ChatColor.AQUA + " /CTF class       -  show your class");
+				        sender.sendMessage(ChatColor.AQUA + " /CTF team        -  show your team");
+				        sender.sendMessage(ChatColor.AQUA + " /CTF classes     -  show available classes");
+					}
 					if (args.length > 0) {
 						String cmd = args[0].toLowerCase();
 						if(cmd.equalsIgnoreCase("classes")){

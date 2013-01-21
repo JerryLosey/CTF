@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.kitteh.tag.TagAPI;
 
 public class PlayerJoinListener implements Listener {
 
@@ -21,14 +22,15 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		//Handle Permissions
 		
-		
 		int redsize = CTF.RedPlayers.size();
 		int bluesize = CTF.AllPlayers.size();
 		if (!CTF.AllPlayers.contains(e.getPlayer()) && !CTF.RedPlayers.contains(e.getPlayer())){
 			if(redsize > bluesize){
 				CTF.AllPlayers.add(e.getPlayer());
+				TagAPI.refreshPlayer((Player) e.getPlayer());
 			}else if(bluesize > redsize){
 				CTF.RedPlayers.add(e.getPlayer());
+				TagAPI.refreshPlayer((Player) e.getPlayer());
 			} else {
 				CTF.AllPlayers.add(e.getPlayer());
 			}

@@ -56,7 +56,7 @@ public class BlockBreakListener implements Listener {
 									player.getInventory().setHelmet(flag);
 									block.setType(Material.AIR);
 									plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag!");
-									plugin.redFlagCarrier = player;
+									plugin.blueFlagCarrier = player;
 								}
 								else if(block.getData() == 14) {
 									e.setCancelled(true);
@@ -83,7 +83,7 @@ public class BlockBreakListener implements Listener {
 									player.getInventory().setHelmet(flag);
 									block.setType(Material.AIR);
 									plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag!");
-									plugin.blueFlagCarrier = player;
+									plugin.redFlagCarrier = player;
 								}
 								else if(block.getData() != 14) {
 									e.setCancelled(true);

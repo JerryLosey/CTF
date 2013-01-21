@@ -128,8 +128,10 @@ public class PlayerDamageListener implements Listener{
 				Player damager = (Player) e.getDamager();
 				Player player = (Player) e.getEntity();
 				if(CTF.AllPlayers.contains(damager) && CTF.AllPlayers.contains(player)){
+					e.setDamage(0);
 					e.setCancelled(true);
 				}else if(CTF.RedPlayers.contains(damager) && CTF.RedPlayers.contains(player)){
+					e.setDamage(0);
 					e.setCancelled(true);
 				}
 				
@@ -139,6 +141,7 @@ public class PlayerDamageListener implements Listener{
 				if(CTF.PlayerClasses.containsKey(p)){
 					if(CTF.PlayerClasses.get(p).equals("soldier")){
 						if(e.getCause().equals(DamageCause.FALL)){
+							e.setDamage(0);
 							e.setCancelled(true);
 						}
 					}
@@ -153,6 +156,7 @@ public class PlayerDamageListener implements Listener{
 							if(item.getType().equals(Material.COOKED_BEEF)){
 								this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(p, new ItemStack(Material.COOKED_BEEF, 1)), 1L);
 								p.setHealth(p.getHealth() + 8 <= 20 ? p.getHealth() + 8 : 20);
+								p.setFoodLevel(20);
 							}
 						}
 					}
@@ -171,26 +175,26 @@ public class PlayerDamageListener implements Listener{
 					if(e.getEntity() instanceof Player){
 						Player killer = (Player)a.getShooter();
 						Player player = (Player)e.getEntity();
-						if(killer.getLocation().distanceSquared(player.getLocation()) >= 400){
+						if(CTF.AllPlayers.contains(killer) && (CTF.AllPlayers.contains(player))){
+							e.setDamage(0);
+							e.setCancelled(true);
+						}else if(CTF.RedPlayers.contains(killer) && (CTF.RedPlayers.contains(player))){
+							e.setDamage(0);
+							e.setCancelled(true);
+						} else if(killer.getLocation().distanceSquared(player.getLocation()) >= 400){
 							if(CTF.AllPlayers.contains(killer)){ //killer is on blue team
-								if(CTF.AllPlayers.contains(player)){ //player is on blue team as well!
-									e.setCancelled(true);
-								}else if(CTF.RedPlayers.contains(player)){
+								if(CTF.RedPlayers.contains(player)){
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.BLUE + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.DARK_RED + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(1000);
 								}
 							}else if(CTF.RedPlayers.contains(killer)){
-								if(CTF.RedPlayers.contains(player)){
-									e.setCancelled(true); // Can't kill teammates
-								} else if(CTF.AllPlayers.contains(player)){
+								if(CTF.AllPlayers.contains(player)){
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.DARK_RED + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.BLUE + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(1000);
 								}
-								
 							}
-							
 						}
 					}
 				}
