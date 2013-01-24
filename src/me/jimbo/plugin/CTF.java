@@ -23,6 +23,7 @@ import me.jimbo.plugin.listeners.PingListener;
 import me.jimbo.plugin.listeners.TagAPIListener;
 import me.jimbo.plugin.listeners.WeatherChange;
 import me.jimbo.plugin.threads.MainTimer;
+import me.jimbo.plugin.threads.NinjaThread;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -124,6 +125,7 @@ public class CTF extends JavaPlugin {
 	public Player blueFlagCarrier;
 	
 	private int MTID;
+	private int NINJ;
 
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -177,6 +179,8 @@ public class CTF extends JavaPlugin {
 	public void onDisable() {
 		getServer().getScheduler().cancelTask(this.MTID);
 		this.MTID = 0;
+		getServer().getScheduler().cancelTask(this.NINJ);
+		this.NINJ = 0;
 		blueScore = 0;
 		redScore = 0;
 		roundOver = true;
@@ -268,6 +272,39 @@ public class CTF extends JavaPlugin {
 		return 0;
 	}
 	
+	public boolean getDistanceToSpawn(Player player, int team){
+		Location loc = player.getLocation();
+		if(team == 1){
+			Location spawn = new Location(Bukkit.getWorlds().get(0), (double) getConfig().getDouble("Spawns.Red.X"), (double) getConfig().getDouble("Spawns.Red.Y"), (double) getConfig().getDouble("Spawns.Red.Z"));
+			if(loc.distanceSquared(spawn) <= 25){
+				return true;
+			}else{
+				return false;
+			}
+		}else if(team == 2){
+			Location spawn = new Location(Bukkit.getWorlds().get(0), (double) getConfig().getDouble("Spawns.Blue.X"), (double) getConfig().getDouble("Spawns.Blue.Y"), (double) getConfig().getDouble("Spawns.Blue.Z"));
+			if(loc.distanceSquared(spawn) <= 25){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	public int getTeam(Player player){
+		// 1 is red
+		// 2 is blue
+		if(RedPlayers.contains(player)){
+			int x = 1;
+			return x;
+		}else if(AllPlayers.contains(player)){
+			int x = 2;
+			return x;
+		}
+		return 0;
+	}
+	
 	public void splitTeams(){
 		Random r = new Random();
 		int moving = AllPlayers.size()/2;
@@ -295,6 +332,7 @@ public class CTF extends JavaPlugin {
 	
 	public void registerTimers(){
 		this.MTID = getServer().getScheduler().scheduleSyncRepeatingTask(this, new MainTimer(this), 60L, 20L);
+		this.NINJ = getServer().getScheduler().scheduleSyncRepeatingTask(this, new NinjaThread(this), 60L, 20L);
 	}
 	
 	public void resetFlag(int flag){
@@ -367,7 +405,7 @@ public class CTF extends JavaPlugin {
 		    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
 			inv.addItem(new ItemStack[] { this.egsword });
 
-			inv.addItem(new ItemStack[] { this.egg });
+		    inv.addItem(new ItemStack[] { this.egg });
 		    inv.addItem(new ItemStack[] { this.egg });
 		    inv.addItem(new ItemStack[] { this.egg });
 		    inv.addItem(new ItemStack[] { this.egg });
@@ -402,12 +440,37 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.redstone });
 		    inv.addItem(new ItemStack[] { this.redstone });
 		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
+		    inv.addItem(new ItemStack[] { this.redstone });
 
 		    inv.addItem(new ItemStack[] { this.sugar });
 		    inv.addItem(new ItemStack[] { this.sugar });
 		    inv.addItem(new ItemStack[] { this.sugar });
 		    inv.addItem(new ItemStack[] { this.sugar });
-
+		    
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
@@ -462,7 +525,7 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
 		if(classed.equals("medic")){
-			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 12000, 1), true);
+			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1200, 1), true);
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.ihelmet);
 			}
@@ -487,8 +550,6 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.web });
 		    inv.addItem(new ItemStack[] { this.web });
 		    inv.addItem(new ItemStack[] { this.web });
-
-		    inv.addItem(new ItemStack[] { this.regeneration });
 
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
