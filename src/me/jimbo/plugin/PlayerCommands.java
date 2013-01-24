@@ -792,7 +792,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 							sender.sendMessage(ChatColor.RED + "This server running " + ChatColor.GOLD + "CTF" + ChatColor.RED + " version: " + ChatColor.BLUE + pdf.getVersion());
 							sender.sendMessage(ChatColor.GREEN + "Created by: " + ChatColor.YELLOW + "teh_jombi");
-							sender.sendMessage(ChatColor.GREEN + "Authors: " + ChatColor.YELLOW + "teh_jombi");
+							sender.sendMessage(ChatColor.GREEN + "Authors: " + ChatColor.YELLOW + pdf.getAuthors());
 						    sender.sendMessage(ChatColor.DARK_AQUA + "For a command list, and help, type /CTF:");
 						    sender.sendMessage(ChatColor.GREEN + "http://www.silentnoobs.com/");
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
