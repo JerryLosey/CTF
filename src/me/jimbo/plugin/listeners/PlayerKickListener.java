@@ -34,6 +34,7 @@ public class PlayerKickListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerQuit(PlayerQuitEvent e) {
+		plugin.getServer().broadcastMessage("" + e.getEventName()); // Debug the floating too long kick
 		if(CTF.AllPlayers.contains(e.getPlayer())){
 			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
 		}
