@@ -841,7 +841,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    // Do something
 						    plugin.inProgress = true;
 						    int j = plugin.getTeam((Player) sender);
-						    if(!plugin.getDistanceToSpawn((Player) sender, j)){
+						    if(plugin.getDistanceToSpawn((Player) sender, j)){
 						    	sender.sendMessage("You are within 5 blocks of your spawnpoint!");
 						    }else{
 						    	sender.sendMessage("You are outside of your spawnpoint!");
