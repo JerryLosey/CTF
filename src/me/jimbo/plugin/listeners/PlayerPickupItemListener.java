@@ -3,7 +3,6 @@ package me.jimbo.plugin.listeners;
 import java.util.HashMap;
 
 import me.jimbo.plugin.CTF;
-
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -22,8 +21,8 @@ public class PlayerPickupItemListener implements Listener {
 	private HashMap<String, String> shotedplayer = new HashMap<String, String>();
 	@SuppressWarnings("unused")
 	private CTF plugin;
-	public double hboost = 5.0D;
-	public double vboost = 5.0D;
+	public double hboost = 4.0D;
+	public double vboost = 4.0D;
 	
 	public PlayerPickupItemListener (CTF plugin) {
 		this.plugin = plugin;
@@ -67,7 +66,7 @@ public class PlayerPickupItemListener implements Listener {
 		Block underSponge = sponge.getRelative(BlockFace.DOWN);
 		double h = 0.0D;
 		double v = 0.0D;
-		int max_p = 25;
+		int max_p = 15;
 		int max = 0;
 		String dir = "up";
 		Block db = underSponge;
