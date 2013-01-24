@@ -93,22 +93,27 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					Player target = (Player)sender;
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inventory = target.getInventory();
-					inventory.clear();
-					inventory.setArmorContents(null);
-					target.setHealth(0);
-					
-					if(inventory.getHelmet() == null){
-						inventory.setHelmet(this.dhelmet);
-					}
-					if(inventory.getChestplate() == null){
-						inventory.setChestplate(this.dchestplate);
-					}
-					if(inventory.getLeggings() == null){
-						inventory.setLeggings(this.dleggings);
-					}
-					if(inventory.getBoots() == null){
-						inventory.setBoots(this.dboots);
-						
+					int j = plugin.getTeam((Player) sender);
+					if(!plugin.getDistanceToSpawn((Player) sender, j)){
+						inventory.clear();
+						inventory.setArmorContents(null);
+						target.setHealth(0);
+					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
+						inventory.clear();
+						inventory.setArmorContents(null);
+						if(inventory.getHelmet() == null){
+							inventory.setHelmet(this.dhelmet);
+						}
+						if(inventory.getChestplate() == null){
+							inventory.setChestplate(this.dchestplate);
+						}
+						if(inventory.getLeggings() == null){
+							inventory.setLeggings(this.dleggings);
+						}
+						if(inventory.getBoots() == null){
+							inventory.setBoots(this.dboots);
+						}
+							
 						inventory.addItem(new ItemStack[] { this.dsword });
 						inventory.addItem(new ItemStack[] { this.steak });
 						inventory.addItem(new ItemStack[] { this.steak });
@@ -117,7 +122,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						this.isHeavy = true;
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "heavy");
-						}
 						
 						this.isSoldier = false;
 				        this.isArcher = false;
@@ -128,7 +132,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Heavy");
 				        return true;
+						}
 					}
+					
 				}
 				// Soldier class
 				if((command.getName().equalsIgnoreCase("soldier")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.soldier"))))){
@@ -787,10 +793,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 							sender.sendMessage(ChatColor.RED + "This server running " + ChatColor.GOLD + "CTF" + ChatColor.RED + " version: " + ChatColor.BLUE + pdf.getVersion());
 							sender.sendMessage(ChatColor.GREEN + "Created by: " + ChatColor.YELLOW + "teh_jombi");
 							sender.sendMessage(ChatColor.GREEN + "Authors: " + ChatColor.YELLOW + "teh_jombi");
-						    sender.sendMessage(ChatColor.DARK_AQUA + "For a command list, and help, see the wiki:");
+						    sender.sendMessage(ChatColor.DARK_AQUA + "For a command list, and help, type /CTF:");
 						    sender.sendMessage(ChatColor.GREEN + "http://www.silentnoobs.com/");
-						    sender.sendMessage(ChatColor.AQUA + "Visit the BukkitDev page at:");
-						    sender.sendMessage(ChatColor.BLUE + "http://dev.bukkit.org/server-mods/CTF");
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 				    	}
 						if(cmd.equals("test"))
@@ -801,7 +805,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    // Do something
 						    plugin.inProgress = true;
 						    int j = plugin.getTeam((Player) sender);
-						    if(plugin.getDistanceToSpawn((Player) sender, j)){
+						    if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						    	sender.sendMessage("You are within 5 blocks of your spawnpoint!");
 						    }else{
 						    	sender.sendMessage("You are outside of your spawnpoint!");
