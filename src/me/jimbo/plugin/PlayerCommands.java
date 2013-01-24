@@ -416,8 +416,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.web });
 				    inv.addItem(new ItemStack[] { this.web });
 	
-				    inv.addItem(new ItemStack[] { this.regeneration });
-	
 				    inv.addItem(new ItemStack[] { this.steak });
 				    inv.addItem(new ItemStack[] { this.steak });
 				    inv.addItem(new ItemStack[] { this.steak });
@@ -568,12 +566,37 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
 				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
+				    inv.addItem(new ItemStack[] { this.redstone });
 
 				    inv.addItem(new ItemStack[] { this.sugar });
 				    inv.addItem(new ItemStack[] { this.sugar });
 				    inv.addItem(new ItemStack[] { this.sugar });
 				    inv.addItem(new ItemStack[] { this.sugar });
-
+				    
 				    inv.addItem(new ItemStack[] { this.steak });
 				    inv.addItem(new ItemStack[] { this.steak });
 				    inv.addItem(new ItemStack[] { this.steak });
@@ -770,14 +793,20 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    sender.sendMessage(ChatColor.BLUE + "http://dev.bukkit.org/server-mods/CTF");
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 				    	}
-//						if(cmd.equals("start"))
-//				    	{
-//							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
-//							sender.sendMessage(ChatColor.YELLOW + "Starting Round!");
-//						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
-//						    // Do something
-//						    plugin.inProgress = true;					    
-//				    	}
+						if(cmd.equals("test"))
+				    	{
+							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
+							sender.sendMessage(ChatColor.YELLOW + "Test Command!");
+						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
+						    // Do something
+						    plugin.inProgress = true;
+						    int j = plugin.getTeam((Player) sender);
+						    if(plugin.getDistanceToSpawn((Player) sender, j)){
+						    	sender.sendMessage("You are within 5 blocks of your spawnpoint!");
+						    }else{
+						    	sender.sendMessage("You are outside of your spawnpoint!");
+						    }
+				    	}
 						if(cmd.equals("reset") && sender.hasPermission("ctf.admin.reset"))
 				    	{
 							sender.sendMessage(ChatColor.GRAY + "------------------------------------");
