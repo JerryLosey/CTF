@@ -37,8 +37,8 @@ public class PlayerPickupItemListener implements Listener {
 		Item drop = e.getItem();
 		ItemStack item = drop.getItemStack();
 		Inventory pInv = player.getInventory();
-		
-		
+		e.setCancelled(true);
+		drop.remove();
 		//14 is red, 11 is blue
 		if(item.getDurability() == 14){
 
