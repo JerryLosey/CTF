@@ -10,7 +10,7 @@ public class NinjaThread implements Runnable {
 	
 	private CTF plugin;
 
-	public NinjaThread(CTF plugin, Player player, Boolean visible){
+	public NinjaThread(CTF plugin){
 		this.plugin = plugin;
 	}
 
@@ -18,7 +18,7 @@ public class NinjaThread implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 	    for (Player p : this.plugin.getServer().getOnlinePlayers())
-	    	if((p.getInventory().contains(331)) && (p.getItemInHand().getTypeId() == 331)){
+	    	if((p.getInventory().contains(331)) && (p.getItemInHand().getTypeId() == 331) && (p.hasPermission("ctf.class.ninja"))){
 	    		p.getInventory().removeItem(new ItemStack[] { new ItemStack(331,1)});
 	    		togglev(p, false);
 	    	} else {
@@ -29,7 +29,11 @@ public class NinjaThread implements Runnable {
 	 private void togglev(Player p, boolean visible)
 	  {
 		 for(Player players : Bukkit.getOnlinePlayers()){
-			 players.hidePlayer(p);
+			 if(!visible){
+				 players.hidePlayer(p);
+			 }else{
+				 players.showPlayer(p);
+			 }
 		 }
 	  }
 
