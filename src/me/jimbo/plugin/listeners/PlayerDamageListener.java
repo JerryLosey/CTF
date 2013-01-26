@@ -107,7 +107,13 @@ public class PlayerDamageListener implements Listener{
 			if((e.getDamager() instanceof EnderPearl) && (e.getEntity() instanceof Player) && (CTF.PlayerClasses.get(e.getEntity()).equals("ninja"))){
 				e.setDamage(3); // If damager is an enderpearl AND damagee is a player AND player is in the ninja class, change the damage to 1.5 hearts instead of 2.5
 			}
-			
+			if(e.getDamager() instanceof Player){
+				Player killer = (Player) e.getDamager();
+				Player victim = (Player) e.getEntity();
+				if((killer.getInventory().getItemInHand().getType() == Material.DIAMOND_AXE) && (victim.getFireTicks()>0)){
+					e.setDamage(1000);
+				}
+			}
 			if((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)){
 				if(CTF.PlayerClasses.get(e.getEntity()).equals("firefly")){
 					@SuppressWarnings("unused")
@@ -183,7 +189,7 @@ public class PlayerDamageListener implements Listener{
 			if(e.getDamager().getType() == EntityType.ARROW){
 				Arrow a = (Arrow)e.getDamager();
 				if(a.getShooter() instanceof Player){
-					if(e.getEntity() instanceof Player){
+					if(e.getEntity() instanceof Player & (CTF.PlayerClasses.get(a.getShooter()).equalsIgnoreCase("archer"))){
 						Player killer = (Player)a.getShooter();
 						Player player = (Player)e.getEntity();
 						if(CTF.AllPlayers.contains(killer) && (CTF.AllPlayers.contains(player))){
