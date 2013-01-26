@@ -109,6 +109,16 @@ public class PlayerDamageListener implements Listener{
 			}
 			
 			if((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)){
+				if(CTF.PlayerClasses.get(e.getEntity()).equals("firefly")){
+					Player player = (Player)e.getEntity();
+					player.setHealth(0);
+				}
+				if(CTF.PlayerClasses.get(e.getEntity()).equals("berserker")){
+					Player player = (Player)e.getEntity();
+					if(player.isSneaking()){
+						e.setDamage(e.getDamage()/3);
+					}
+				}
 				if(CTF.PlayerClasses.get(e.getDamager()).equals("medic")){
 					Player medic = (Player)e.getDamager();
 					Player hp = (Player)e.getEntity();
