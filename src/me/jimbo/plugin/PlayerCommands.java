@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionEffect;
 import org.kitteh.tag.TagAPI;
 
 public class PlayerCommands extends JavaPlugin implements CommandExecutor {
@@ -33,6 +33,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	public boolean isEngineer = false;
 	public boolean isFirefly = false;
 	public boolean isBerserker = false;
+	
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
 	ItemStack dleggings = new ItemStack(Material.DIAMOND_LEGGINGS);
@@ -96,17 +97,26 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
+					inventory.clear();
+					inventory.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						sender.sendMessage("H.001");
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "heavy");
+						}
+						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "heavy");
+						}
+						sender.sendMessage("H.002");
 						if(inventory.getHelmet() == null){
 							inventory.setHelmet(this.dhelmet);
 						}
@@ -125,10 +135,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						inventory.addItem(new ItemStack[] { this.steak });
 						inventory.addItem(new ItemStack[] { this.steak });
 						
-						this.isHeavy = true;
-						if(CTF.PlayerClasses.containsKey(target)){
-							CTF.PlayerClasses.put(target, "heavy");
-						
+						this.isHeavy = true;						
 						this.isSoldier = false;
 				        this.isArcher = false;
 				        this.isMedic = false;
@@ -140,7 +147,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Heavy");
 				        return true;
-						}
 					}
 					
 				}
@@ -151,17 +157,27 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
+					inventory.clear();
+					inventory.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						sender.sendMessage("S.001");
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "soldier");
+						}
+						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "soldier");
+						}
+						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
+						sender.sendMessage("S.002");
 						
 						if(inventory.getHelmet() == null){
 							inventory.setHelmet(this.ihelmet);
@@ -197,11 +213,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						inventory.addItem(new ItemStack[] { this.pearl });
 						inventory.addItem(new ItemStack[] { this.pearl });
 						
-						this.isSoldier = true;
-						if(CTF.PlayerClasses.containsKey(target)){
-							CTF.PlayerClasses.put(target, "soldier");
-						}
-						
+						this.isSoldier = true;						
 						this.isHeavy = false;
 				        this.isArcher = false;
 				        this.isMedic = false;
@@ -223,21 +235,29 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
+
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(true);
 					((Player) sender).setFlying(true);
+					inventory.clear();
+					inventory.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "firefly");
+						}
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "firefly");
+						}
 						
-						this.pixbow.addEnchantment(Enchantment.FIRE_ASPECT, 1);
-						this.pixsword.addEnchantment(Enchantment.FIRE_ASPECT, 3);
+						this.pixbow.addEnchantment(Enchantment.ARROW_FIRE, 1);
+						this.pixbow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+						this.pixsword.addEnchantment(Enchantment.FIRE_ASPECT, 2);
 						
 						inventory.addItem(new ItemStack[] { this.pixbow });
 						inventory.addItem(new ItemStack[] { this.pixsword });
@@ -261,12 +281,10 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						inventory.addItem(new ItemStack[] { this.sugar });
 						inventory.addItem(new ItemStack[] { this.sugar });
 						inventory.addItem(new ItemStack[] { this.sugar });
+
+						inventory.addItem(new ItemStack[] { this.arrow });
 						
-						this.isFirefly = true;
-						if(CTF.PlayerClasses.containsKey(target)){
-							CTF.PlayerClasses.put(target, "firefly");
-						}
-						
+						this.isFirefly = true;						
 						this.isHeavy = false;
 				        this.isArcher = false;
 				        this.isMedic = false;
@@ -287,17 +305,23 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
+					inventory.clear();
+					inventory.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "berserker");
+						}
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inventory.clear();
-						inventory.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "berserker");
+						}
 						this.dleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 						this.dleggings.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 						inventory.setLeggings(dleggings);
@@ -311,11 +335,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						inventory.addItem(new ItemStack[] { this.steak });
 						inventory.addItem(new ItemStack[] { this.steak });
 
-						this.isBerserker = true;
-						if(CTF.PlayerClasses.containsKey(target)){
-							CTF.PlayerClasses.put(target, "berserker");
-						}
-						
+						this.isBerserker = true;						
 						this.isHeavy = false;
 				        this.isArcher = false;
 				        this.isMedic = false;
@@ -336,17 +356,23 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
+					inv.clear();
+					inv.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "archer");
+						}
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "archer");
+						}
 						
 						if(inv.getHelmet() == null){
 							inv.setHelmet(this.chelmet);
@@ -505,11 +531,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        inv.addItem(new ItemStack[] { this.steak });
 				        inv.addItem(new ItemStack[] { this.steak });
 				        inv.addItem(new ItemStack[] { this.steak });
-				        this.isArcher = true;
-						if(CTF.PlayerClasses.containsKey(target)){
-							CTF.PlayerClasses.put(target, "archer");
-						}
-						
+				        
+				        this.isArcher = true;						
 						this.isSoldier = false;
 						this.isHeavy = false;
 				        this.isMedic = false;
@@ -532,15 +555,22 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}
 					Player target = (Player)sender;
 					PlayerInventory inv = target.getInventory();
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
+					inv.clear();
+					inv.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "medic");
+						}
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "medic");
+						}
 						
 						if(inv.getHelmet() == null){
 							inv.setHelmet(this.ihelmet);
@@ -574,11 +604,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    inv.addItem(new ItemStack[] { this.steak });
 					    inv.addItem(new ItemStack[] { this.steak });
 							
-					    this.isMedic = true;
-						if(CTF.PlayerClasses.containsKey(target)){
-							CTF.PlayerClasses.put(target, "medic");
-						}
-							
+					    this.isMedic = true;							
 						this.isHeavy = false;
 					    this.isArcher = false;
 						this.isSoldier = false;
@@ -600,17 +626,23 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
+					inv.clear();
+					inv.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+					    if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "pyro");
+						}
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+					    if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "pyro");
+						}
 						
 						if(inv.getHelmet() == null){
 							inv.setHelmet(this.ihelmet);
@@ -658,11 +690,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    inv.addItem(new ItemStack[] { this.steak });
 					    inv.addItem(new ItemStack[] { this.steak });
 		
-					    this.isPyro = true;
-					    if(CTF.PlayerClasses.containsKey(target)){
-							CTF.PlayerClasses.put(target, "pyro");
-						}
-		
+					    this.isPyro = true;		
 					    this.isHeavy = false;
 					    this.isSoldier = false;
 					    this.isArcher = false;
@@ -684,17 +712,21 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+					    if(CTF.PlayerClasses.containsKey(target)){
+					    	CTF.PlayerClasses.put(target, "ninja");
+					    	}
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+					    if(CTF.PlayerClasses.containsKey(target)){
+					    	CTF.PlayerClasses.put(target, "ninja");
+					    	}
 		
 						this.egsword.addEnchantment(Enchantment.DURABILITY, 3);
 					    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
@@ -771,11 +803,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    inv.addItem(new ItemStack[] { this.steak });
 					    inv.addItem(new ItemStack[] { this.steak });
 		
-					    this.isNinja = true;
-					    if(CTF.PlayerClasses.containsKey(target)){
-					    	CTF.PlayerClasses.put(target, "ninja");
-					    	}
-		
+					    this.isNinja = true;		
 					    this.isHeavy = false;
 					    this.isSoldier = false;
 					    this.isArcher = false;
@@ -797,17 +825,23 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						return true;
 					}
 					Player target = (Player)sender;
-					target.removePotionEffect(PotionEffectType.REGENERATION);
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
 					((Player) sender).setAllowFlight(false);
+					inv.clear();
+					inv.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+					      if(CTF.PlayerClasses.containsKey(target)){
+					    	  CTF.PlayerClasses.put(target, "engineer");
+							}
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
-						inv.clear();
-						inv.setArmorContents(null);
+					      if(CTF.PlayerClasses.containsKey(target)){
+					    	  CTF.PlayerClasses.put(target, "engineer");
+							}
 						
 						if (inv.getHelmet() == null) {
 					        inv.setHelmet(this.lhelmet);
@@ -836,11 +870,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					      inv.addItem(new ItemStack[] { this.coal });
 					      inv.addItem(new ItemStack[] { this.coal });
 		
-					      this.isEngineer = true;
-					      if(CTF.PlayerClasses.containsKey(target)){
-					    	  CTF.PlayerClasses.put(target, "engineer");
-							}
-		
+					      this.isEngineer = true;		
 					      this.isNinja = false;
 					      this.isHeavy = false;
 					      this.isSoldier = false;

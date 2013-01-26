@@ -380,8 +380,10 @@ public class CTF extends JavaPlugin {
 		PlayerInventory inv = player.getInventory();
 		inv.clear();
 		inv.setArmorContents(null);
-		if(classed.equals("engineer")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
+		if(classed.equalsIgnoreCase("engineer")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 			if (inv.getHelmet() == null) {
 		        inv.setHelmet(this.lhelmet);
 		      }
@@ -409,10 +411,13 @@ public class CTF extends JavaPlugin {
 		      inv.addItem(new ItemStack[] { this.coal });
 		      inv.addItem(new ItemStack[] { this.coal });
 		}
-		if(classed.equals("firefly")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
-			this.pixbow.addEnchantment(Enchantment.FIRE_ASPECT, 1);
-			this.pixsword.addEnchantment(Enchantment.FIRE_ASPECT, 3);
+		if(classed.equalsIgnoreCase("firefly")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
+			this.pixbow.addEnchantment(Enchantment.ARROW_FIRE, 1);
+			this.pixbow.addEnchantment(Enchantment.ARROW_INFINITE, 1);
+			this.pixsword.addEnchantment(Enchantment.FIRE_ASPECT, 2);
 			
 			inv.addItem(new ItemStack[] { this.pixbow });
 			inv.addItem(new ItemStack[] { this.pixsword });
@@ -436,9 +441,13 @@ public class CTF extends JavaPlugin {
 			inv.addItem(new ItemStack[] { this.sugar });
 			inv.addItem(new ItemStack[] { this.sugar });
 			inv.addItem(new ItemStack[] { this.sugar });
+
+			inv.addItem(new ItemStack[] { this.arrow });
 		}
-		if(classed.equals("berserker")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
+		if(classed.equalsIgnoreCase("berserker")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 			this.dleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 			this.dleggings.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 			inv.setLeggings(dleggings);
@@ -453,8 +462,10 @@ public class CTF extends JavaPlugin {
 			inv.addItem(new ItemStack[] { this.steak });
 
 		}
-		if(classed.equals("ninja")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
+		if(classed.equalsIgnoreCase("ninja")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 		    this.egsword.addEnchantment(Enchantment.DURABILITY, 3);
 		    this.egsword.addEnchantment(Enchantment.DAMAGE_ALL, 3);
 			inv.addItem(new ItemStack[] { this.egsword });
@@ -530,8 +541,10 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
-		if(classed.equals("pyro")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
+		if(classed.equalsIgnoreCase("pyro")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.ihelmet);
 			}
@@ -578,7 +591,7 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
-		if(classed.equals("medic")){
+		if(classed.equalsIgnoreCase("medic")){
 			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 1200, 1), true);
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.ihelmet);
@@ -612,8 +625,10 @@ public class CTF extends JavaPlugin {
 		    inv.addItem(new ItemStack[] { this.steak });
 		    inv.addItem(new ItemStack[] { this.steak });
 		}
-		if(classed.equals("heavy")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
+		if(classed.equalsIgnoreCase("heavy")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.dhelmet);
 			}
@@ -632,8 +647,10 @@ public class CTF extends JavaPlugin {
 				inv.addItem(new ItemStack[] { this.steak });
 			}
 		}
-		if(classed.equals("archer")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
+		if(classed.equalsIgnoreCase("archer")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.chelmet);
 			}
@@ -792,8 +809,10 @@ public class CTF extends JavaPlugin {
 	        inv.addItem(new ItemStack[] { this.steak });
 	        inv.addItem(new ItemStack[] { this.steak });
 		}
-		if(classed.equals("soldier")){
-			player.removePotionEffect(PotionEffectType.REGENERATION);
+		if(classed.equalsIgnoreCase("soldier")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 			if(inv.getHelmet() == null){
 				inv.setHelmet(this.ihelmet);
 			}

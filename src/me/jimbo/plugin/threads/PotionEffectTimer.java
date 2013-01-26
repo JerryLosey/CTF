@@ -23,11 +23,12 @@ public class PotionEffectTimer implements Runnable {
 				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 6000, 1) );
 				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000, 1) );
 				p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 6000, 1) );
-			}else{
-				for(PotionEffect effect : p.getActivePotionEffects()){
-					p.removePotionEffect(effect.getType());
-				}
 			}
+//			}else{
+//				for(PotionEffect effect : p.getActivePotionEffects()){
+//					p.removePotionEffect(effect.getType());
+//				}
+//			}
 		}
 		
 	}

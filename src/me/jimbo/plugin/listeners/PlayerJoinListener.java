@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffect;
 import org.kitteh.tag.TagAPI;
 
 public class PlayerJoinListener implements Listener {
@@ -52,6 +53,9 @@ public class PlayerJoinListener implements Listener {
 			plugin.resetInv(player);
 			player.setHealth(20);
 			player.setFoodLevel(20);
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
 		}
 		
 	}
