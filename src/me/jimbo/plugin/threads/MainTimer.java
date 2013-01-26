@@ -29,7 +29,7 @@ public class MainTimer implements Runnable {
 			}
 		}else if(y==4){
 			if(z==0){
-				plugin.getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + y + ":"+ z + ChatColor.GREEN+" minutes before the round ends!");
+				plugin.getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + "1:00" + ChatColor.GREEN+" minutes before the round ends!");
 			}
 		}
 		
