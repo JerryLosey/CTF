@@ -33,6 +33,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	public boolean isEngineer = false;
 	public boolean isFirefly = false;
 	public boolean isBerserker = false;
+	public boolean isMartyr = false;
 	
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
@@ -60,7 +61,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	ItemStack ssword = new ItemStack(Material.STONE_SWORD);
 	ItemStack daxe = new ItemStack(Material.DIAMOND_AXE);
 	ItemStack bow = new ItemStack(Material.BOW);
-	ItemStack flintandsteel = new ItemStack(Material.FLINT_AND_STEEL);
+	ItemStack fsteel = new ItemStack(Material.FLINT_AND_STEEL);
 	ItemStack arrow = new ItemStack(Material.ARROW);
 	ItemStack chelmet = new ItemStack(Material.CHAINMAIL_HELMET);
 	ItemStack cchestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
@@ -78,6 +79,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	ItemStack pixbow = new ItemStack(Material.BOW);
 	ItemStack pixsword = new ItemStack(Material.DIAMOND_SWORD);
 	ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
+	ItemStack damagePot = new ItemStack(Material.POTION, 4, (short) 16428);
 
 	
 	public PlayerCommands (CTF plugin) {
@@ -144,8 +146,57 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        this.isChemist = false;
 					    this.isFirefly = false;
 					    this.isBerserker = false;
+						this.isMartyr = false;
 	
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Heavy");
+				        return true;
+					}
+					
+				}
+				if((command.getName().equalsIgnoreCase("martyr")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.martyr"))))){
+					if(!(sender instanceof Player)){
+						sender.sendMessage(ChatColor.RED + "In-Game Only!");
+						return true;
+					}
+					Player target = (Player)sender;
+					for(PotionEffect effect : target.getActivePotionEffects()){
+						target.removePotionEffect(effect.getType());
+					}
+					PlayerInventory inventory = target.getInventory();
+					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
+					inventory.clear();
+					inventory.setArmorContents(null);
+					if(!plugin.getDistanceToSpawn((Player) sender, j)){
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "martyr");
+						}
+						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
+						target.setHealth(0);
+					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "martyr");
+						}
+
+						inventory.addItem(new ItemStack[] { this.fsteel });
+						inventory.addItem(new ItemStack[] { this.damagePot });
+						inventory.addItem(new ItemStack[] { this.damagePot });
+						inventory.addItem(new ItemStack[] { this.damagePot });
+						inventory.addItem(new ItemStack[] { this.damagePot });
+						inventory.addItem(new ItemStack[] { this.damagePot });
+						
+						this.isMartyr = true;
+						this.isHeavy = true;						
+						this.isSoldier = false;
+				        this.isArcher = false;
+				        this.isMedic = false;
+				        this.isPyro = false;
+				        this.isNinja = false;
+				        this.isChemist = false;
+					    this.isFirefly = false;
+					    this.isBerserker = false;
+	
+				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Martyr!");
 				        return true;
 					}
 					
@@ -223,6 +274,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isEngineer = false;
 					    this.isFirefly = false;
 					    this.isBerserker = false;
+						this.isMartyr = false;
 		
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Soldier");
 				        return true;
@@ -293,6 +345,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        this.isChemist = false;
 					    this.isEngineer = false;
 					    this.isBerserker = false;
+						this.isMartyr = false;
 		
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Firefly!");
 				        return true;
@@ -344,6 +397,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        this.isChemist = false;
 					    this.isEngineer = false;
 					    this.isFirefly = false;
+						this.isMartyr = false;
 		
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Berserker!");
 				        return true;
@@ -542,6 +596,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isEngineer = false;
 					    this.isFirefly = false;
 					    this.isBerserker = false;
+						this.isMartyr = false;
 		
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now an Archer!");
 				        return true;
@@ -614,6 +669,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isEngineer = false;
 					    this.isFirefly = false;
 					    this.isBerserker = false;
+						this.isMartyr = false;
 		
 					    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Medic!");
 					    return true;
@@ -658,7 +714,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						}
 					    inv.addItem(new ItemStack[] { this.daxe });
 		
-					    inv.addItem(new ItemStack[] { this.flintandsteel });
+					    inv.addItem(new ItemStack[] { this.fsteel });
 		
 					    inv.addItem(new ItemStack[] { this.bow });
 		
@@ -700,6 +756,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isEngineer = false;
 					    this.isFirefly = false;
 					    this.isBerserker = false;
+						this.isMartyr = false;
 		
 					    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Pyro");
 					    return true;
@@ -813,6 +870,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isEngineer = false;
 					    this.isFirefly = false;
 					    this.isBerserker = false;
+						this.isMartyr = false;
 		
 					    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Ninja");
 					    return true;
@@ -880,6 +938,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					      this.isChemist = false;
 						  this.isFirefly = false;
 						  this.isBerserker = false;
+						  this.isMartyr = false;
 		
 					      sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now an Engineer");
 					      return true;
@@ -903,6 +962,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    sender.sendMessage(ChatColor.AQUA + " /medic      -  Be a Medic");	
 						    sender.sendMessage(ChatColor.AQUA + " /firefly      -  Be a Firefly");
 						    sender.sendMessage(ChatColor.AQUA + " /berserker      -  Be a Berserker");	
+						    sender.sendMessage(ChatColor.AQUA + " /martyr      -  Be a Martyr");	
 						}
 						if (args.length > 1) {
 							String cmd2 = args[1].toLowerCase();
@@ -1087,24 +1147,26 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	}
 	
 	public boolean getClass(String playerClass){
-		if(playerClass.equals("Engineer")){
+		if(playerClass.equalsIgnoreCase("Engineer")){
 			return this.isEngineer;
-		}else if(playerClass.equals("Ninja")){
+		}else if(playerClass.equalsIgnoreCase("Ninja")){
 			return this.isNinja;
-		}else if(playerClass.equals("Heavy")){
+		}else if(playerClass.equalsIgnoreCase("Heavy")){
 			return this.isHeavy;
-		}else if(playerClass.equals("Medic")){
+		}else if(playerClass.equalsIgnoreCase("Medic")){
 			return this.isMedic;
-		}else if(playerClass.equals("Archer")){
+		}else if(playerClass.equalsIgnoreCase("Archer")){
 			return this.isArcher;
-		}else if(playerClass.equals("Soldier")){
+		}else if(playerClass.equalsIgnoreCase("Soldier")){
 			return this.isSoldier;
-		}else if(playerClass.equals("Pyro")){
+		}else if(playerClass.equalsIgnoreCase("Pyro")){
 			return this.isPyro;
-		}else if(playerClass.equals("Firefly")){
+		}else if(playerClass.equalsIgnoreCase("Firefly")){
 			return this.isFirefly;
-		}else if(playerClass.equals("Beserker")){
+		}else if(playerClass.equalsIgnoreCase("Beserker")){
 			return this.isBerserker;
+		}else if(playerClass.equalsIgnoreCase("Martyr")){
+			return this.isMartyr;
 		}
 		
 		return false;

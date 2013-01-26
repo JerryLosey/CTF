@@ -90,7 +90,7 @@ public class CTF extends JavaPlugin {
 	ItemStack ssword = new ItemStack(Material.STONE_SWORD);
 	ItemStack daxe = new ItemStack(Material.DIAMOND_AXE);
 	ItemStack bow = new ItemStack(Material.BOW);
-	ItemStack flintandsteel = new ItemStack(Material.FLINT_AND_STEEL);
+	ItemStack fsteel = new ItemStack(Material.FLINT_AND_STEEL);
 	ItemStack arrow = new ItemStack(Material.ARROW);
 	ItemStack chelmet = new ItemStack(Material.CHAINMAIL_HELMET);
 	ItemStack cchestplate = new ItemStack(Material.CHAINMAIL_CHESTPLATE);
@@ -108,6 +108,7 @@ public class CTF extends JavaPlugin {
 	ItemStack pixbow = new ItemStack(Material.BOW);
 	ItemStack pixsword = new ItemStack(Material.DIAMOND_SWORD);
 	ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
+	ItemStack damagePot = new ItemStack(Material.POTION, 4, (short) 16428);
 	
 	FileConfiguration config;
 	public int redX;
@@ -166,6 +167,7 @@ public class CTF extends JavaPlugin {
 		getCommand("engineer").setExecutor(new PlayerCommands(this));
 		getCommand("firefly").setExecutor(new PlayerCommands(this));
 		getCommand("berserker").setExecutor(new PlayerCommands(this));
+		getCommand("martyr").setExecutor(new PlayerCommands(this));
 		
 		String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
@@ -381,6 +383,18 @@ public class CTF extends JavaPlugin {
 		PlayerInventory inv = player.getInventory();
 		inv.clear();
 		inv.setArmorContents(null);
+		if(classed.equalsIgnoreCase("martyr")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
+		      inv.addItem(new ItemStack[] { this.fsteel });
+		      inv.addItem(new ItemStack[] { this.damagePot });
+		      inv.addItem(new ItemStack[] { this.damagePot });
+		      inv.addItem(new ItemStack[] { this.damagePot });
+		      inv.addItem(new ItemStack[] { this.damagePot });
+		      inv.addItem(new ItemStack[] { this.damagePot });
+
+		}
 		if(classed.equalsIgnoreCase("engineer")){
 			for(PotionEffect effect : player.getActivePotionEffects()){
 				player.removePotionEffect(effect.getType());
@@ -560,7 +574,7 @@ public class CTF extends JavaPlugin {
 			}
 		    inv.addItem(new ItemStack[] { this.daxe });
 
-		    inv.addItem(new ItemStack[] { this.flintandsteel });
+		    inv.addItem(new ItemStack[] { this.fsteel });
 
 		    inv.addItem(new ItemStack[] { this.bow });
 

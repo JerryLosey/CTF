@@ -1,7 +1,6 @@
 package me.jimbo.plugin.threads;
 
 import org.bukkit.ChatColor;
-
 import me.jimbo.plugin.CTF;
 
 public class MainTimer implements Runnable {
@@ -33,16 +32,7 @@ public class MainTimer implements Runnable {
 			}
 		}
 		
-		// This is assuming a 5 minute round length
-//		if(y == 4){
-//			plugin.getServer().broadcastMessage("Round ends in 1 minute!");
-//			if(z == 30){
-//				plugin.getServer().broadcastMessage("Round ends in 30 seconds!");
-//			}else if(z == 45){
-//				plugin.getServer().broadcastMessage("Round ends in 15 seconds!");
-//			}else if(z == 55){
-//				plugin.getServer().broadcastMessage("Round ends in 5 seconds!");
-//			}
-//		}
+		// Cake listener
+
 	}
 }

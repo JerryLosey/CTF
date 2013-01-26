@@ -43,3 +43,7 @@ commands:
        description: Respawn as a berserker.
        permission: ctf.class.berserker
        permission-message: You need <permission> to use
+   martyr:
+       description: Respawn as a martyr.
+       permission: ctf.class.martyr
+       permission-message: You need <permission> to use
