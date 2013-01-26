@@ -340,7 +340,8 @@ public class CTF extends JavaPlugin {
 	}
 	
 	public void registerTimers(){
-		this.MTID = getServer().getScheduler().scheduleSyncRepeatingTask(this, new MainTimer(this), 60L, 20L);
+		this.MTID = getServer().getScheduler().scheduleSyncRepeatingTask(this, new MainTimer(this), 20L, 20L);
+		getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + "5 "+ ChatColor.GREEN+"minutes before the round ends!");
 		this.NINJ = getServer().getScheduler().scheduleSyncRepeatingTask(this, new NinjaThread(this), 60L, 20L);
 		this.EFFE = getServer().getScheduler().scheduleSyncRepeatingTask(this, new PotionEffectTimer(this), 60L, 20L);
 	}
