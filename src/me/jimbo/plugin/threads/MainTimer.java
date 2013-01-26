@@ -1,10 +1,11 @@
 package me.jimbo.plugin.threads;
 
+import org.bukkit.ChatColor;
+
 import me.jimbo.plugin.CTF;
 
 public class MainTimer implements Runnable {
 
-	@SuppressWarnings("unused")
 	private CTF plugin;
 	public int x = 0;
 	
@@ -17,12 +18,22 @@ public class MainTimer implements Runnable {
 		// TODO Auto-generated method stub
 		// This is where we do whatever during the timer
 		//plugin.getServer().broadcastMessage("Test!");
-//		x++;
-//		plugin.getServer().broadcastMessage("" + x);
-//		double y = x/60; // # of minutes
-//		double z = x % 60; // # of seconds
-//		//plugin.getServer().broadcastMessage("" + x + "/" + y + "/" + z);
-//		// This is assuming a 5 minute round length
+		x++;
+
+		int y = x/60; // # of minutes
+		int z = x % 60; // # of seconds
+		
+		if(y==2){
+			if(z==30){
+				plugin.getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + y + ":"+ z + ChatColor.GREEN+" minutes before the round ends!");
+			}
+		}else if(y==4){
+			if(z==0){
+				plugin.getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + y + ":"+ z + ChatColor.GREEN+" minutes before the round ends!");
+			}
+		}
+		
+		// This is assuming a 5 minute round length
 //		if(y == 4){
 //			plugin.getServer().broadcastMessage("Round ends in 1 minute!");
 //			if(z == 30){
