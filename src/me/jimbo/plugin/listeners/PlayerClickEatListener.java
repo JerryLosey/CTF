@@ -28,21 +28,24 @@ public class PlayerClickEatListener implements Listener {
 		if(plugin.inProgress){
 			if((e.getAction() == Action.RIGHT_CLICK_BLOCK) && (e.getPlayer().hasPermission("ctf.class.soldier")) && (e.getPlayer().getItemInHand().getTypeId() == 267)){
 				e.getPlayer().setVelocity(new Vector(0.0D, 0.9D, 0.0D));
-			}
-			if(CTF.PlayerClasses.get(e.getPlayer()).equalsIgnoreCase("gunner")){
-				if(e.getPlayer().getInventory().contains(Material.SNOW_BALL)){
-					Snowball snowball =  e.getPlayer().getWorld().spawn(e.getPlayer().getEyeLocation(), Snowball.class);
-					snowball.setShooter(e.getPlayer());
-					snowball.setVelocity(e.getPlayer().getLocation().getDirection().multiply(1.5));
-					ItemStack snow = new ItemStack(Material.SNOW_BALL, 1);
-					e.getPlayer().getInventory().removeItem(snow);
+			}else if(CTF.PlayerClasses.get(e.getPlayer()).equalsIgnoreCase("gunner")){
+				if(e.getAction() == Action.LEFT_CLICK_AIR){
+					if(e.getPlayer().getInventory().contains(Material.SNOW_BALL)){
+						if(e.getPlayer().getItemInHand().equals(Material.STICK)){
+							Snowball snowball =  e.getPlayer().getWorld().spawn(e.getPlayer().getEyeLocation(), Snowball.class);
+							snowball.setShooter(e.getPlayer());
+							snowball.setVelocity(e.getPlayer().getLocation().getDirection().multiply(1.5));
+							ItemStack snow = new ItemStack(Material.SNOW_BALL, 1);
+							e.getPlayer().getInventory().removeItem(snow);							
+						}
+					}
+				}else{
+					e.setCancelled(true);
 				}
-			}
-			if((e.getAction() == Action.RIGHT_CLICK_BLOCK) && ((e.getPlayer().hasPermission("ctf.class.ninja") || e.getPlayer().hasPermission("ctf.class.firefly"))) && (e.getPlayer().getItemInHand().getTypeId() == 353)){
+			}else if((e.getAction() == Action.RIGHT_CLICK_BLOCK) && ((e.getPlayer().hasPermission("ctf.class.ninja") || e.getPlayer().hasPermission("ctf.class.firefly"))) && (e.getPlayer().getItemInHand().getTypeId() == 353)){
 				this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(e.getPlayer(), new ItemStack(Material.SUGAR, 1)), 1L);
 				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 1), true);
-			}
-			if ((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+			}else if ((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 				try{
 					if (e.getPlayer().getHealth() == e.getPlayer().getMaxHealth()) {
 				        return;
@@ -55,6 +58,8 @@ public class PlayerClickEatListener implements Listener {
 					} catch (Exception ex) {
 						//
 					}
+			}else{
+				e.setCancelled(true);
 			}
 		}else{
 			e.setCancelled(true);
