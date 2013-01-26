@@ -50,6 +50,8 @@ public class PlayerJoinListener implements Listener {
 			player.teleport(location);
 			player.getInventory().clear();
 			plugin.resetInv(player);
+			player.setHealth(20);
+			player.setFoodLevel(20);
 		}
 		
 	}
