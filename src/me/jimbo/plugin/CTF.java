@@ -164,6 +164,8 @@ public class CTF extends JavaPlugin {
 		getCommand("pyro").setExecutor(new PlayerCommands(this));
 		getCommand("ninja").setExecutor(new PlayerCommands(this));
 		getCommand("engineer").setExecutor(new PlayerCommands(this));
+		getCommand("firefly").setExecutor(new PlayerCommands(this));
+		getCommand("berserker").setExecutor(new PlayerCommands(this));
 		
 		String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
