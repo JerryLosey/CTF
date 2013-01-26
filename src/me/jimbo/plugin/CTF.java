@@ -435,6 +435,22 @@ public class CTF extends JavaPlugin {
 			inv.addItem(new ItemStack[] { this.sugar });
 			inv.addItem(new ItemStack[] { this.sugar });
 		}
+		if(classed.equals("berserker")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
+			this.dleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+			this.dleggings.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
+			inv.setLeggings(dleggings);
+			
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+
+		}
 		if(classed.equals("ninja")){
 			player.removePotionEffect(PotionEffectType.REGENERATION);
 		    this.egsword.addEnchantment(Enchantment.DURABILITY, 3);
