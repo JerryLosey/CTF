@@ -19,7 +19,7 @@ public class PotionEffectTimer implements Runnable {
 		// TODO Auto-generated method stub
 		for (Player p : this.plugin.getServer().getOnlinePlayers()){
 			// Do something
-			if(p.hasPermission("ctf.class.berserker")){
+			if(p.hasPermission("ctf.class.berserker") && CTF.PlayerClasses.get(p).equalsIgnoreCase("berserker")){
 				p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 6000, 1) );
 				p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6000, 1) );
 				p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 6000, 1) );
