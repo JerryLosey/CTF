@@ -30,6 +30,8 @@ public class MainTimer implements Runnable {
 			if(z==0){
 				plugin.getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + "1:00" + ChatColor.GREEN+" minutes before the round ends!");
 			}
+		}else if(y == 5){
+			plugin.getServer().broadcastMessage(ChatColor.GREEN + "Round is over!");
 		}
 		
 		// Cake listener
