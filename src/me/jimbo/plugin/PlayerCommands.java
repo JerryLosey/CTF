@@ -31,6 +31,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	public boolean isNinja = false;
 	public boolean isChemist = false;
 	public boolean isEngineer = false;
+	public boolean isFirefly = false;
 	ItemStack dhelmet = new ItemStack(Material.DIAMOND_HELMET);
 	ItemStack dchestplate = new ItemStack(Material.DIAMOND_CHESTPLATE);
 	ItemStack dleggings = new ItemStack(Material.DIAMOND_LEGGINGS);
@@ -72,6 +73,9 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	ItemStack sugar = new ItemStack(Material.SUGAR);
 	ItemStack coal = new ItemStack(Material.COAL);
 	ItemStack wsword = new ItemStack(Material.WOOD_SWORD);
+	ItemStack pixbow = new ItemStack(Material.BOW);
+	ItemStack pixsword = new ItemStack(Material.DIAMOND_SWORD);
+	ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
 
 	
 	public PlayerCommands (CTF plugin) {
@@ -129,6 +133,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        this.isPyro = false;
 				        this.isNinja = false;
 				        this.isChemist = false;
+					    this.isFirefly = false;
 	
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Heavy");
 				        return true;
@@ -200,8 +205,71 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        this.isNinja = false;
 				        this.isChemist = false;
 					    this.isEngineer = false;
+					    this.isFirefly = false;
 		
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Soldier");
+				        return true;
+					}
+				}
+				// Firefly class
+				if((command.getName().equalsIgnoreCase("firefly")) && (((sender.isOp()) || (sender.hasPermission("ctf.class.firefly"))))){
+					if(!(sender instanceof Player)){
+						sender.sendMessage(ChatColor.RED + "In-Game Only!");
+						return true;
+					}
+					Player target = (Player)sender;
+					target.removePotionEffect(PotionEffectType.REGENERATION);
+					PlayerInventory inventory = target.getInventory();
+					int j = plugin.getTeam((Player) sender);
+					if(!plugin.getDistanceToSpawn((Player) sender, j)){
+						inventory.clear();
+						inventory.setArmorContents(null);
+						target.setHealth(0);
+					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
+						inventory.clear();
+						inventory.setArmorContents(null);
+						((Player) sender).setFlying(true);
+						
+						this.pixbow.addEnchantment(Enchantment.FIRE_ASPECT, 1);
+						this.pixsword.addEnchantment(Enchantment.FIRE_ASPECT, 3);
+						
+						inventory.addItem(new ItemStack[] { this.pixbow });
+						inventory.addItem(new ItemStack[] { this.pixsword });
+						
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						inventory.addItem(new ItemStack[] { this.steak });
+						
+						inventory.addItem(new ItemStack[] { this.gapple });
+						inventory.addItem(new ItemStack[] { this.gapple });
+						inventory.addItem(new ItemStack[] { this.gapple });
+						
+						inventory.addItem(new ItemStack[] { this.sugar });
+						inventory.addItem(new ItemStack[] { this.sugar });
+						inventory.addItem(new ItemStack[] { this.sugar });
+						
+						this.isFirefly = true;
+						if(CTF.PlayerClasses.containsKey(target)){
+							CTF.PlayerClasses.put(target, "firefly");
+						}
+						
+						this.isHeavy = false;
+				        this.isArcher = false;
+				        this.isMedic = false;
+				        this.isPyro = false;
+				        this.isNinja = false;
+				        this.isChemist = false;
+					    this.isEngineer = false;
+		
+				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Firefly!");
 				        return true;
 					}
 				}
@@ -392,6 +460,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        this.isNinja = false;
 				        this.isChemist = false;
 					    this.isEngineer = false;
+					    this.isFirefly = false;
 		
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now an Archer!");
 				        return true;
@@ -458,6 +527,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isNinja = false;
 					    this.isChemist = false;
 					    this.isEngineer = false;
+					    this.isFirefly = false;
 		
 					    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Medic!");
 					    return true;
@@ -539,6 +609,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isNinja = false;
 					    this.isChemist = false;
 					    this.isEngineer = false;
+					    this.isFirefly = false;
 		
 					    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Pyro");
 					    return true;
@@ -649,6 +720,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					    this.isPyro = false;
 					    this.isChemist = false;
 					    this.isEngineer = false;
+					    this.isFirefly = false;
 		
 					    sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Ninja");
 					    return true;
@@ -711,6 +783,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					      this.isMedic = false;
 					      this.isPyro = false;
 					      this.isChemist = false;
+						    this.isFirefly = false;
 		
 					      sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now an Engineer");
 					      return true;

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import me.jimbo.plugin.listeners.ArmorRemovalListener;
 import me.jimbo.plugin.listeners.BlockBreakListener;
 import me.jimbo.plugin.listeners.BlockPlaceListener;
-import me.jimbo.plugin.listeners.EatingListener;
+import me.jimbo.plugin.listeners.PlayerClickEatListener;
 import me.jimbo.plugin.listeners.InventoryOpenListener;
 import me.jimbo.plugin.listeners.PlayerClickListener;
 import me.jimbo.plugin.listeners.PlayerDamageListener;
@@ -24,6 +24,7 @@ import me.jimbo.plugin.listeners.TagAPIListener;
 import me.jimbo.plugin.listeners.WeatherChange;
 import me.jimbo.plugin.threads.MainTimer;
 import me.jimbo.plugin.threads.NinjaThread;
+import me.jimbo.plugin.threads.PotionEffectTimer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -57,7 +58,7 @@ public class CTF extends JavaPlugin {
 	public final PlayerDamageListener PlayerDamageListener = new PlayerDamageListener(this);
 	public final InventoryOpenListener InventoryOpenListener = new InventoryOpenListener(this);
 	public final ArmorRemovalListener ArmorRemovalListener = new ArmorRemovalListener(this);
-	public final EatingListener EatingListener = new EatingListener(this);
+	public final PlayerClickEatListener EatingListener = new PlayerClickEatListener(this);
 	public final PlayerClickListener PlayerClickListener = new PlayerClickListener(this);
 	public final PingListener PingListener = new PingListener(this);
 	public final TagAPIListener TagAPIListener = new TagAPIListener(this);
@@ -104,6 +105,9 @@ public class CTF extends JavaPlugin {
 	ItemStack sugar = new ItemStack(Material.SUGAR);
 	ItemStack coal = new ItemStack(Material.COAL);
 	ItemStack wsword = new ItemStack(Material.WOOD_SWORD);
+	ItemStack pixbow = new ItemStack(Material.BOW);
+	ItemStack pixsword = new ItemStack(Material.DIAMOND_SWORD);
+	ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
 	
 	FileConfiguration config;
 	public int redX;
@@ -126,6 +130,7 @@ public class CTF extends JavaPlugin {
 	
 	private int MTID;
 	private int NINJ;
+	private int EFFE;
 
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -181,6 +186,8 @@ public class CTF extends JavaPlugin {
 		this.MTID = 0;
 		getServer().getScheduler().cancelTask(this.NINJ);
 		this.NINJ = 0;
+		getServer().getScheduler().cancelTask(this.EFFE);
+		this.EFFE = 0;
 		blueScore = 0;
 		redScore = 0;
 		roundOver = true;
@@ -333,6 +340,7 @@ public class CTF extends JavaPlugin {
 	public void registerTimers(){
 		this.MTID = getServer().getScheduler().scheduleSyncRepeatingTask(this, new MainTimer(this), 60L, 20L);
 		this.NINJ = getServer().getScheduler().scheduleSyncRepeatingTask(this, new NinjaThread(this), 60L, 20L);
+		this.EFFE = getServer().getScheduler().scheduleSyncRepeatingTask(this, new PotionEffectTimer(this), 60L, 20L);
 	}
 	
 	public void resetFlag(int flag){
@@ -398,6 +406,34 @@ public class CTF extends JavaPlugin {
 		      inv.addItem(new ItemStack[] { this.coal });
 		      inv.addItem(new ItemStack[] { this.coal });
 		      inv.addItem(new ItemStack[] { this.coal });
+		}
+		if(classed.equals("firefly")){
+			player.removePotionEffect(PotionEffectType.REGENERATION);
+			this.pixbow.addEnchantment(Enchantment.FIRE_ASPECT, 1);
+			this.pixsword.addEnchantment(Enchantment.FIRE_ASPECT, 3);
+			
+			inv.addItem(new ItemStack[] { this.pixbow });
+			inv.addItem(new ItemStack[] { this.pixsword });
+			
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			inv.addItem(new ItemStack[] { this.steak });
+			
+			inv.addItem(new ItemStack[] { this.gapple });
+			inv.addItem(new ItemStack[] { this.gapple });
+			inv.addItem(new ItemStack[] { this.gapple });
+			
+			inv.addItem(new ItemStack[] { this.sugar });
+			inv.addItem(new ItemStack[] { this.sugar });
+			inv.addItem(new ItemStack[] { this.sugar });
 		}
 		if(classed.equals("ninja")){
 			player.removePotionEffect(PotionEffectType.REGENERATION);
