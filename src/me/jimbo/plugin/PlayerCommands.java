@@ -99,6 +99,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inventory.clear();
 						inventory.setArmorContents(null);
@@ -153,6 +154,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inventory.clear();
 						inventory.setArmorContents(null);
@@ -224,6 +226,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(true);
+					((Player) sender).setFlying(true);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inventory.clear();
 						inventory.setArmorContents(null);
@@ -231,7 +235,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						inventory.clear();
 						inventory.setArmorContents(null);
-						((Player) sender).setFlying(true);
 						
 						this.pixbow.addEnchantment(Enchantment.FIRE_ASPECT, 1);
 						this.pixsword.addEnchantment(Enchantment.FIRE_ASPECT, 3);
@@ -287,6 +290,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inventory = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inventory.clear();
 						inventory.setArmorContents(null);
@@ -294,7 +298,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						inventory.clear();
 						inventory.setArmorContents(null);
-						((Player) sender).setFlying(true);
 						this.dleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 						this.dleggings.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
 						inventory.setLeggings(dleggings);
@@ -320,6 +323,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 				        this.isNinja = false;
 				        this.isChemist = false;
 					    this.isEngineer = false;
+					    this.isFirefly = false;
 		
 				        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "You are now a Berserker!");
 				        return true;
@@ -335,6 +339,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inv.clear();
 						inv.setArmorContents(null);
@@ -528,6 +533,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					Player target = (Player)sender;
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inv.clear();
 						inv.setArmorContents(null);
@@ -597,6 +603,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inv.clear();
 						inv.setArmorContents(null);
@@ -680,6 +687,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inv.clear();
 						inv.setArmorContents(null);
@@ -792,6 +800,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					target.removePotionEffect(PotionEffectType.REGENERATION);
 					PlayerInventory inv = target.getInventory();
 					int j = plugin.getTeam((Player) sender);
+					((Player) sender).setAllowFlight(false);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
 						inv.clear();
 						inv.setArmorContents(null);
