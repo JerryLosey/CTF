@@ -17,13 +17,14 @@ public class NinjaThread implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-	    for (Player p : this.plugin.getServer().getOnlinePlayers())
+	    for (Player p : this.plugin.getServer().getOnlinePlayers()){
 	    	if((p.getInventory().contains(331)) && (p.getItemInHand().getTypeId() == 331) && (p.hasPermission("ctf.class.ninja"))){
 	    		p.getInventory().removeItem(new ItemStack[] { new ItemStack(331,1)});
 	    		togglev(p, false);
 	    	} else {
 	    		togglev(p, true);
 	    	}
+	    }
 	}
 	
 	 private void togglev(Player p, boolean visible)
