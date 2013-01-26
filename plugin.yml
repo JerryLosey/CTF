@@ -1,7 +1,7 @@
 name: CTF
 description: Capture The Flag
 main: me.jimbo.plugin.CTF
-version: 0.8.4
+version: 0.8.5
 author: teh_jombi
 authors: [fireblast709]
 commands:
@@ -35,4 +35,11 @@ commands:
        description: Respawn as an engineer.
        permission: ctf.class.engineer
        permission-message: You need <permission> to use
-
+   firefly:
+       description: Respawn as a firefly.
+       permission: ctf.class.firefly
+       permission-message: You need <permission> to use
+   berserker:
+       description: Respawn as a berserker.
+       permission: ctf.class.berserker
+       permission-message: You need <permission> to use
