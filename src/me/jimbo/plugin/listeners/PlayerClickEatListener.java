@@ -13,12 +13,12 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class EatingListener implements Listener {
+public class PlayerClickEatListener implements Listener {
 
 	
 	private CTF plugin;
 	
-	public EatingListener (CTF plugin) {
+	public PlayerClickEatListener (CTF plugin) {
 		this.plugin = plugin;
 	}
 	
