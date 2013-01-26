@@ -109,6 +109,7 @@ public class CTF extends JavaPlugin {
 	ItemStack pixsword = new ItemStack(Material.DIAMOND_SWORD);
 	ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
 	ItemStack damagePot = new ItemStack(Material.POTION, 4, (short) 16428);
+	ItemStack snowball = new ItemStack(Material.SNOW_BALL);
 	
 	FileConfiguration config;
 	public int redX;
@@ -168,6 +169,7 @@ public class CTF extends JavaPlugin {
 		getCommand("firefly").setExecutor(new PlayerCommands(this));
 		getCommand("berserker").setExecutor(new PlayerCommands(this));
 		getCommand("martyr").setExecutor(new PlayerCommands(this));
+		getCommand("gunner").setExecutor(new PlayerCommands(this));
 		
 		String pluginFolder = getDataFolder().getAbsolutePath();
         new File(pluginFolder).mkdirs();
@@ -393,6 +395,25 @@ public class CTF extends JavaPlugin {
 		      inv.addItem(new ItemStack[] { this.damagePot });
 		      inv.addItem(new ItemStack[] { this.damagePot });
 		      inv.addItem(new ItemStack[] { this.damagePot });
+
+		}
+		if(classed.equalsIgnoreCase("gunner")){
+			for(PotionEffect effect : player.getActivePotionEffects()){
+				player.removePotionEffect(effect.getType());
+			}
+			inv.setHelmet(this.ihelmet);
+			inv.setChestplate(this.lchestplate);
+			inv.setLeggings(this.lleggings);
+			inv.setBoots(this.iboots);
+			this.ssword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
+			this.ihelmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+			this.lchestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+			this.lleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+			this.iboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+		      inv.addItem(new ItemStack[] { this.ssword });
+		      for(int h=0; h<100; h++){
+			      inv.addItem(new ItemStack[] { this.snowball });
+		      }
 
 		}
 		if(classed.equalsIgnoreCase("engineer")){

@@ -47,3 +47,7 @@ commands:
        description: Respawn as a martyr.
        permission: ctf.class.martyr
        permission-message: You need <permission> to use
+   gunner:
+       description: Respawn as a gunner.
+       permission: ctf.class.gunner
+       permission-message: You need <permission> to use
