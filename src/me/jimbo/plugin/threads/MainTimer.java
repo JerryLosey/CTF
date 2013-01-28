@@ -16,7 +16,6 @@ public class MainTimer implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		// This is where we do whatever during the timer
-		//plugin.getServer().broadcastMessage("Test!");
 		x++;
 
 		int y = x/60; // # of minutes
@@ -32,6 +31,12 @@ public class MainTimer implements Runnable {
 			}
 		}else if(y == 5){
 			plugin.getServer().broadcastMessage(ChatColor.GREEN + "Round is over!");
+			if(z==5){
+				plugin.getServer().broadcastMessage(ChatColor.GREEN + "Server is restarting.  Please rejoin!");
+			}
+			if(z==10){
+				plugin.onRestart();
+			}
 		}
 		
 		// Cake listener
