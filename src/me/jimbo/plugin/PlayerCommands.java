@@ -82,6 +82,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
 	ItemStack damagePot = new ItemStack(Material.POTION, 4, (short) 16428);
 	ItemStack snowball = new ItemStack(Material.SNOW_BALL);
+	ItemStack stick = new ItemStack(Material.STICK);
 
 	
 	public PlayerCommands (CTF plugin) {
@@ -188,7 +189,8 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						this.lleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 						this.iboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 						inventory.addItem(new ItemStack[] { this.ssword });
-					    for(int h=0; h<100; h++){
+						inventory.addItem(new ItemStack[] { this.stick });
+					    for(int h=0; h<200; h++){
 					    	inventory.addItem(new ItemStack[] { this.snowball });
 					    }
 						

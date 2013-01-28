@@ -2,6 +2,7 @@ package me.jimbo.plugin.listeners;
 
 import me.jimbo.plugin.CTF;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

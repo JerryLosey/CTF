@@ -25,6 +25,7 @@ import me.jimbo.plugin.listeners.WeatherChange;
 import me.jimbo.plugin.threads.MainTimer;
 import me.jimbo.plugin.threads.NinjaThread;
 import me.jimbo.plugin.threads.PotionEffectTimer;
+import me.jimbo.plugin.threads.SnowballTimer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -110,6 +111,7 @@ public class CTF extends JavaPlugin {
 	ItemStack gapple = new ItemStack(Material.GOLDEN_APPLE);
 	ItemStack damagePot = new ItemStack(Material.POTION, 4, (short) 16428);
 	ItemStack snowball = new ItemStack(Material.SNOW_BALL);
+	ItemStack stick = new ItemStack(Material.STICK);
 	
 	FileConfiguration config;
 	public int redX;
@@ -124,7 +126,7 @@ public class CTF extends JavaPlugin {
 	public int redScore;
 	public int blueScore;
 	
-	public boolean inProgress;
+	public boolean inProgress = false;
 	public boolean roundOver = false;
 	
 	public Player redFlagCarrier;
@@ -133,6 +135,7 @@ public class CTF extends JavaPlugin {
 	private int MTID;
 	private int NINJ;
 	private int EFFE;
+	private int SNOW;
 
 	Logger log = Logger.getLogger("Minecraft");
 	
@@ -186,6 +189,26 @@ public class CTF extends JavaPlugin {
         
 		startTimer(17);
 	}
+	public void onRestart(){
+		inProgress = false;
+		getServer().getScheduler().cancelTask(this.MTID);
+		this.MTID = 0;
+		getServer().getScheduler().cancelTask(this.NINJ);
+		this.NINJ = 0;
+		getServer().getScheduler().cancelTask(this.EFFE);
+		this.EFFE = 0;
+		getServer().getScheduler().cancelTask(this.SNOW);
+		this.SNOW = 0;
+		blueScore = 0;
+		redScore = 0;
+		roundOver = true;
+		resetFlag(1);
+		resetFlag(2);
+		for(Player p : getServer().getOnlinePlayers()){
+			p.kickPlayer(ChatColor.YELLOW + "Round is restarting!  Rejoin in a few seconds :)");
+		}
+		startTimer(17);
+	}
 	
 	public void onDisable() {
 		getServer().getScheduler().cancelTask(this.MTID);
@@ -194,6 +217,8 @@ public class CTF extends JavaPlugin {
 		this.NINJ = 0;
 		getServer().getScheduler().cancelTask(this.EFFE);
 		this.EFFE = 0;
+		getServer().getScheduler().cancelTask(this.SNOW);
+		this.SNOW = 0;
 		blueScore = 0;
 		redScore = 0;
 		roundOver = true;
@@ -201,11 +226,10 @@ public class CTF extends JavaPlugin {
 		resetFlag(2);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void startTimer(int timer) {
 		inProgress = false;
 		final int t = timer;
-		this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
+		this.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 			int z = t;
 			@Override
 			public void run() {
@@ -233,7 +257,7 @@ public class CTF extends JavaPlugin {
 					if(z==0 &&((AllPlayers.size() + RedPlayers.size()) <= getConfig().getInt("Minimum Players"))){
 						getServer().getScheduler().cancelAllTasks();
 						roundOver = true;
-						startTimer(35);
+						onRestart();
 					}else if(z == t-5){
 						roundOver = false;
 					}else if(z == -1){
@@ -348,6 +372,7 @@ public class CTF extends JavaPlugin {
 		getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + "5 "+ ChatColor.GREEN+"minutes before the round ends!");
 		this.NINJ = getServer().getScheduler().scheduleSyncRepeatingTask(this, new NinjaThread(this), 60L, 20L);
 		this.EFFE = getServer().getScheduler().scheduleSyncRepeatingTask(this, new PotionEffectTimer(this), 60L, 20L);
+		this.SNOW = getServer().getScheduler().scheduleSyncRepeatingTask(this, new SnowballTimer(this), 20L, 4L);
 	}
 	
 	public void resetFlag(int flag){
@@ -411,7 +436,8 @@ public class CTF extends JavaPlugin {
 			this.lleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 			this.iboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 		      inv.addItem(new ItemStack[] { this.ssword });
-		      for(int h=0; h<100; h++){
+		      inv.addItem(new ItemStack[] { this.stick });
+		      for(int h=0; h<200; h++){
 			      inv.addItem(new ItemStack[] { this.snowball });
 		      }
 
