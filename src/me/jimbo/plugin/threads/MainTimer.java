@@ -1,6 +1,9 @@
 package me.jimbo.plugin.threads;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
 import me.jimbo.plugin.CTF;
 
 public class MainTimer implements Runnable {
@@ -31,15 +34,37 @@ public class MainTimer implements Runnable {
 			}
 		}else if(y == 5){
 			plugin.getServer().broadcastMessage(ChatColor.GREEN + "Round is over!");
-			if(z==5){
+			if(z==1){
 				plugin.getServer().broadcastMessage(ChatColor.GREEN + "Server is restarting.  Please rejoin!");
 			}
-			if(z==10){
+			if(z==4){
+				if(plugin.getScore(1)>plugin.getScore(2)){ //Red > Blue
+					for(Player player : Bukkit.getOnlinePlayers()){
+						if(CTF.RedPlayers.contains(player)){
+							CTF.addWin.put(player, 1);
+						}else{
+							CTF.addLoss.put(player, 1);
+						}
+					}
+				}else if(plugin.getScore(2)>plugin.getScore(1)){
+					for(Player player : Bukkit.getOnlinePlayers()){
+						if(CTF.AllPlayers.contains(player)){
+							CTF.addWin.put(player, 1);
+						}else{
+							CTF.addLoss.put(player, 1);
+						}
+					}
+				}
 				plugin.onRestart();
 			}
 		}
 		
 		// Cake listener
 
+	}
+	
+	public int getX(){
+		return x;
+		
 	}
 }

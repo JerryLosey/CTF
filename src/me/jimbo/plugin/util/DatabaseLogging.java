@@ -1,8 +1,14 @@
 package me.jimbo.plugin.util;
 
+import java.sql.SQLException;
+
+import org.bukkit.plugin.java.JavaPlugin;
+
+import couk.Adamki11s.SQL.SyncSQL;
+
 import me.jimbo.plugin.CTF;
 
-public class DatabaseLogging {
+public class DatabaseLogging extends JavaPlugin{
 	
 	@SuppressWarnings("unused")
 	private CTF plugin;
@@ -11,6 +17,16 @@ public class DatabaseLogging {
 		this.plugin = plugin;
 	}
 	
+	public void Send(){
+		SyncSQL sql = new SyncSQL("li.silentnoobs.com", "ctf", "myuser", "mypass");
+		sql.initialise();
+		try {
+			sql.standardQuery("UPDATE ctf.stats SET deaths = 55 WHERE playername='teh_jombi';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	// ### addKills ### //
 	// onPlayerDeathEvent
 	// Player player = event.getKiller();

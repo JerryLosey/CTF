@@ -3,6 +3,7 @@ package me.jimbo.plugin.listeners;
 import me.jimbo.plugin.CTF;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -19,30 +20,38 @@ public class PlayerKickListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerKick(PlayerKickEvent e) {
+		Player player = e.getPlayer();
+
+		CTF.timePlayed.put(player, ((System.currentTimeMillis()/1000) - CTF.timePlayed.get(player)));
+		
 		e.setReason(ChatColor.AQUA + "Server Restarting. Reconnect.");
-		if(CTF.AllPlayers.contains(e.getPlayer())){
-			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
+		if(CTF.AllPlayers.contains(player)){
+			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(player));
 		}
-		if(CTF.PlayerClasses.containsKey(e.getPlayer())){
-			CTF.PlayerClasses.remove(e.getPlayer());
+		if(CTF.PlayerClasses.containsKey(player)){
+			CTF.PlayerClasses.remove(player);
 		}
-		if(CTF.RedPlayers.contains(e.getPlayer())){
-			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
+		if(CTF.RedPlayers.contains(player)){
+			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(player));
 		}
 		
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerQuit(PlayerQuitEvent e) {
-		if(CTF.AllPlayers.contains(e.getPlayer())){
-			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(e.getPlayer()));
+		Player player = e.getPlayer();
+		
+		CTF.timePlayed.put(player, ((System.currentTimeMillis()/1000) - CTF.timePlayed.get(player)));
+		
+		if(CTF.AllPlayers.contains(player)){
+			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(player));
 		}
-		if(CTF.PlayerClasses.containsKey(e.getPlayer())){
-			CTF.PlayerClasses.remove(e.getPlayer());
+		if(CTF.PlayerClasses.containsKey(player)){
+			CTF.PlayerClasses.remove(player);
 		}
-		if(CTF.RedPlayers.contains(e.getPlayer())){
-			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(e.getPlayer()));
-			CTF.PlayerClasses.remove(e.getPlayer());
+		if(CTF.RedPlayers.contains(player)){
+			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(player));
+			CTF.PlayerClasses.remove(player);
 		}
 		if(plugin.inProgress){
 			if((CTF.PlayerClasses.size() < 1 || CTF.AllPlayers.size() < 1 || CTF.RedPlayers.size() < 1) && plugin.inProgress){
