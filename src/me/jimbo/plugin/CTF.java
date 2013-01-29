@@ -48,6 +48,12 @@ public class CTF extends JavaPlugin {
 	
 	public final static HashMap<Player, String> PlayerClasses = new HashMap<Player,String>();
 
+	public final static HashMap<Player,Integer> addKills = new HashMap<Player,Integer>();
+	public final static HashMap<Player,Integer> addDeaths = new HashMap<Player,Integer>();
+	public final static HashMap<Player,Integer> addWin = new HashMap<Player,Integer>();
+	public final static HashMap<Player,Integer> addLoss = new HashMap<Player,Integer>();
+	public final static HashMap<Player,Long> timePlayed = new HashMap<Player,Long>();
+
 	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
 	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
 	public final PlayerRespawnListener PlayerRespawnListener = new PlayerRespawnListener(this);
