@@ -426,15 +426,15 @@ public class CTF extends JavaPlugin {
 			for(PotionEffect effect : player.getActivePotionEffects()){
 				player.removePotionEffect(effect.getType());
 			}
+			this.ihelmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+			this.lchestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+			this.lleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+			this.iboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 			inv.setHelmet(this.ihelmet);
 			inv.setChestplate(this.lchestplate);
 			inv.setLeggings(this.lleggings);
 			inv.setBoots(this.iboots);
 			this.ssword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
-			this.ihelmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-			this.lchestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
-			this.lleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-			this.iboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 		      inv.addItem(new ItemStack[] { this.ssword });
 		      inv.addItem(new ItemStack[] { this.stick });
 		      for(int h=0; h<200; h++){

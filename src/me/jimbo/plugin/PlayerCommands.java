@@ -179,15 +179,15 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "gunner");
 						}
+						this.ihelmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+						this.lchestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
+						this.lleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+						this.iboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 						inventory.setHelmet(this.ihelmet);
 						inventory.setChestplate(this.lchestplate);
 						inventory.setLeggings(this.lleggings);
 						inventory.setBoots(this.iboots);
 						this.ssword.addEnchantment(Enchantment.DAMAGE_ALL, 1);
-						this.ihelmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-						this.lchestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
-						this.lleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-						this.iboots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 						inventory.addItem(new ItemStack[] { this.ssword });
 						inventory.addItem(new ItemStack[] { this.stick });
 					    for(int h=0; h<200; h++){

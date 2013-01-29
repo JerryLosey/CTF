@@ -17,11 +17,12 @@ public class SnowballTimer implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		ItemStack snow = new ItemStack(Material.SNOW_BALL, 1);
 		for (Player p : this.plugin.getServer().getOnlinePlayers()){
 			if(CTF.PlayerClasses.get(p.getPlayer()).equalsIgnoreCase("gunner")){
 				if(p.getInventory().getItemInHand().getTypeId() == 280){
+					ItemStack snow = new ItemStack(Material.SNOW_BALL, 1);
 					if(p.getInventory().contains(snow)){
+						plugin.getServer().broadcastMessage("Snowball timer is running!");
 						Snowball snowball =  p.getWorld().spawn(p.getEyeLocation(), Snowball.class);
 						snowball.setShooter(p);
 						snowball.setVelocity(p.getLocation().getDirection().multiply(1.5));

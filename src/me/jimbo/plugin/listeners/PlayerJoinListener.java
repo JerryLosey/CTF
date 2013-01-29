@@ -29,9 +29,14 @@ public class PlayerJoinListener implements Listener {
 			if(redsize > bluesize){
 				CTF.AllPlayers.add(e.getPlayer());
 				TagAPI.refreshPlayer((Player) e.getPlayer());
+				Location loc = new Location(null, plugin.getConfig().getDouble("Spawns.Blue.X"), plugin.getConfig().getDouble("Spawns.Blue.Y"), plugin.getConfig().getDouble("Spawns.Blue.Z"));
+				e.getPlayer().teleport(loc);
 			}else if(bluesize > redsize){
 				CTF.RedPlayers.add(e.getPlayer());
 				TagAPI.refreshPlayer((Player) e.getPlayer());
+				Location loc = new Location(null, plugin.getConfig().getDouble("Spawns.Red.X"), plugin.getConfig().getDouble("Spawns.Red.Y"), plugin.getConfig().getDouble("Spawns.Red.Z"));
+				e.getPlayer().teleport(loc);
+				plugin.resetInv(e.getPlayer());
 			} else {
 				CTF.AllPlayers.add(e.getPlayer());
 			}
