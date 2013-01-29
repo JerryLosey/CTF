@@ -1,5 +1,7 @@
 package me.jimbo.plugin;
 
+import me.jimbo.plugin.util.DatabaseLogging;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -22,6 +24,7 @@ import org.kitteh.tag.TagAPI;
 public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	
 	private CTF plugin;
+	private DatabaseLogging dl;
 	
 	public boolean isHeavy = false;
 	public boolean isSoldier = false;
@@ -1138,12 +1141,13 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 						    // Do something
 						    plugin.inProgress = true;
-						    int j = plugin.getTeam((Player) sender);
-						    if(plugin.getDistanceToSpawn((Player) sender, j)){
-						    	sender.sendMessage("You are within 5 blocks of your spawnpoint!");
-						    }else{
-						    	sender.sendMessage("You are outside of your spawnpoint!");
-						    }
+						    dl.Send();
+//						    int j = plugin.getTeam((Player) sender);
+//						    if(plugin.getDistanceToSpawn((Player) sender, j)){
+//						    	sender.sendMessage("You are within 5 blocks of your spawnpoint!");
+//						    }else{
+//						    	sender.sendMessage("You are outside of your spawnpoint!");
+//						    }
 				    	}
 						if(cmd.equals("reset") && sender.hasPermission("ctf.admin.reset"))
 				    	{
