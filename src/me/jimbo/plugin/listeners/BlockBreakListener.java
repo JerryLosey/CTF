@@ -14,6 +14,7 @@ import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 public class BlockBreakListener implements Listener {
 
@@ -57,6 +58,9 @@ public class BlockBreakListener implements Listener {
 									block.setType(Material.AIR);
 									plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag!");
 									plugin.blueFlagCarrier = player;
+									for(PotionEffect effect : player.getActivePotionEffects()){
+										player.removePotionEffect(effect.getType());
+									}
 								}
 								else if(block.getData() == 14) {
 									e.setCancelled(true);
