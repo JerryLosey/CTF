@@ -29,6 +29,12 @@ public class PlayerDeathListener implements Listener {
 		if(e.getEntity() instanceof Player) {
 			Player player = e.getEntity();
 			Player killer = e.getEntity().getKiller();
+			
+			CTF.addDeaths.put(player, CTF.addDeaths.get(player)+1);
+			if(killer instanceof Player){
+				CTF.addKills.put(killer, CTF.addKills.get(killer)+1);
+			}
+			
 			player.getPlayer().getInventory().clear();
 			player.getPlayer().getInventory().setArmorContents(null);
 			e.setDeathMessage(null);
