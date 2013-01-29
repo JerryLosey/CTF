@@ -23,6 +23,12 @@ public class PlayerJoinListener implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		//Handle Permissions
 		
+		CTF.addDeaths.put(e.getPlayer(), 0);
+		CTF.addKills.put(e.getPlayer(), 0);
+		CTF.addWin.put(e.getPlayer(), 0);
+		CTF.addLoss.put(e.getPlayer(), 0);
+		CTF.timePlayed.put(e.getPlayer(), System.currentTimeMillis()/1000);
+		
 		int redsize = CTF.RedPlayers.size();
 		int bluesize = CTF.AllPlayers.size();
 		if (!CTF.AllPlayers.contains(e.getPlayer()) && !CTF.RedPlayers.contains(e.getPlayer())){
