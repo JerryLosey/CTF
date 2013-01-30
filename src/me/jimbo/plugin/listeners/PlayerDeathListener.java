@@ -51,7 +51,7 @@ public class PlayerDeathListener implements Listener {
 			}
 			if(CTF.RedPlayers.contains(player)){
 				if(plugin.blueFlagCarrier == player){
-					plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.BLUE + "blue " + ChatColor.WHITE + "flag!");
+					plugin.getServer().broadcastMessage(ChatColor.DARK_RED + player.getDisplayName() + ChatColor.WHITE + " dropped the " + ChatColor.DARK_BLUE + "blue " + ChatColor.WHITE + "flag!");
 					plugin.getServer().broadcastMessage("The " + ChatColor.DARK_BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
 					plugin.resetFlag(2);
 				}

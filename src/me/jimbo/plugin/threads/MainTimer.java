@@ -38,23 +38,24 @@ public class MainTimer implements Runnable {
 				plugin.getServer().broadcastMessage(ChatColor.GREEN + "Server is restarting.  Please rejoin!");
 			}
 			if(z==4){
-				if(plugin.getScore(1)>plugin.getScore(2)){ //Red > Blue
+				if(plugin.redScore>plugin.blueScore){ //Red > Blue
 					for(Player player : Bukkit.getOnlinePlayers()){
 						if(CTF.RedPlayers.contains(player)){
 							CTF.addWin.put(player, 1);
-						}else{
+						}else if(CTF.AllPlayers.contains(player)){
 							CTF.addLoss.put(player, 1);
 						}
 					}
-				}else if(plugin.getScore(2)>plugin.getScore(1)){
+				}else if(plugin.blueScore>plugin.redScore){
 					for(Player player : Bukkit.getOnlinePlayers()){
 						if(CTF.AllPlayers.contains(player)){
 							CTF.addWin.put(player, 1);
-						}else{
+						}else if(CTF.RedPlayers.contains(player)){
 							CTF.addLoss.put(player, 1);
 						}
 					}
 				}
+				plugin.pushSQL();
 				plugin.onRestart();
 			}
 		}

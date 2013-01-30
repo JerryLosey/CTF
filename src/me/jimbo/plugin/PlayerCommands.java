@@ -1,7 +1,5 @@
 package me.jimbo.plugin;
 
-import me.jimbo.plugin.util.DatabaseLogging;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,7 +22,6 @@ import org.kitteh.tag.TagAPI;
 public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	
 	private CTF plugin;
-	private DatabaseLogging dl;
 	
 	public boolean isHeavy = false;
 	public boolean isSoldier = false;
@@ -117,11 +114,11 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "heavy");
 						}
-						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "heavy");
+							((Player) sender).getInventory().clear();
 						}
 						if(inventory.getHelmet() == null){
 							inventory.setHelmet(this.dhelmet);
@@ -176,11 +173,11 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "gunner");
 						}
-						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "gunner");
+							((Player) sender).getInventory().clear();
 						}
 						this.ihelmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
 						this.lchestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 3);
@@ -231,11 +228,11 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "martyr");
 						}
-						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "martyr");
+							((Player) sender).getInventory().clear();
 						}
 
 						inventory.addItem(new ItemStack[] { this.fsteel });
@@ -278,18 +275,15 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					inventory.clear();
 					inventory.setArmorContents(null);
 					if(!plugin.getDistanceToSpawn((Player) sender, j)){
-						sender.sendMessage("S.001");
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "soldier");
 						}
-						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
 						target.setHealth(0);
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "soldier");
+							((Player) sender).getInventory().clear();
 						}
-						plugin.getServer().broadcastMessage(CTF.PlayerClasses.get(sender)+"");
-						sender.sendMessage("S.002");
 						
 						if(inventory.getHelmet() == null){
 							inventory.setHelmet(this.ihelmet);
@@ -367,6 +361,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "firefly");
+							((Player) sender).getInventory().clear();
 						}
 						
 						this.pixbow.addEnchantment(Enchantment.ARROW_FIRE, 1);
@@ -437,6 +432,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "berserker");
+							((Player) sender).getInventory().clear();
 						}
 						this.dleggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
 						this.dleggings.addEnchantment(Enchantment.PROTECTION_PROJECTILE, 3);
@@ -490,6 +486,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "archer");
+							((Player) sender).getInventory().clear();
 						}
 						
 						if(inv.getHelmet() == null){
@@ -690,6 +687,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 						if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "medic");
+							((Player) sender).getInventory().clear();
 						}
 						
 						if(inv.getHelmet() == null){
@@ -764,6 +762,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 					    if(CTF.PlayerClasses.containsKey(target)){
 							CTF.PlayerClasses.put(target, "pyro");
+							((Player) sender).getInventory().clear();
 						}
 						
 						if(inv.getHelmet() == null){
@@ -850,6 +849,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 					    if(CTF.PlayerClasses.containsKey(target)){
 					    	CTF.PlayerClasses.put(target, "ninja");
+							((Player) sender).getInventory().clear();
 					    	}
 		
 						this.egsword.addEnchantment(Enchantment.DURABILITY, 3);
@@ -967,6 +967,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}else if(plugin.getDistanceToSpawn((Player) sender, j)){
 					      if(CTF.PlayerClasses.containsKey(target)){
 					    	  CTF.PlayerClasses.put(target, "engineer");
+								((Player) sender).getInventory().clear();
 							}
 						
 						if (inv.getHelmet() == null) {
@@ -1141,13 +1142,7 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 						    sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 						    // Do something
 						    plugin.inProgress = true;
-						    dl.Send();
-//						    int j = plugin.getTeam((Player) sender);
-//						    if(plugin.getDistanceToSpawn((Player) sender, j)){
-//						    	sender.sendMessage("You are within 5 blocks of your spawnpoint!");
-//						    }else{
-//						    	sender.sendMessage("You are outside of your spawnpoint!");
-//						    }
+						    plugin.pushSQL();
 				    	}
 						if(cmd.equals("reset") && sender.hasPermission("ctf.admin.reset"))
 				    	{

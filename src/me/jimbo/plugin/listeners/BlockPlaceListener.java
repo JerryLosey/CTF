@@ -58,6 +58,7 @@ public class BlockPlaceListener implements Listener {
 								//plugin.getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
 								plugin.redFlagCarrier = null;
 							}
+							CTF.addCapture.put(player, CTF.addCapture.get(player)+1);
 							
 						}
 					}
@@ -82,7 +83,7 @@ public class BlockPlaceListener implements Listener {
 							if(player == plugin.blueFlagCarrier){
 								plugin.blueFlagCarrier = null;
 							}
-							
+							CTF.addCapture.put(player, CTF.addCapture.get(player)+1);
 						}
 					}
 					

@@ -1,8 +1,10 @@
 package me.jimbo.plugin;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -41,6 +43,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import couk.Adamki11s.SQL.SyncSQL;
+
+@SuppressWarnings("unused")
 public class CTF extends JavaPlugin {
 	
 	public final static ArrayList<Player> RedPlayers = new ArrayList<Player>();
@@ -53,6 +58,7 @@ public class CTF extends JavaPlugin {
 	public final static HashMap<Player,Integer> addWin = new HashMap<Player,Integer>();
 	public final static HashMap<Player,Integer> addLoss = new HashMap<Player,Integer>();
 	public final static HashMap<Player,Long> timePlayed = new HashMap<Player,Long>();
+	public final static HashMap<Player,Integer> addCapture = new HashMap<Player,Integer>();
 
 	public final BlockBreakListener BlockBreakListener = new BlockBreakListener(this);
 	public final PlayerDeathListener PlayerDeathListener = new PlayerDeathListener(this);
@@ -196,7 +202,14 @@ public class CTF extends JavaPlugin {
 		startTimer(17);
 	}
 	public void onRestart(){
+		addKills.clear();
+		addDeaths.clear();
+		addWin.clear();
+		addLoss.clear();
+		timePlayed.clear();
 		inProgress = false;
+		AllPlayers.clear();
+		RedPlayers.clear();
 		getServer().getScheduler().cancelTask(this.MTID);
 		this.MTID = 0;
 		getServer().getScheduler().cancelTask(this.NINJ);
@@ -205,6 +218,7 @@ public class CTF extends JavaPlugin {
 		this.EFFE = 0;
 		getServer().getScheduler().cancelTask(this.SNOW);
 		this.SNOW = 0;
+		getServer().getScheduler().cancelAllTasks();
 		blueScore = 0;
 		redScore = 0;
 		roundOver = true;
@@ -217,6 +231,11 @@ public class CTF extends JavaPlugin {
 	}
 	
 	public void onDisable() {
+		addKills.clear();
+		addDeaths.clear();
+		addWin.clear();
+		addLoss.clear();
+		timePlayed.clear();
 		getServer().getScheduler().cancelTask(this.MTID);
 		this.MTID = 0;
 		getServer().getScheduler().cancelTask(this.NINJ);
@@ -378,7 +397,43 @@ public class CTF extends JavaPlugin {
 		getServer().broadcastMessage(ChatColor.GREEN + "You have "+ ChatColor.GOLD + "5 "+ ChatColor.GREEN+"minutes before the round ends!");
 		this.NINJ = getServer().getScheduler().scheduleSyncRepeatingTask(this, new NinjaThread(this), 60L, 20L);
 		this.EFFE = getServer().getScheduler().scheduleSyncRepeatingTask(this, new PotionEffectTimer(this), 60L, 20L);
-		this.SNOW = getServer().getScheduler().scheduleSyncRepeatingTask(this, new SnowballTimer(this), 20L, 4L);
+		//this.SNOW = getServer().getScheduler().scheduleSyncRepeatingTask(this, new SnowballTimer(this), 20L, 4L);
+	}
+	
+	public void pushSQL(){
+		SyncSQL sql = new SyncSQL("li.silentnoobs.com", "ctf", "mcuser", "l33th@ck34");
+		sql.initialise();
+		try {
+			for(Entry<Player,Integer> entry : addDeaths.entrySet()){
+				Player player = entry.getKey();
+				Integer deaths = entry.getValue();
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, "+deaths+", 0, 0, 0, 0) ON DUPLICATE KEY UPDATE deaths = deaths + "+deaths+";");
+			}
+			for(Entry<Player,Integer> entry : addKills.entrySet()){
+				Player player = entry.getKey();
+				Integer kills = entry.getValue();
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", "+kills+", 0, 0, 0, 0, 0) ON DUPLICATE KEY UPDATE kills = kills + "+kills+";");
+			}
+			for(Entry<Player,Integer> entry : addWin.entrySet()){
+				Player player = entry.getKey();
+				Integer win = entry.getValue();
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, "+win+", 0, 0, 0) ON DUPLICATE KEY UPDATE wins = losses + "+win+";");
+			}
+			for(Entry<Player,Integer> entry : addLoss.entrySet()){
+				Player player = entry.getKey();
+				Integer loss = entry.getValue();
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, 0, "+loss+", 0, 0) ON DUPLICATE KEY UPDATE losses = losses + "+loss+";");
+			}
+			for(Entry<Player,Integer> entry : addCapture.entrySet()){
+				Player player = entry.getKey();
+				Integer capture = entry.getValue();
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, "+capture+", 0, 0, 0) ON DUPLICATE KEY UPDATE losses = captures + "+capture+";");
+			}
+			//Timeplayed
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void resetFlag(int flag){
@@ -394,7 +449,6 @@ public class CTF extends JavaPlugin {
 			Block b = loc.getBlock();
 			b.setTypeId(35);
 			b.setData((byte) 14);
-			getServer().broadcastMessage("The " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag was reset!");
 		} else if(flag == 2){
 			blueFlagCarrier = null;
 			int blueX = (int) getConfig().getDouble("Goals.Blue.X");
@@ -404,7 +458,6 @@ public class CTF extends JavaPlugin {
 			Block b = loc.getBlock();
 			b.setTypeId(35);
 			b.setData((byte) 11);
-			getServer().broadcastMessage("The " + ChatColor.BLUE + "blue" + ChatColor.WHITE + " flag was reset!");
 		}else{
 			log.warning("Invalid flag on resetFlag()");
 		}
@@ -412,7 +465,7 @@ public class CTF extends JavaPlugin {
 	
 	public void resetInv(Player player){
 
-		String classed = PlayerClasses.get(player);
+		String classed = PlayerClasses.get(player).toString();
 		PlayerInventory inv = player.getInventory();
 		inv.clear();
 		inv.setArmorContents(null);

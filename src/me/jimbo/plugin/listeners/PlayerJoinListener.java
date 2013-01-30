@@ -2,6 +2,7 @@ package me.jimbo.plugin.listeners;
 
 import me.jimbo.plugin.CTF;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,20 +28,22 @@ public class PlayerJoinListener implements Listener {
 		CTF.addKills.put(e.getPlayer(), 0);
 		CTF.addWin.put(e.getPlayer(), 0);
 		CTF.addLoss.put(e.getPlayer(), 0);
+		CTF.addCapture.put(e.getPlayer(), 0);
 		CTF.timePlayed.put(e.getPlayer(), System.currentTimeMillis()/1000);
 		
 		int redsize = CTF.RedPlayers.size();
 		int bluesize = CTF.AllPlayers.size();
+		CTF.PlayerClasses.put(e.getPlayer(), "soldier");
 		if (!CTF.AllPlayers.contains(e.getPlayer()) && !CTF.RedPlayers.contains(e.getPlayer())){
 			if(redsize > bluesize){
 				CTF.AllPlayers.add(e.getPlayer());
 				TagAPI.refreshPlayer((Player) e.getPlayer());
-				Location loc = new Location(null, plugin.getConfig().getDouble("Spawns.Blue.X"), plugin.getConfig().getDouble("Spawns.Blue.Y"), plugin.getConfig().getDouble("Spawns.Blue.Z"));
+				Location loc = new Location(Bukkit.getWorld("world"), plugin.getConfig().getDouble("Spawns.Blue.X"), plugin.getConfig().getDouble("Spawns.Blue.Y"), plugin.getConfig().getDouble("Spawns.Blue.Z"));
 				e.getPlayer().teleport(loc);
 			}else if(bluesize > redsize){
 				CTF.RedPlayers.add(e.getPlayer());
 				TagAPI.refreshPlayer((Player) e.getPlayer());
-				Location loc = new Location(null, plugin.getConfig().getDouble("Spawns.Red.X"), plugin.getConfig().getDouble("Spawns.Red.Y"), plugin.getConfig().getDouble("Spawns.Red.Z"));
+				Location loc = new Location(Bukkit.getWorld("world"), plugin.getConfig().getDouble("Spawns.Red.X"), plugin.getConfig().getDouble("Spawns.Red.Y"), plugin.getConfig().getDouble("Spawns.Red.Z"));
 				e.getPlayer().teleport(loc);
 				plugin.resetInv(e.getPlayer());
 			} else {
@@ -67,6 +70,7 @@ public class PlayerJoinListener implements Listener {
 			for(PotionEffect effect : player.getActivePotionEffects()){
 				player.removePotionEffect(effect.getType());
 			}
+			CTF.PlayerClasses.put(player, "soldier");
 		}
 		
 	}

@@ -61,6 +61,7 @@ public class BlockBreakListener implements Listener {
 									for(PotionEffect effect : player.getActivePotionEffects()){
 										player.removePotionEffect(effect.getType());
 									}
+									player.setFlying(false);
 								}
 								else if(block.getData() == 14) {
 									e.setCancelled(true);
@@ -88,6 +89,10 @@ public class BlockBreakListener implements Listener {
 									block.setType(Material.AIR);
 									plugin.getServer().broadcastMessage(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " has the " + ChatColor.DARK_RED + "red" + ChatColor.WHITE + " flag!");
 									plugin.redFlagCarrier = player;
+									for(PotionEffect effect : player.getActivePotionEffects()){
+										player.removePotionEffect(effect.getType());
+									}
+									player.setFlying(false);
 								}
 								else if(block.getData() != 14) {
 									e.setCancelled(true);

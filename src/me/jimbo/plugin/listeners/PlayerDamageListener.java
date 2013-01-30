@@ -201,14 +201,14 @@ public class PlayerDamageListener implements Listener{
 						} else if(killer.getLocation().distanceSquared(player.getLocation()) >= 400){
 							if(CTF.AllPlayers.contains(killer)){ //killer is on blue team
 								if(CTF.RedPlayers.contains(player)){
-									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.BLUE + killer.getDisplayName() + ChatColor.GOLD + "!");
+									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.DARK_BLUE + killer.getDisplayName() + ChatColor.GOLD + "!");
 									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.DARK_RED + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(1000);
 								}
 							}else if(CTF.RedPlayers.contains(killer)){
 								if(CTF.AllPlayers.contains(player)){
 									player.sendMessage(ChatColor.GOLD + "You were headshotted by " + ChatColor.DARK_RED + killer.getDisplayName() + ChatColor.GOLD + "!");
-									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.BLUE + player.getDisplayName() + ChatColor.GOLD + "!");
+									killer.sendMessage(ChatColor.GOLD + "You headshotted " + ChatColor.DARK_BLUE + player.getDisplayName() + ChatColor.GOLD + "!");
 									e.setDamage(1000);
 								}
 							}

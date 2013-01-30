@@ -9,6 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
 
 public class PlayerKickListener implements Listener {
 
@@ -22,7 +23,7 @@ public class PlayerKickListener implements Listener {
 	public void onPlayerKick(PlayerKickEvent e) {
 		Player player = e.getPlayer();
 
-		CTF.timePlayed.put(player, ((System.currentTimeMillis()/1000) - CTF.timePlayed.get(player)));
+		//CTF.timePlayed.put(player, ((System.currentTimeMillis()/1000) - CTF.timePlayed.get(player)));
 		
 		e.setReason(ChatColor.AQUA + "Server Restarting. Reconnect.");
 		if(CTF.AllPlayers.contains(player)){
@@ -34,6 +35,10 @@ public class PlayerKickListener implements Listener {
 		if(CTF.RedPlayers.contains(player)){
 			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(player));
 		}
+
+		for(PotionEffect effect : player.getActivePotionEffects()){
+			player.removePotionEffect(effect.getType());
+		}
 		
 	}
 	
@@ -41,7 +46,7 @@ public class PlayerKickListener implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent e) {
 		Player player = e.getPlayer();
 		
-		CTF.timePlayed.put(player, ((System.currentTimeMillis()/1000) - CTF.timePlayed.get(player)));
+		//CTF.timePlayed.put(player, ((System.currentTimeMillis()/1000) - CTF.timePlayed.get(player)));
 		
 		if(CTF.AllPlayers.contains(player)){
 			CTF.AllPlayers.remove(CTF.AllPlayers.indexOf(player));
@@ -52,6 +57,10 @@ public class PlayerKickListener implements Listener {
 		if(CTF.RedPlayers.contains(player)){
 			CTF.RedPlayers.remove(CTF.RedPlayers.indexOf(player));
 			CTF.PlayerClasses.remove(player);
+		}
+
+		for(PotionEffect effect : player.getActivePotionEffects()){
+			player.removePotionEffect(effect.getType());
 		}
 		if(plugin.inProgress){
 			if((CTF.PlayerClasses.size() < 1 || CTF.AllPlayers.size() < 1 || CTF.RedPlayers.size() < 1) && plugin.inProgress){
