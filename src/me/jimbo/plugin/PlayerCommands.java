@@ -91,8 +91,16 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 	
 	@EventHandler(priority=EventPriority.HIGHEST)
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(plugin.inProgress){
-			if (sender instanceof Player){
+		if (sender instanceof Player){
+			Player player = (Player) sender;
+			if((command.getName().equalsIgnoreCase("info")) && ((sender.isOp()) || sender.hasPermission("ctf.info"))){
+				sender.sendMessage(ChatColor.GREEN + "--{=!=}--" + ChatColor.AQUA + "[CTF]" + ChatColor.GOLD + player.getDisplayName() + ChatColor.GREEN + "--{=!=}--");
+				sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= Health: " + player.getHealth() + "/" + player.getMaxHealth());
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= Gamemode: " + player.getGameMode().name().toLowerCase());
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= OP: " + player.isOp());
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= Class: " + CTF.PlayerClasses.get(player));
+			}
+			if(plugin.inProgress){
 				// Heavy class
 
 				TagAPI.refreshPlayer((Player) sender);
@@ -1039,7 +1047,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 							String cmd2 = args[1].toLowerCase();
 							if(cmd.equals("set")) {
 								if(cmd2.equals("staging")){
-									Player player = (Player) sender;
 								    Location location = player.getLocation();
 									sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 									sender.sendMessage(ChatColor.GREEN + "Setting Staging Area");
@@ -1057,7 +1064,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 									String cmd3 = args[2].toLowerCase();
 									if(cmd3.equals("spawn"))
 							    	{
-										Player player = (Player) sender;
 									    Location location = player.getLocation();
 										sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 										sender.sendMessage(ChatColor.GREEN + "Setting Red Team Spawn!");
@@ -1072,7 +1078,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 							    	}
 									if(cmd3.equals("flag"))
 							    	{
-										Player player = (Player) sender;
 										Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 									    Location location = block.getLocation();
 										sender.sendMessage(ChatColor.GRAY + "------------------------------------");
@@ -1092,7 +1097,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 									String cmd3 = args[2].toLowerCase();
 									if(cmd3.equals("spawn"))
 							    	{
-										Player player = (Player) sender;
 									    Location location = player.getLocation();
 										sender.sendMessage(ChatColor.GRAY + "------------------------------------");
 										sender.sendMessage(ChatColor.GREEN + "Setting Blue Team Spawn!");
@@ -1107,7 +1111,6 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 							    	}
 									if(cmd3.equals("flag"))
 							    	{
-										Player player = (Player) sender;
 										Block block = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
 									    Location location = block.getLocation();
 										sender.sendMessage(ChatColor.GRAY + "------------------------------------");
@@ -1200,17 +1203,16 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 					}
 				}
 			return false;
-			} else {
-				// Denies access to console users
-				sender.sendMessage("Only in-game players can use this command!");
-				return false;
-			}
+		} else {
+			// Denies access to console users
+			sender.sendMessage("Only in-game players can use this command!");
+			return false;
 		}
-		else{
-			sender.sendMessage(ChatColor.RED + "Can't use commands until the round starts :)");
-		}
-		return false;
+	}else{
+		sender.sendMessage(ChatColor.RED + "Can't use commands until the round starts :)");
 	}
+		return false;
+}
 	
 	public boolean getClass(String playerClass){
 		if(playerClass.equalsIgnoreCase("Engineer")){
