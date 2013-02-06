@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import me.jimbo.plugin.listeners.ArmorRemovalListener;
 import me.jimbo.plugin.listeners.BlockBreakListener;
 import me.jimbo.plugin.listeners.BlockPlaceListener;
-import me.jimbo.plugin.listeners.PlayerClickEatListener;
+import me.jimbo.plugin.listeners.PlayerClickListener;
 import me.jimbo.plugin.listeners.InventoryOpenListener;
 import me.jimbo.plugin.listeners.PlayerClickListener;
 import me.jimbo.plugin.listeners.PlayerDamageListener;
@@ -71,7 +71,7 @@ public class CTF extends JavaPlugin {
 	public final PlayerDamageListener PlayerDamageListener = new PlayerDamageListener(this);
 	public final InventoryOpenListener InventoryOpenListener = new InventoryOpenListener(this);
 	public final ArmorRemovalListener ArmorRemovalListener = new ArmorRemovalListener(this);
-	public final PlayerClickEatListener EatingListener = new PlayerClickEatListener(this);
+	public final PlayerClickListener EatingListener = new PlayerClickListener(this);
 	public final PlayerClickListener PlayerClickListener = new PlayerClickListener(this);
 	public final PingListener PingListener = new PingListener(this);
 	public final TagAPIListener TagAPIListener = new TagAPIListener(this);
