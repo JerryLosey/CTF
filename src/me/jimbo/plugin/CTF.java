@@ -422,12 +422,17 @@ public class CTF extends JavaPlugin {
 			for(Entry<Player,Integer> entry : addLoss.entrySet()){
 				Player player = entry.getKey();
 				Integer loss = entry.getValue();
-				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, 0, "+loss+", 0, 0) ON DUPLICATE KEY UPDATE losses = losses + "+loss+";");
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, 0, 0, "+loss+", 0) ON DUPLICATE KEY UPDATE losses = losses + "+loss+";");
 			}
 			for(Entry<Player,Integer> entry : addCapture.entrySet()){
 				Player player = entry.getKey();
 				Integer capture = entry.getValue();
-				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, "+capture+", 0, 0, 0) ON DUPLICATE KEY UPDATE losses = captures + "+capture+";");
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, "+capture+", 0, 0, 0) ON DUPLICATE KEY UPDATE captures = captures + "+capture+";");
+			}
+			for(Entry<Player,Long> entry : timePlayed.entrySet()){
+				Player player = entry.getKey();
+				Long time = entry.getValue();
+				sql.standardQuery("INSERT INTO ctf.stats (playername, kills, deaths, captures, wins, losses, timeplayed) values (\""+player.getDisplayName().toString()+"\", 0, 0, 0, 0, 0, " + timePlayed+ ") ON DUPLICATE KEY UPDATE timeplayed = timeplayed + "+timePlayed+";");
 			}
 			//Timeplayed
 		} catch (SQLException e) {

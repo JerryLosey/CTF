@@ -47,7 +47,7 @@ public class PlayerDeathListener implements Listener {
 			}
 			if(CTF.PlayerClasses.get(player).equalsIgnoreCase("martyr")){
 				Location loc = player.getLocation();
-				plugin.getServer().getWorld("world").createExplosion(loc, 2.0F, false);// Add another ",false" to the end when updating to 1.4.7+
+				plugin.getServer().getWorld("world").createExplosion(loc.getX(), loc.getY(), loc.getZ(), 2.0F, false, false);// Add another ",false" to the end when updating to 1.4.7+
 			}
 			if(CTF.RedPlayers.contains(player)){
 				if(plugin.blueFlagCarrier == player){
