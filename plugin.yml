@@ -7,6 +7,10 @@ authors: [fireblast709]
 commands:
    ctf:
        description: Manage Capture The Flag
+   info:
+       description: Show your info
+   class:
+       description: Show your current class and all available classes
    heavy:
        description: Respawn as a heavy.
        permission: ctf.class.heavy

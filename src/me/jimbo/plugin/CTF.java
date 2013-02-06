@@ -174,6 +174,8 @@ public class CTF extends JavaPlugin {
 		redScore = 0;
 		blueScore = 0;
 		getCommand("CTF").setExecutor(new PlayerCommands(this));
+		getCommand("info").setExecutor(new PlayerCommands(this));
+		getCommand("class").setExecutor(new PlayerCommands(this));
 		getCommand("heavy").setExecutor(new PlayerCommands(this));
 		getCommand("soldier").setExecutor(new PlayerCommands(this));
 		getCommand("archer").setExecutor(new PlayerCommands(this));

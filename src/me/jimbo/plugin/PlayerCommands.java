@@ -100,6 +100,13 @@ public class PlayerCommands extends JavaPlugin implements CommandExecutor {
 		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= OP: " + player.isOp());
 		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= Class: " + CTF.PlayerClasses.get(player));
 			}
+			if((command.getName().equalsIgnoreCase("class")) && ((sender.isOp()) || sender.hasPermission("ctf.list"))){
+				sender.sendMessage(ChatColor.GREEN + "--{=!=}--" + ChatColor.AQUA + "[CTF]" + ChatColor.GOLD + player.getDisplayName() + ChatColor.GREEN + "--{=!=}--");
+				sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= Health: " + player.getHealth() + "/" + player.getMaxHealth());
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= Gamemode: " + player.getGameMode().name().toLowerCase());
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= OP: " + player.isOp());
+		        sender.sendMessage(ChatColor.AQUA + "[CTF]" + ChatColor.GREEN + "= Class: " + CTF.PlayerClasses.get(player));
+			}
 			if(plugin.inProgress){
 				// Heavy class
 

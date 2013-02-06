@@ -29,7 +29,7 @@ public class PlayerClickListener implements Listener {
 				e.getPlayer().setVelocity(new Vector(0.0D, 0.9D, 0.0D));
 			}else if((e.getAction() == Action.RIGHT_CLICK_BLOCK) && ((e.getPlayer().hasPermission("ctf.class.ninja") || e.getPlayer().hasPermission("ctf.class.firefly"))) && (e.getPlayer().getItemInHand().getTypeId() == 353)){
 				this.plugin.getServer().getScheduler().scheduleSyncDelayedTask(this.plugin, new ItemRemoveThread(e.getPlayer(), new ItemStack(Material.SUGAR, 1)), 1L);
-				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 1), true);
+				e.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 100, 3), true);
 			}else if ((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 				try{
 					if (e.getPlayer().getHealth() == e.getPlayer().getMaxHealth()) {
