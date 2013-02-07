@@ -1,6 +1,7 @@
 package me.jimbo.plugin;
 
 import java.io.File;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -189,10 +190,7 @@ public class CTF extends JavaPlugin {
 		getCommand("gunner").setExecutor(new PlayerCommands(this));
 		
 		String pluginFolder = getDataFolder().getAbsolutePath();
-        new File(pluginFolder).mkdirs();
-        
-        //createTable();
-        
+        new File(pluginFolder).mkdirs();        
         
         if(!pluginFolder.contains("config.yml"))
         {
